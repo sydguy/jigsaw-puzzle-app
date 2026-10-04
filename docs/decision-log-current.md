@@ -14,4 +14,6 @@
 
 Deferred: AI, multiplayer, cloudsync, backup/restore, push and marketing landing site. Final branding, countdown durations, product quantities/prices, legal policies and service provisioning remain tracked gates.
 
+2026-10-05 EAS setup: authenticated owner `sydguy`, created and linked `@sydguy/jigsaw-puzzle-app` (project ID `fc555f03-646f-4c0d-b2cc-e3b381bf5a59`), and adopted the permanent native identifier `com.sydguy.jigsawpuzzleapp` for iOS and Android. Added development, preview and production build profiles. This does not claim Apple/Google credentials or a completed native build.
+
 2026-10-05 foundation: owner resumed work for a clean Expo Router starter and M0, supplied the design/system package and v1 architecture. Adopt tokens without treating proposed screens/entities as accepted implementation. Configure Git main/origin with author sydguy and the supplied email. Keep native/service work gated; record audit findings without forcing incompatible framework upgrades.

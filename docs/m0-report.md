@@ -22,7 +22,7 @@ Owner authorized a clean root Expo + React Native + TypeScript + Expo Router sta
 | Expo | SDK55/RN0.83 target retained; no silent OS-floor change. Exact dependency lockfile committed. |
 | Environments | Development local only. Staging/production resources must be separate when provisioned. |
 | Credentials | No provider credentials supplied or stored. Future secrets use owner dashboards and scoped environment/secret stores, never chat/source. |
-| App identity | Working name and development scheme only. Final app identifiers, icon and publishing identity remain open. |
+| App identity | EAS project `@sydguy/jigsaw-puzzle-app` linked. iOS and Android use `com.sydguy.jigsawpuzzleapp`. Working display name, icon and publishing identity remain open. |
 | Test devices | Owner iPhone12Pro/S26Ultra/TabA9+ recorded; iPad and older-device evidence remain required. |
 
 ## Ownership and gates
@@ -45,6 +45,7 @@ M0's local documents and scaffold can be completed without service accounts. Ful
 - PASS: Expo dependency compatibility (`expo install --check`).
 - PASS: production web export; index, sitemap and not-found routes generated.
 - PASS: local Expo web server on localhost:8081; HTTP 200 and expected starter content verified.
+- PASS: EAS development profiles resolve for both iOS and Android; Expo development client installed. No cloud build has been requested.
 - PASS: seven archive hashes, 24 original security mappings and active documentation links (rerun after document changes).
 - UNVERIFIED: browser visual inspection; browser automation failed to initialize with a Windows sandbox error. HTTP/export success is not a visual acceptance test.
 - UNVERIFIED: native builds, physical device behavior, Fast Refresh editing and performance; no service accounts configured.

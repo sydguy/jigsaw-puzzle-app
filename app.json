@@ -5,9 +5,29 @@
     "version": "0.1.0",
     "scheme": "jigsaw-development",
     "userInterfaceStyle": "light",
-    "ios": { "supportsTablet": true },
-    "web": { "bundler": "metro", "output": "static" },
-    "plugins": ["expo-router"],
-    "experiments": { "typedRoutes": true }
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sydguy.jigsawpuzzleapp"
+    },
+    "android": {
+      "package": "com.sydguy.jigsawpuzzleapp"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "fc555f03-646f-4c0d-b2cc-e3b381bf5a59"
+      }
+    },
+    "owner": "sydguy"
   }
 }

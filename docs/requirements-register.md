@@ -25,7 +25,7 @@ Authority: latest owner decisions, then [production plan](production-v1-plan.md)
 | D17 | Retain owner-created catalogue: estimated 20 free plus 3 premium themes x30; owner approves AI-created artwork before publication. | M5/M9 | CONTENT-01 |
 | D18 | Retain ads and US$2.99/mo base; subscription removes all ads/enables offline, no premium/AI allowance. | M7/M8 | ADS-02 |
 | D19 | Retain real HTTPS FAQ/policy/support destinations; website mock guidance only; landing later; form delivery/spam/failure handling required. | M8 | SUPPORT-01 |
-| D20 | Supersede unchosen backend: Supabase, RevenueCat, Expo/EAS. Minimize fixed costs. Accounts absent. | M0/M1 | SETUP-01 |
+| D20 | Supersede unchosen backend: Supabase, RevenueCat, Expo/EAS. Minimize fixed costs. Expo account/project now linked; remaining provider and store accounts are setup gates. | M0/M1 | SETUP-01 |
 | D21 | Retain single-picture import; collection deletion cascades after count-confirmation; Home deletion preserves picture. | M4 | SAVE-02 |
 
 ## Owner UI image (top-to-bottom rows)

@@ -26,6 +26,8 @@ On this workstation the system Node is older. The existing bundled Node can be s
 
 Primary preview is local Expo web on Windows. EAS native builds and physical checks are separate; cloud simulation is optional. No production accounts, signing or native validation are claimed.
 
+The project is linked to [`@sydguy/jigsaw-puzzle-app`](https://expo.dev/accounts/sydguy/projects/jigsaw-puzzle-app). `eas.json` defines development, preview and production profiles. Starting a cloud build remains an explicit action and may require Apple or Google credentials.
+
 ## References
 
 - [Visual and entity architecture](docs/v1-architecture.md): development workflow, runtime services and minimum v1 data relationships, with editable Mermaid diagrams.

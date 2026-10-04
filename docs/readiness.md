@@ -8,10 +8,10 @@ M0 local documentation adoption and clean Expo foundation prepared; full readine
 
 | Dependency | Status | Gate |
 |---|---|---|
-| Owner Expo/EAS account/organization | Not ready | Account-linked EAS builds |
+| Owner Expo/EAS account/organization | Ready: `sydguy`; project linked | EAS project configuration complete; build credentials are not yet configured |
 | Apple Developer membership/signing | Not ready | Installable iOS build and Store/TestFlight |
 | Google Play Console account | Not ready | Store billing/Play testing and submission |
-| Final app identifier/publishing identity | Not chosen | Native provisioning |
+| Native app identifiers | Configured as `com.sydguy.jigsawpuzzleapp` for iOS and Android | Treat as permanent; visible branding remains open |
 | Supabase/RevenueCat/AdMob/Resend/Sentry resources | Not provisioned/verified | Service integration acceptance |
 | Physical iPad and older supported hardware | Not available/verified | Native release acceptance |
 | Catalogue originals and rights approvals | Not supplied | Contentbeta |

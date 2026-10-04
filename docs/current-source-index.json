@@ -63,8 +63,8 @@
     },
     {
       "path": "docs/decision-log-current.md",
-      "bytes": 1650,
-      "sha256": "0559c2e6875acb929dbe78f77a808a91f3f7cc80cd1638d9e058d062b813870d"
+      "bytes": 2028,
+      "sha256": "ad6b7bae0faa9e950096d5e1a5802a7bd8fa2c887f4bee9f370e832f1277bc47"
     },
     {
       "path": "docs/dependency-audit.json",
@@ -73,8 +73,8 @@
     },
     {
       "path": "docs/m0-report.md",
-      "bytes": 4883,
-      "sha256": "464db0dc2c20171fabcf331faf8de8090f1c462cf06e6e0be5fafb5a59e69ae9"
+      "bytes": 5073,
+      "sha256": "55d33e4de4633a4236b5949e49ef975af7f1da10c89b296072242e60fbaa9191"
     },
     {
       "path": "docs/production-v1-plan.md",
@@ -83,8 +83,8 @@
     },
     {
       "path": "docs/readiness.md",
-      "bytes": 2927,
-      "sha256": "3fa7b4ab27a441876c2a12bb2bb5ccdf75623b5f1e5c902bbdea722be42bfb72"
+      "bytes": 3062,
+      "sha256": "f9e7a611b1cb5d2afc46507ff81d2e73f5ce09640a7b24be329ea9159475b613"
     },
     {
       "path": "docs/README.md",
@@ -93,8 +93,8 @@
     },
     {
       "path": "docs/requirements-register.md",
-      "bytes": 10911,
-      "sha256": "07d045621b0ac38fdcd13faad926b8eaa96372127d49f8cdeb6656d18a471e39"
+      "bytes": 10982,
+      "sha256": "954ef624ca1a34bc9f9a84f6cfcf0fa5bf8d331e0493e7e7802f38745311a387"
     },
     {
       "path": "docs/security-requirements.md",
