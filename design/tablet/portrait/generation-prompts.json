@@ -1,0 +1,107 @@
+{
+  "mode": "built-in image_gen",
+  "basePrompt": "Use case: ui-mockup. Edit target: supplied landscape tablet UI. Create ONE finished tablet PORTRAIT adaptation, 3:4 aspect ratio (ideally 1152x1536), upright readable UI. Reflow content thoughtfully; do not rotate, squeeze, or place landscape screenshot inside portrait canvas. Match original theme exactly: very pale lavender background, white rounded cards, subtle purple shadows, deep navy headings, violet-blue gradient buttons, colorful glossy illustrated icons and original image subjects. Preserve screen purpose, labels and controls. Crisp carefully spelled text, comfortable tablet touch targets, consistent margins. No annotations or extra presentation background. ",
+  "knownLimitations": [
+    "My Collection grid: Tropical Paradise label remains misspelled in generated raster despite correction attempts."
+  ],
+  "screens": [
+    {
+      "source": "Tab-Account.png",
+      "file": "01-account-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-0f8bcecf-f9b1-4e0d-903b-a94835bc3e68.png",
+      "prompt": "Replace tall left sidebar with compact profile header and horizontal settings tabs (Accounts selected, Billing, Privacy & Legal, FAQ, Support). Account title and subtitle, account information form in a single full-width card, full name Sarah Johnson, email sarah@family.com, password with Edit, Save Changes. Danger Zone below with warning and Delete My Account. Sign Out above fixed bottom Home / My Collection / Settings navigation.",
+      "correctionPrompts": null
+    },
+    {
+      "source": "Tab-AI.png",
+      "file": "02-ai-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-50bf2cf3-4a8b-4c31-bf1b-67cbf9ba1ae3.png",
+      "prompt": "Add Image title with back and settings buttons. Four image-source cards in a 2x2 grid with Generate with AI selected. Below: description heading and spacious prompt field with Upload Photo and 0/500. Center microphone with waveform and instruction. Five style choices arranged compactly in one row or 3+2: Realistic selected, Artistic, Cartoon, Watercolor, Sketch. Large Generate Image button at bottom. Preserve lavender decorative corner shapes.",
+      "correctionPrompts": null
+    },
+    {
+      "source": "tab-collection pic selection.png",
+      "file": "03-collection-selection-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-b5fd69ba-436c-41c6-9670-185c1fcb2e17.png",
+      "prompt": "Portrait black tablet bezel. Nature Collection title and subtitle. Compact two-column quota card AI Pack 75/100 pictures and Theme Collection 75/100 pictures 2/3 themes. Exclude already in collection toggle. Image grid reflowed to 4 columns and 6 rows, all 24 thumbnails, preserve selection check on cabin and dark Already in collection overlays. Fixed Add Picture button at bottom.",
+      "correctionPrompts": null
+    },
+    {
+      "source": "tab-create puzzle.png",
+      "file": "04-create-puzzle-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-e0ec0b2d-de98-4ee0-bd7a-255d1ba9b544.png",
+      "prompt": "Portrait black tablet bezel. Create Puzzle heading and back. Stack large wide Add Image dashed upload area at top, then full-width PUZZLE SIZE card with Rows 4 / Columns 4 steppers and four Quick Picks, correct 12 x 18 to 216 pieces. TIMER MODE segmented Timer / Stopwatch beneath, Rotate pieces row, compact Ready to Create helper, full-width Create Puzzle bottom button. Balanced fit without tiny text.",
+      "correctionPrompts": null
+    },
+    {
+      "source": "tab-Curated collection.png",
+      "file": "05-curated-collections-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-d2b17995-8d84-492b-918f-7868c8975b3f.png",
+      "prompt": "Add Image header. Four image-source choices in compact 2x2 grid. Curated Collections should be selected to match this page content. Choose a Collection section below: two-column collection cards with original landscape, fox, fantasy castle, travel imagery. Show Free, Nature, Wildlife, Fantasy, Travel collections through vertically scrollable area, bottom row may indicate scroll continuation. Preserve premium locks and image counts. Bottom Want more collections? promotion and Buy Collection Packs button.",
+      "correctionPrompts": "Change only selected source state: Photo Gallery must have plain white background, no purple border and no checkmark. Curated Collections card must have lavender tint, thin purple border and purple checkmark in upper right. All other pixels, portrait aspect, layout, cards, labels and artwork unchanged."
+    },
+    {
+      "source": "tab-homev1.png",
+      "file": "06-home-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-f5b1efab-605a-4625-9374-83cfd1f6296a.png",
+      "prompt": "Portrait black tablet bezel. Compact top quotas in two columns, then Add Puzzle banner. My Puzzles (3) and Sort by Latest Played. Three vertically stacked cards with landscape thumbnail on left and title/details right, then status and action within each card below details. Lakeside Village 100 pieces completed Play Again; Playful Puppy 64 pieces completed Play Again; Fairy Tale Castle 200 pieces 68% Continue. Fixed Home/My Collection/Settings bottom nav.",
+      "correctionPrompts": null
+    },
+    {
+      "source": "Tab-my collection detailed v 1.png",
+      "file": "07-my-collection-detailed-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-fc3d41eb-3318-403b-a495-b66013f74c98.png",
+      "prompt": "Portrait black tablet bezel. My Collection heading subtitle. Move sort and theme filters to second row, Grid / Detailed segmented toggle with Detailed selected. Four stacked detailed cards: Mountain Lake selected, Playful Puppy, Sunset Beach, Autumn Path. Image left, title and theme right, wrap Times Used / Date Added / Last Used metadata neatly beneath within card. Preserve readable metadata. Full-width Create Puzzle and fixed bottom nav.",
+      "correctionPrompts": null
+    },
+    {
+      "source": "Tab-my collection grid.png",
+      "file": "08-my-collection-grid-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-518a8d71-c869-45e1-a00e-9ea40b14b0b5.png",
+      "prompt": "Portrait black tablet bezel. My Collection header and subtitle. Filters below header and Grid / Detailed toggle with Grid selected. Reflow images into THREE columns, comfortably spaced with name and colored theme chips. Preserve original ordering and subjects with selected Mountain Lake first, and show remaining items through scrolling. Fixed Create Puzzle button and bottom Home/My Collection/Settings.",
+      "correctionPrompts": "Correct only the misspelled image title \"Tropicer Paradise\" to exactly \"Tropical Paradise\". Add thin purple vertical scrollbar on far right inside content to indicate remaining collection items below. Keep every other title, artwork, layout, aspect, button and color unchanged.\nEdit this portrait UI. In the THIRD ROW, RIGHTMOST image tile showing palm trees and a tropical beach, replace the title beneath it with EXACTLY: \"Tropical Paradise\". Spell T-r-o-p-i-c-a-l, then Paradise. The current title is incorrect. This is the only change. Preserve all other text, the purple scrollbar, layout, images, dimensions, and style."
+    },
+    {
+      "source": "Tab-photo capturedv1.png",
+      "file": "09-photo-captured-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-f71a8c7b-d1bb-47a0-9ff4-2965a6377cd6.png",
+      "prompt": "Portrait black tablet bezel. Full-height alpine mountain lake photo preview, dark outside crop area. White centered crop rectangle with four round corner handles, suitable portrait composition but do not distort mountains. Close X upper right. Center Drag to change selected area hint in dark pill. Retake Photo and Use Photo buttons side by side along lower edge, ample space and readable labels.",
+      "correctionPrompts": null
+    },
+    {
+      "source": "tab-photo gallery.png",
+      "file": "10-photo-gallery-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-4fae1472-077e-4b92-bf4d-79801329da0d.png",
+      "prompt": "Add Image header with back. Four source cards as compact 2x2 grid, Photo Gallery selected. Choose an image from your gallery heading. Original eighteen colorful photo thumbnails reflowed into 3 columns and 6 rows in scrollable area, first cabin selected with purple outline and check. Keep thumbnails large; viewport may show first four rows and partial next indicating scroll. Fixed Add Selected Image purple gradient button at bottom.",
+      "correctionPrompts": null
+    },
+    {
+      "source": "tab-puzzle.png",
+      "file": "11-puzzle-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-602ae53b-734b-4aba-921c-d97d5b568976.png",
+      "prompt": "Portrait black tablet bezel. Lakeside Castle title and back. Reflow original right-side stats into compact full-width top card beneath title: 72% progress ring, 59/81 pieces placed, Moves:128, 00:00 and Start Playing. Large colorful castle rainbow puzzle board below across full width, preserve artwork and jigsaw outlines without distortion. Piece tray under board in two rows. Hint Preview Restart Shuffle buttons in one horizontal row. Ad Banner at bottom. Make puzzle board dominant.",
+      "correctionPrompts": null
+    },
+    {
+      "source": "Tab-take photo.png",
+      "file": "12-take-photo-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-7d2cc4c9-47ee-4e07-9b4f-e31b09dae333.png",
+      "prompt": "Add Image centered title, back left and close right, subtitle. Four source cards reflowed into spacious 2x2 grid, Camera selected. Preserve image stack, green camera, AI flower, purple curated folder icons. Large centered Take Photo gradient button below grid with comfortable whitespace and subtle pale lavender background.",
+      "correctionPrompts": null
+    },
+    {
+      "source": "tab-billing.png",
+      "file": "13-billing-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-b17cf532-8bad-4b96-a462-85739c84263c.png",
+      "prompt": "Compact profile header Sarah Johnson and settings tabs replacing left sidebar, Billing selected. Billing title and subtitle. Stack three product sections: AI Picture Packs with 4 packs in compact 2x2 cards (20 $4.99,50 $9.99,100 $16.99,200 $29.99); Themed Premium Collections horizontal row with nature animals flowers cities and prices; Combo Packs horizontal cards. Compact Purchase History below with March February January 2026 records and PDF actions. Sign Out and fixed bottom navigation. Use sensible scroll indication if necessary, never tiny cramped text.",
+      "correctionPrompts": null
+    },
+    {
+      "source": "Tab-privacy and Legal.png",
+      "file": "14-privacy-legal-portrait.png",
+      "generatedFile": "C:\\Users\\ARIJI\\.codex\\generated_images\\01a106b3-5a40-7910-85d1-903ea044a5e7\\exec-83464b5c-6f47-4a07-9afa-8b57b5e4324d.png",
+      "prompt": "Compact profile header and horizontal settings tabs replacing sidebar, Privacy & Legal selected. Privacy & Legal title and subtitle. Full-width Cookie Preferences card with Functional (Required) always on, Analytics on, Marketing off and matching colored icons. Below Legal card with Terms & Conditions, Privacy Policy, Cookie Policy rows and subtitles and chevrons. Sign Out above fixed Home/My Collection/Settings bottom nav. Spacious readable portrait layout.",
+      "correctionPrompts": null
+    }
+  ]
+}

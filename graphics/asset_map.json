@@ -1,0 +1,332 @@
+[
+  {
+    "original_path": "graphics/03b8a927-b950-43a9-b29e-5bd5955921e6-trimmed.png",
+    "new_path": "assets/graphics/legal_privacy_policy.png",
+    "ui_role": "Privacy policy document",
+    "reference_screens": "Tab/Tab-privacy and Legal.png",
+    "match_status": "matched",
+    "width": 832,
+    "height": 791,
+    "sha256": "f2e14d2f261c316f6b303f3d5d9d867d1bd3cc096d9d93d1a772b9f0aa402275"
+  },
+  {
+    "original_path": "graphics/03da93a2-9406-4bce-b32c-db749bf4532a-trimmed.png",
+    "new_path": "assets/graphics/ai_style_realistic.png",
+    "ui_role": "Realistic image style",
+    "reference_screens": "Tab/Tab-AI.png",
+    "match_status": "matched",
+    "width": 757,
+    "height": 710,
+    "sha256": "084f701af7e4629af488cc9c6312e1cb2f481775b7820e0f5306b6443326381d"
+  },
+  {
+    "original_path": "graphics/0fd88b83-e536-4e29-ba2b-1e4609d02ca0-trimmed.png",
+    "new_path": "assets/graphics/billing_combo_puzzle_pair_straight.png",
+    "ui_role": "Orange and green puzzle pair; alternate combo-pack artwork",
+    "reference_screens": "Tab/tab-billing.png",
+    "match_status": "variant",
+    "width": 1356,
+    "height": 907,
+    "sha256": "c4024cce12aaf95a2e46672486f7b0da5b4f5a7c6b1a3689fdccf5f02616f458"
+  },
+  {
+    "original_path": "graphics/126189a5-b3f6-438c-968b-eeb80e2ed5d6-trimmed.png",
+    "new_path": "assets/graphics/settings_faq.png",
+    "ui_role": "FAQ question mark",
+    "reference_screens": "Mobile/mobile-settings.png",
+    "match_status": "matched",
+    "width": 899,
+    "height": 912,
+    "sha256": "3b574f96918cd9b3c9cf9daa2fbd79717e6f33600073d2343612998ce5416700"
+  },
+  {
+    "original_path": "graphics/239fe27e-86b1-492c-96fb-d0fa2b503873-trimmed.png",
+    "new_path": "assets/graphics/premium_collection_crown.png",
+    "ui_role": "Premium collections and theme allowance",
+    "reference_screens": "Tab/tab-billing.png; Tab/tab-homev1.png",
+    "match_status": "matched",
+    "width": 1175,
+    "height": 859,
+    "sha256": "8c28438c3d88ca7ac2cbb13a9f7800d8e3dcdc7e94056221d9569e48193bde44"
+  },
+  {
+    "original_path": "graphics/2dbfef1f-978e-4371-b5d1-dae2cd85585e-trimmed.png",
+    "new_path": "assets/graphics/ai_style_artistic.png",
+    "ui_role": "Artistic palette style",
+    "reference_screens": "Tab/Tab-AI.png",
+    "match_status": "matched",
+    "width": 893,
+    "height": 871,
+    "sha256": "5b4a8e56d7f8506115a858ec5922e771a21ecd4afdbc6e47e61013392e9a6343"
+  },
+  {
+    "original_path": "graphics/2fd04a65-c9ae-49c3-b346-baabbaaa7659-trimmed.png",
+    "new_path": "assets/graphics/legal_terms_conditions.png",
+    "ui_role": "Terms and conditions document",
+    "reference_screens": "Tab/Tab-privacy and Legal.png",
+    "match_status": "matched",
+    "width": 819,
+    "height": 802,
+    "sha256": "5a6eebe5a656e5e5bf28ae4e0bef364238a986d69f6af23bf568b8cf6080e17d"
+  },
+  {
+    "original_path": "graphics/4480efe0-0457-4d77-a305-ff91b10d464c-trimmed.png",
+    "new_path": "assets/graphics/legal_cookie_policy.png",
+    "ui_role": "Cookie policy",
+    "reference_screens": "Tab/Tab-privacy and Legal.png",
+    "match_status": "matched",
+    "width": 1047,
+    "height": 1025,
+    "sha256": "efb720abd1eddb679d6df1c2240e34df89e68f0bd17a2c10cf08f0a918cf5052"
+  },
+  {
+    "original_path": "graphics/5a5db93e-a33c-43c4-8ebf-04c8773923d6-trimmed.png",
+    "new_path": "assets/graphics/privacy_analytics.png",
+    "ui_role": "Analytics cookie preference",
+    "reference_screens": "Tab/Tab-privacy and Legal.png",
+    "match_status": "matched",
+    "width": 849,
+    "height": 824,
+    "sha256": "30f47d1991e47fe0f8656a472fc0d3db587459b1b6e61371856e718f48243b79"
+  },
+  {
+    "original_path": "graphics/668e349f-2843-46cb-a9cf-eb98f885c162-trimmed.png",
+    "new_path": "assets/graphics/billing_themed_collection_piece.png",
+    "ui_role": "Themed collection pack icon",
+    "reference_screens": "Tab/tab-billing.png",
+    "match_status": "matched",
+    "width": 1095,
+    "height": 1104,
+    "sha256": "e25f013ea32e8d8b281dbe829dd8d486d9c07d707365c2dec47d8ba670243943"
+  },
+  {
+    "original_path": "graphics/69e02197-729e-4ad5-9c38-919b3c994f37-trimmed.png",
+    "new_path": "assets/graphics/privacy_marketing.png",
+    "ui_role": "Marketing cookie preference",
+    "reference_screens": "Tab/Tab-privacy and Legal.png",
+    "match_status": "matched",
+    "width": 982,
+    "height": 966,
+    "sha256": "969b14fd6d859ebd815cbb4ac4bb4701a3e1df227410c50cd956e09194361bb4"
+  },
+  {
+    "original_path": "graphics/81b7c1bc-9b06-4de8-bc8c-4bc549f31d21-trimmed.png",
+    "new_path": "assets/graphics/privacy_functional_shield.png",
+    "ui_role": "Functional cookie preference; reusable privacy shield",
+    "reference_screens": "Tab/Tab-privacy and Legal.png",
+    "match_status": "matched",
+    "width": 853,
+    "height": 830,
+    "sha256": "a5af392a98229ef2dcc89b24e5e655bf19ff184a97b89b4f0e774ec40b4c96a5"
+  },
+  {
+    "original_path": "graphics/8566c93c-98ca-4852-9069-9ee49a5f25b4 (1)-trimmed.png",
+    "new_path": "assets/graphics/settings_account.png",
+    "ui_role": "Account navigation",
+    "reference_screens": "Mobile/mobile-settings.png",
+    "match_status": "matched",
+    "width": 785,
+    "height": 858,
+    "sha256": "6b9f26fa033096981618f248bfb5ce8240f86839460f387d82c67a88cb1d3482"
+  },
+  {
+    "original_path": "graphics/860fbbfa-efb1-44de-b0b3-4225caeb7a6b-trimmed.png",
+    "new_path": "assets/graphics/billing_ai_picture_pack.png",
+    "ui_role": "AI picture pack chip",
+    "reference_screens": "Tab/tab-billing.png",
+    "match_status": "matched",
+    "width": 1042,
+    "height": 1050,
+    "sha256": "e0920fbfbc0623a0a80553946b4f2131116a1dbaf177d491c905d18d7687ef68"
+  },
+  {
+    "original_path": "graphics/939dea3b-704b-444b-96e2-0ffa8d3296ad-trimmed.png",
+    "new_path": "assets/graphics/settings_support.png",
+    "ui_role": "Support headset",
+    "reference_screens": "Mobile/mobile-settings.png",
+    "match_status": "matched",
+    "width": 1001,
+    "height": 998,
+    "sha256": "d1d8d396ea5f7fbf4068602e191e9ccb7be2b4d0a71a174ad7893668e280285f"
+  },
+  {
+    "original_path": "graphics/b6777f44-8337-4bce-ad28-ce52a4d0f7a8-trimmed.png",
+    "new_path": "assets/graphics/ai_style_sketch.png",
+    "ui_role": "Sketch pencil style",
+    "reference_screens": "Tab/Tab-AI.png",
+    "match_status": "matched",
+    "width": 885,
+    "height": 885,
+    "sha256": "397f281355f160626446ca8e22fc87acb1a8abb0f53751d4f2147f7b8f4b0b18"
+  },
+  {
+    "original_path": "graphics/b69dde98-b05d-4fa1-92b4-31b6c4f93275-trimmed.png",
+    "new_path": "assets/graphics/ai_sparkles.png",
+    "ui_role": "AI Picture Packs heading; Combo Packs heading with puzzle pair; not Create Puzzle",
+    "reference_screens": "Owner annotated Billing reference, 26 September 2026",
+    "match_status": "confirmed",
+    "width": 953,
+    "height": 886,
+    "sha256": "95667ba7004fd167896ef108273715c8e4c1464a5188835360946ecb8bcb8c5c"
+  },
+  {
+    "original_path": "graphics/ChatGPT Image Sep 4, 2026, 02_08_27 AM-trimmed.png",
+    "new_path": "assets/graphics/image_source_camera.png",
+    "ui_role": "Camera image source",
+    "reference_screens": "Tab/Tab-take photo.png",
+    "match_status": "matched",
+    "width": 1030,
+    "height": 833,
+    "sha256": "3ca72a4d0efc3daf184828ec3298253341df4492c000385a6b23e293343c04f9"
+  },
+  {
+    "original_path": "graphics/ChatGPT Image Sep 4, 2026, 02_12_50 AM-trimmed.png",
+    "new_path": "assets/graphics/premium_collection_lock.png",
+    "ui_role": "Premium collection lock and upsell",
+    "reference_screens": "Tab/tab-Curated collection.png",
+    "match_status": "matched",
+    "width": 698,
+    "height": 880,
+    "sha256": "42d9fa5f87992635d55ec9cc1ad1861a0ba9c00af3febc9211f466b261c18864"
+  },
+  {
+    "original_path": "graphics/ChatGPT Image Sep 4, 2026, 02_13_20 AM-trimmed.png",
+    "new_path": "assets/graphics/image_source_ai_generate.png",
+    "ui_role": "Generate with AI image source",
+    "reference_screens": "Tab/Tab-AI.png",
+    "match_status": "matched",
+    "width": 997,
+    "height": 746,
+    "sha256": "2ec06578ccdcb829a46fd110dcc9e9c23d67e4635f0af193a16fa41047a9c615"
+  },
+  {
+    "original_path": "graphics/ChatGPT Image Sep 4, 2026, 02_14_33 AM-trimmed.png",
+    "new_path": "assets/graphics/image_source_curated_collections.png",
+    "ui_role": "Curated collections image source",
+    "reference_screens": "Tab/tab-Curated collection.png",
+    "match_status": "matched",
+    "width": 980,
+    "height": 807,
+    "sha256": "f79403215228c7068f1f57ff54ed0dc8e475e5209ccb52dab94ed368576cf7fc"
+  },
+  {
+    "original_path": "graphics/ChatGPT Image Sep 4, 2026, 02_31_17 AM-trimmed.png",
+    "new_path": "assets/graphics/collection_packs_shop_bag.png",
+    "ui_role": "Shopping bag in Want more collections / Buy Collection Packs banner",
+    "reference_screens": "User-supplied annotated Add Image collection chooser screenshot",
+    "match_status": "matched",
+    "width": 985,
+    "height": 991,
+    "sha256": "34208799006291df97426a5d9ae8308196705bebf31f839bb37073075887e01f"
+  },
+  {
+    "original_path": "graphics/ChatGPT Image Sep 4, 2026, 02_36_13 AM-trimmed.png",
+    "new_path": "assets/graphics/image_source_photo_gallery.png",
+    "ui_role": "Photo gallery image source",
+    "reference_screens": "Tab/tab-photo gallery.png",
+    "match_status": "matched",
+    "width": 845,
+    "height": 755,
+    "sha256": "436a41190b956c1c4455246c9202e2f15b0077550936b4a2c18bc0becab3ed49"
+  },
+  {
+    "original_path": "graphics/ChatGPT Image Sep 4, 2026, 02_40_33 AM-trimmed.png",
+    "new_path": "assets/graphics/premium_collection_locked_badge.png",
+    "ui_role": "Circular lock badge at top right of locked premium collection thumbnails",
+    "reference_screens": "User-supplied annotated Add Image collection chooser screenshot",
+    "match_status": "matched",
+    "width": 993,
+    "height": 991,
+    "sha256": "11dda87b94d9f6fa1ed94b46d4bff585e5dfd6f3e51536d3c7623580bf7e66ff"
+  },
+  {
+    "original_path": "graphics/dead9a68-bd20-41fc-91d2-9fe2ab39b5b1-trimmed.png",
+    "new_path": "assets/graphics/ai_style_watercolor.png",
+    "ui_role": "Watercolor brush strokes style",
+    "reference_screens": "Tab/Tab-AI.png",
+    "match_status": "matched",
+    "width": 1121,
+    "height": 978,
+    "sha256": "2b900c02dbc2f3256db8de85def54be99c03d2dbd5c3ba940585fdb4385b62a7"
+  },
+  {
+    "original_path": "graphics/e3b63b81-bd96-4ada-acda-7eda661bace1-trimmed.png",
+    "new_path": "assets/graphics/billing_combo_puzzle_pair_tilted.png",
+    "ui_role": "Tilted orange and green puzzle pair for combo packs",
+    "reference_screens": "Tab/tab-billing.png",
+    "match_status": "matched",
+    "width": 1288,
+    "height": 790,
+    "sha256": "cac851d62b9ae5cbd12ed05e24771439b5a029ef87ffc0c8e9f60a7ed07b5811"
+  },
+  {
+    "original_path": "graphics/eee3ba9c-d6c4-443f-afb6-8e8e9f8030ff-trimmed.png",
+    "new_path": "assets/graphics/ai_style_cartoon.png",
+    "ui_role": "Cartoon baby style",
+    "reference_screens": "Tab/Tab-AI.png",
+    "match_status": "matched",
+    "width": 1030,
+    "height": 928,
+    "sha256": "9d150d21ee08685ed57bee2b1a46095880b4520b5a524c6417e411744828c2be"
+  },
+  {
+    "original_path": "ChatGPT Image Aug 3, 2026, 09_58_23 PM-trimmed.png",
+    "new_path": "assets/graphics/puzzle_timer_mode.png",
+    "ui_role": "Timer Mode heading on Create Puzzle",
+    "reference_screens": "Revised Create Puzzle / Settings references",
+    "match_status": "matched",
+    "width": 535,
+    "height": 600,
+    "sha256": "f92a64cbabb18f90c69712136a5be9dba31d92ccebaa9b643864458bb996d601"
+  },
+  {
+    "original_path": "d0b39dc2-b468-4efe-bef7-8b8752c46b22-trimmed.png",
+    "new_path": "assets/graphics/puzzle_ready_illustration.png",
+    "ui_role": "Ready to Create illustration; reusable pale puzzle decoration",
+    "reference_screens": "Revised Create Puzzle / Settings references",
+    "match_status": "matched",
+    "width": 1074,
+    "height": 1155,
+    "sha256": "820b53784fcf7a7c72ce78f87faab518265e7f4294be4754f2e017b441786bbe"
+  },
+  {
+    "original_path": "2b341478-ecca-4498-97a7-ba8610fb04d6-trimmed.png",
+    "new_path": "assets/graphics/settings_privacy_legal.png",
+    "ui_role": "Privacy & Legal navigation in Settings and tablet sidebar",
+    "reference_screens": "Revised Create Puzzle / Settings references",
+    "match_status": "matched",
+    "width": 789,
+    "height": 907,
+    "sha256": "7b7a75db0be0a4a453e188a6c4a86e5fcaf6109eb26e24ff52b0a04f407ef7e1"
+  },
+  {
+    "original_path": "5e0cd5d2-41d0-4de4-b2d8-85906a89bba1-trimmed.png",
+    "new_path": "assets/graphics/settings_billing.png",
+    "ui_role": "Billing navigation in Settings and tablet sidebar",
+    "reference_screens": "Revised Create Puzzle / Settings references",
+    "match_status": "matched",
+    "width": 753,
+    "height": 530,
+    "sha256": "0d9b6ecb1bf03b354ad458d18641e4b4982ca0857402029504244a33dd85ebfe"
+  },
+  {
+    "original_path": "ChatGPT Image Aug 3, 2026, 09_47_03 PM-trimmed.png",
+    "new_path": "assets/graphics/puzzle_size_piece.png",
+    "ui_role": "Puzzle Size heading on Create Puzzle",
+    "reference_screens": "Revised Create Puzzle / Settings references",
+    "match_status": "matched",
+    "width": 478,
+    "height": 502,
+    "sha256": "4f24de733e620f8b919050fbe60e5db9d71d628e05f8aecabc8acb242a9253f5"
+  },
+  {
+    "original_path": "ChatGPT Image Sep 3, 2026, 05_47_53 PM-trimmed.png",
+    "new_path": "assets/graphics/hint_bulb.svg",
+    "ui_role": "White vector icon on green Hint button; original PNG retained as reference",
+    "reference_screens": "Puzzle play, phone and tablet",
+    "match_status": "vector recreation",
+    "width": 64,
+    "height": 64,
+    "sha256": "1b0641c4369ee5b668640b90f60035be6309c287a6641a47553a0bd68cccd432"
+  }
+]

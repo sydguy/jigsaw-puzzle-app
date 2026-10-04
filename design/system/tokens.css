@@ -1,0 +1,31 @@
+/* Generated from tokens.json by build.py. Proposed design tokens. */
+:root {
+  --jf-canvas: #F7F7FE;
+  --jf-surface: #FFFFFF;
+  --jf-surface-soft: #EFEEFD;
+  --jf-selected: #E7E1FF;
+  --jf-text: #17124F;
+  --jf-text-secondary: #625B87;
+  --jf-primary: #5430E8;
+  --jf-primary-pressed: #4020BF;
+  --jf-gradient-start: #7140EC;
+  --jf-gradient-end: #3030F4;
+  --jf-border: #DAD7EE;
+  --jf-control-border: #8D84B2;
+  --jf-focus: #2F23B9;
+  --jf-success: #27763D;
+  --jf-success-soft: #E9F5EA;
+  --jf-warning: #995000;
+  --jf-warning-soft: #FFF1D9;
+  --jf-danger: #BA2F3A;
+  --jf-danger-soft: #FFF0F1;
+  --jf-info: #255FD0;
+  --jf-info-soft: #EAF1FF;
+  --jf-disabled-surface: #E9E7F0;
+  --jf-disabled-text: #716C85;
+  --jf-hint: #377E3C;
+  --jf-preview: #AC510B;
+  --jf-restart: #BA2F3A;
+  --jf-shuffle: #255FD0;
+  --jf-premium-gold: #F3BA43;
+}

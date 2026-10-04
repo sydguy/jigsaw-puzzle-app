@@ -1,0 +1,35 @@
+[
+  {
+    "output": "specimens/lakeside.png",
+    "source": "design/tablet/tab-homev1.png",
+    "crop": [
+      54,
+      381,
+      414,
+      550
+    ],
+    "usage": "Design specimen only; not approved catalogue content"
+  },
+  {
+    "output": "specimens/puppy.png",
+    "source": "design/tablet/tab-homev1.png",
+    "crop": [
+      54,
+      578,
+      414,
+      747
+    ],
+    "usage": "Design specimen only; not approved catalogue content"
+  },
+  {
+    "output": "specimens/castle.png",
+    "source": "design/tablet/tab-homev1.png",
+    "crop": [
+      54,
+      778,
+      414,
+      946
+    ],
+    "usage": "Design specimen only; not approved catalogue content"
+  }
+]

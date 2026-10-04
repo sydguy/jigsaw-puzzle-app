@@ -1,0 +1,171 @@
+[
+  {
+    "foreground": "text",
+    "background": "canvas",
+    "ratio": 15.93,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "textSecondary",
+    "background": "canvas",
+    "ratio": 5.85,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "textSecondary",
+    "background": "surfaceSoft",
+    "ratio": 5.44,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "primary",
+    "background": "surface",
+    "ratio": 7.08,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "surface",
+    "background": "primary",
+    "ratio": 7.08,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "surface",
+    "background": "gradientStart",
+    "ratio": 5.76,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "surface",
+    "background": "gradientEnd",
+    "ratio": 7.36,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "success",
+    "background": "successSoft",
+    "ratio": 5.0,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "danger",
+    "background": "dangerSoft",
+    "ratio": 5.34,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "warning",
+    "background": "warningSoft",
+    "ratio": 5.38,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "info",
+    "background": "infoSoft",
+    "ratio": 5.11,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "surface",
+    "background": "danger",
+    "ratio": 5.91,
+    "minimum": 4.5,
+    "passed": true
+  },
+  {
+    "foreground": "controlBorder",
+    "background": "surface",
+    "ratio": 3.46,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "focus",
+    "background": "surfaceSoft",
+    "ratio": 8.88,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "#FFFFFF icon",
+    "background": "#4B944B",
+    "role": "hint",
+    "ratio": 3.73,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "#FFFFFF icon",
+    "background": "#377E3C",
+    "role": "hint",
+    "ratio": 4.99,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "#FFFFFF icon",
+    "background": "#C26316",
+    "role": "preview",
+    "ratio": 4.13,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "#FFFFFF icon",
+    "background": "#AC510B",
+    "role": "preview",
+    "ratio": 5.34,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "#FFFFFF icon",
+    "background": "#D24448",
+    "role": "restart",
+    "ratio": 4.51,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "#FFFFFF icon",
+    "background": "#BA2F3A",
+    "role": "restart",
+    "ratio": 5.91,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "#FFFFFF icon",
+    "background": "#3471DC",
+    "role": "shuffle",
+    "ratio": 4.62,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "#FFFFFF icon",
+    "background": "#255FD0",
+    "role": "shuffle",
+    "ratio": 5.79,
+    "minimum": 3,
+    "passed": true
+  },
+  {
+    "foreground": "#FFFFFF",
+    "background": "primary gradient (101 sRGB samples)",
+    "ratio": 5.76,
+    "minimum": 4.5,
+    "passed": true
+  }
+]

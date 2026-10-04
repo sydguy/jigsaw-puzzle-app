@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "Jigsaw Compatibility Lab",
+    "slug": "jigsaw-compatibility-lab",
+    "version": "0.0.1",
+    "platforms": ["ios", "android", "web"],
+    "userInterfaceStyle": "light",
+    "web": {"bundler": "metro"},
+    "ios": {"supportsTablet": true},
+    "android": {"permissions": []}
+  }
+}

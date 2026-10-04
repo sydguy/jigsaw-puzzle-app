@@ -1,0 +1,17 @@
+* text=auto
+*.md text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.ps1 text eol=crlf
+# Historical evidence must retain its original bytes, including line endings.
+docs/superseded/** -text
+docs/source-baseline.json -text
+docs/source-inventory.md -text
+docs/source-corrections.md -text
+design/** -text
+graphics/** -text
+prototype/** -text
+website/** -text
+SCREEN_UPDATES.csv -text
+checksums.json -text

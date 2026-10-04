@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jigsaw Fun Time! — Turn any photo into a puzzle</title>
+<meta name="description" content="Jigsaw Fun Time! turns your photos — or ones made with AI — into puzzles you can solve anywhere. Free to play on iOS and Android.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#462BD9; --purple-light:#6A4CF0; --purple-dark:#301D9E;
+    --gold:#FFC94A; --gold-dark:#FF9E3D;
+    --green:#3FA34D; --blue:#3E8ED0; --red:#E24C4C;
+    --bg:#F4F5FA; --card:#FFFFFF; --ink:#1C1B2E; --ink-soft:#3A3950; --muted:#7A7A8C;
+    --line:#E7E7F2;
+    --radius:20px;
+    --shadow: 0 10px 30px rgba(38,25,120,.10);
+    --shadow-lg: 0 24px 60px rgba(38,25,120,.16);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Nunito',sans-serif; font-weight:900; color:var(--ink); letter-spacing:-0.01em}
+  a{color:inherit}
+  img{max-width:100%; display:block}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px}
+  section{padding:96px 0}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:13px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--purple);
+    background:#EDE9FB; padding:8px 16px; border-radius:999px; margin-bottom:20px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:15px;
+    padding:15px 28px; border-radius:14px; border:none; cursor:pointer;
+    text-decoration:none; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:linear-gradient(135deg,var(--purple),var(--purple-light)); color:#fff; box-shadow:0 10px 24px rgba(70,43,217,.35)}
+  .btn-ghost{background:#fff; color:var(--purple); border:2px solid var(--line)}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:50; background:rgba(244,245,250,.88);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
+  .brand img{height:38px; width:auto}
+  .navlinks{display:flex; gap:32px; font-family:'Nunito',sans-serif; font-weight:700; font-size:15px; color:var(--ink-soft)}
+  .navlinks a{text-decoration:none; padding:6px 2px; border-bottom:2px solid transparent}
+  .navlinks a:hover{color:var(--purple); border-color:var(--purple)}
+  .navcta{display:flex; gap:10px}
+  .storybtn{
+    display:flex; align-items:center; gap:8px; background:#111; color:#fff;
+    padding:7px 14px; border-radius:10px; text-decoration:none; font-size:12px;
+  }
+  .storybtn .lines{display:flex; flex-direction:column; line-height:1.15}
+  .storybtn .lines span:first-child{font-size:9px; opacity:.8}
+  .storybtn .lines span:last-child{font-family:'Nunito',sans-serif; font-weight:800; font-size:13px}
+  .storybtn svg{flex-shrink:0}
+  .navburger{display:none; background:none; border:none; cursor:pointer}
+
+  /* ---------- hero ---------- */
+  .hero{padding:80px 0 40px; position:relative; overflow:hidden}
+  .hero .wrap{display:grid; grid-template-columns:1.05fr .95fr; gap:60px; align-items:center}
+  .hero h1{font-size:52px; line-height:1.08; margin:0 0 20px}
+  .hero h1 .accent{
+    background:linear-gradient(135deg,var(--purple),var(--purple-light));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.lead{font-size:19px; color:var(--ink-soft); max-width:480px; margin:0 0 32px}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:16px}
+  .hero-note{font-size:13px; color:var(--muted); display:flex; align-items:center; gap:8px}
+  .hero-note .dot{width:6px; height:6px; border-radius:50%; background:var(--green)}
+
+  .hero-visual{position:relative}
+  .device-frame{
+    background:#0d1526; border-radius:28px; padding:12px; box-shadow:var(--shadow-lg);
+    transform:rotate(2deg);
+  }
+  .device-frame img{border-radius:18px; display:block}
+  .floaty{
+    position:absolute; width:64px; filter:drop-shadow(0 12px 20px rgba(38,25,120,.25));
+    animation:bob 5s ease-in-out infinite;
+  }
+  .floaty.f1{top:-24px; left:-30px; width:70px; animation-delay:.2s}
+  .floaty.f2{bottom:40px; right:-36px; width:58px; animation-delay:1.1s}
+  .floaty.f3{top:60%; left:-46px; width:50px; animation-delay:2s}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @media (prefers-reduced-motion: reduce){ .floaty{animation:none} }
+
+  /* ---------- piece-edge divider (signature element) ---------- */
+  .piece-divider{width:100%; height:46px; display:block; margin-top:-1px}
+
+  /* ---------- stat strip ---------- */
+  .stats{background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+  .stats .wrap{display:flex; justify-content:space-between; padding:36px 28px; flex-wrap:wrap; gap:24px}
+  .stat{text-align:center; min-width:130px}
+  .stat b{display:block; font-family:'Nunito',sans-serif; font-weight:900; font-size:30px; color:var(--purple)}
+  .stat span{font-size:13px; color:var(--muted)}
+
+  /* ---------- section heading ---------- */
+  .sec-head{text-align:center; max-width:620px; margin:0 auto 56px}
+  .sec-head h2{font-size:36px; margin:0 0 14px}
+  .sec-head p{color:var(--muted); font-size:16px; margin:0}
+
+  /* ---------- feature cards (mirrors the real app's card language) ---------- */
+  .features-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+  .fcard{
+    background:var(--card); border-radius:16px; padding:28px 24px;
+    box-shadow:0 4px 14px rgba(20,30,60,.08); border:1px solid rgba(230,230,240,.9);
+  }
+  .ficon{
+    width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px; background:#EDE9FB;
+  }
+  .ficon img{width:28px; height:28px; object-fit:contain}
+  .fcard h3{font-size:18px; margin:0 0 8px}
+  .fcard p{font-size:14.5px; color:var(--muted); margin:0}
+
+  /* ---------- how it works ---------- */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:32px; counter-reset:step}
+  .step{position:relative; padding-top:8px}
+  .step .num{
+    font-family:'Nunito',sans-serif; font-weight:900; font-size:15px; color:#fff;
+    background:linear-gradient(135deg,var(--purple),var(--purple-light));
+    width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px;
+  }
+  .step h3{font-size:19px; margin:0 0 8px}
+  .step p{color:var(--muted); font-size:14.5px; margin:0}
+
+  /* ---------- screenshots ---------- */
+  .shots{background:#fff}
+  .shots-row{display:grid; grid-template-columns:1.4fr 1fr; gap:28px; align-items:end}
+  .shot-frame{background:#0d1526; border-radius:22px; padding:10px; box-shadow:var(--shadow)}
+  .shot-frame img{border-radius:14px}
+  .shot-frame.tall{padding:14px 8px}
+
+  /* ---------- pricing ---------- */
+  .pricing-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch}
+  .pcard{
+    background:#fff; border-radius:18px; padding:32px 26px; box-shadow:0 4px 14px rgba(20,30,60,.08);
+    border:1px solid var(--line); display:flex; flex-direction:column;
+  }
+  .pcard.featured{
+    border:2px solid var(--purple); box-shadow:var(--shadow-lg); position:relative; transform:translateY(-8px);
+  }
+  .pcard .tag{
+    position:absolute; top:-13px; left:20px; background:linear-gradient(135deg,var(--purple),var(--purple-light));
+    color:#fff; font-family:'Nunito',sans-serif; font-weight:800; font-size:11px; letter-spacing:.05em;
+    text-transform:uppercase; padding:6px 14px; border-radius:20px; box-shadow:0 4px 10px rgba(76,45,190,.35);
+  }
+  .pcard h3{font-size:16px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin:8px 0 4px}
+  .pcard .price{font-family:'Nunito',sans-serif; font-weight:900; font-size:38px; margin:0 0 4px}
+  .pcard .price small{font-size:15px; font-weight:700; color:var(--muted)}
+  .pcard ul{list-style:none; padding:0; margin:20px 0 28px; flex:1}
+  .pcard li{font-size:14px; color:var(--ink-soft); padding:8px 0; border-top:1px solid var(--line); display:flex; gap:10px}
+  .pcard li:first-child{border-top:none}
+  .pcard li:before{content:"✓"; color:var(--green); font-weight:800}
+
+  /* ---------- testimonials ---------- */
+  .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+  .tcard{background:#fff; border-radius:16px; padding:26px; box-shadow:0 4px 14px rgba(20,30,60,.08); border:1px solid var(--line)}
+  .tstars{color:var(--gold-dark); font-size:14px; margin-bottom:12px; letter-spacing:2px}
+  .tcard p{font-size:14.5px; color:var(--ink-soft); margin:0 0 16px}
+  .tcard .who{display:flex; align-items:center; gap:10px}
+  .avatar{width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--purple),var(--purple-light)); color:#fff; font-family:'Nunito',sans-serif; font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center}
+  .who .name{font-family:'Nunito',sans-serif; font-weight:800; font-size:13.5px}
+  .who .meta{font-size:12px; color:var(--muted)}
+
+  /* ---------- FAQ ---------- */
+  .faq{max-width:760px; margin:0 auto}
+  details{background:#fff; border:1px solid var(--line); border-radius:14px; padding:20px 24px; margin-bottom:12px}
+  details[open]{box-shadow:0 4px 14px rgba(20,30,60,.08)}
+  summary{
+    font-family:'Nunito',sans-serif; font-weight:800; font-size:15.5px; cursor:pointer;
+    list-style:none; display:flex; justify-content:space-between; align-items:center;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary:after{content:"+"; font-size:22px; color:var(--purple); font-weight:400; margin-left:16px}
+  details[open] summary:after{content:"–"}
+  details p{font-size:14.5px; color:var(--ink-soft); margin:14px 0 0}
+
+  /* ---------- final CTA ---------- */
+  .cta-band{
+    background:linear-gradient(135deg,var(--purple),var(--purple-light));
+    border-radius:28px; padding:64px 48px; text-align:center; color:#fff;
+    margin:0 28px;
+  }
+  .cta-band h2{color:#fff; font-size:34px; margin:0 0 12px}
+  .cta-band p{color:rgba(255,255,255,.85); font-size:16px; margin:0 0 32px}
+  .cta-band .hero-ctas{justify-content:center}
+  .cta-band .storybtn{background:#fff; color:#111}
+
+  /* ---------- footer ---------- */
+  footer{background:#15122B; color:#C9C7DE; padding:72px 0 28px; margin-top:40px}
+  .foot-grid{display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:32px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,.1)}
+  .foot-brand img{height:34px; margin-bottom:14px}
+  .foot-brand p{font-size:13.5px; color:#9491B5; max-width:230px}
+  .foot-col h4{font-family:'Nunito',sans-serif; font-weight:800; font-size:13px; color:#fff; text-transform:uppercase; letter-spacing:.05em; margin:0 0 16px}
+  .foot-col a{display:block; font-size:14px; color:#B4B1D0; text-decoration:none; margin-bottom:11px}
+  .foot-col a:hover{color:#fff}
+  .foot-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:26px; flex-wrap:wrap; gap:16px}
+  .foot-bottom small{color:#7D7A9E; font-size:13px}
+  .socials{display:flex; gap:10px}
+  .socials a{width:36px; height:36px; border-radius:10px; background:rgba(255,255,255,.06); display:flex; align-items:center; justify-content:center; text-decoration:none}
+  .socials a:hover{background:rgba(255,255,255,.14)}
+
+  @media (max-width: 900px){
+    .navlinks, .navcta{display:none}
+    .navburger{display:block}
+    .hero .wrap{grid-template-columns:1fr; text-align:center}
+    .hero p.lead{margin-left:auto; margin-right:auto}
+    .hero-ctas{justify-content:center}
+    .hero h1{font-size:38px}
+    .device-frame{transform:none; max-width:380px; margin:0 auto}
+    .features-grid, .steps, .pricing-grid, .testi-grid{grid-template-columns:1fr}
+    .shots-row{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr 1fr; gap:36px 20px}
+    .cta-band{margin:0 16px; padding:48px 24px}
+    section{padding:64px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top"><img src="assets/logo.png" alt="Jigsaw Fun Time!"></a>
+    <nav class="navlinks">
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="support.html">Support</a>
+    </nav>
+    <div class="navcta">
+      <a class="storybtn" href="#download" aria-label="Download on the App Store">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M16.365 1.43c0 1.14-.475 2.24-1.24 3.05-.83.87-2.19 1.55-3.29 1.46-.14-1.09.42-2.24 1.19-3.03.83-.86 2.28-1.51 3.34-1.48zM20.5 17.14c-.5 1.16-1.1 2.28-1.94 3.31-.9 1.11-1.85 2.2-3.28 2.22-1.4.03-1.85-.83-3.45-.83-1.6 0-2.1.81-3.42.86-1.38.05-2.44-1.2-3.35-2.31-1.85-2.25-3.27-6.36-1.37-9.14 1.02-1.5 2.6-2.44 4.32-2.47 1.35-.03 2.63.91 3.45.91.82 0 2.38-1.12 4.01-.96.68.03 2.6.28 3.83 2.08-.1.06-2.29 1.34-2.26 4-.03 3.18 2.79 4.24 2.86 4.33z"/></svg>
+        <span class="lines"><span>Download on the</span><span>App Store</span></span>
+      </a>
+      <a class="storybtn" href="#download" aria-label="Get it on Google Play">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M3.6 2.6c-.3.3-.5.8-.5 1.4v16c0 .6.2 1.1.5 1.4l.1.1L13 12.5v-.1L3.7 2.5l-.1.1z" fill="#00D9FF"/><path d="M16.2 15.7L13 12.5v-.1l3.2-3.2 3.7 2.1c1.1.6 1.1 1.6 0 2.2l-3.7 2.1z" fill="#FFCF00"/><path d="M16.2 15.7L13 12.4 3.6 21.9c.4.4 1 .4 1.7.1l10.9-6.3" fill="#FF3A44"/><path d="M16.2 9.3L5.3 3c-.7-.4-1.3-.3-1.7.1l9.4 9.4 3.2-3.2z" fill="#00E676"/></svg>
+        <span class="lines"><span>GET IT ON</span><span>Google Play</span></span>
+      </a>
+    </div>
+    <button class="navburger" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#462BD9" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">✨ AI-powered puzzles</div>
+      <h1>Turn any photo into your next <span class="accent">favorite puzzle.</span></h1>
+      <p class="lead">Snap a picture, generate one with AI, or pick from our galleries — Jigsaw Fun Time! turns it into a puzzle you can solve anywhere, at any size, on any device.</p>
+      <div class="hero-ctas">
+        <a class="storybtn" href="#download" style="padding:11px 20px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M16.365 1.43c0 1.14-.475 2.24-1.24 3.05-.83.87-2.19 1.55-3.29 1.46-.14-1.09.42-2.24 1.19-3.03.83-.86 2.28-1.51 3.34-1.48zM20.5 17.14c-.5 1.16-1.1 2.28-1.94 3.31-.9 1.11-1.85 2.2-3.28 2.22-1.4.03-1.85-.83-3.45-.83-1.6 0-2.1.81-3.42.86-1.38.05-2.44-1.2-3.35-2.31-1.85-2.25-3.27-6.36-1.37-9.14 1.02-1.5 2.6-2.44 4.32-2.47 1.35-.03 2.63.91 3.45.91.82 0 2.38-1.12 4.01-.96.68.03 2.6.28 3.83 2.08-.1.06-2.29 1.34-2.26 4-.03 3.18 2.79 4.24 2.86 4.33z"/></svg>
+          <span class="lines"><span>Download on the</span><span>App Store</span></span>
+        </a>
+        <a class="storybtn" href="#download" style="padding:11px 20px">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M3.6 2.6c-.3.3-.5.8-.5 1.4v16c0 .6.2 1.1.5 1.4l.1.1L13 12.5v-.1L3.7 2.5l-.1.1z" fill="#00D9FF"/><path d="M16.2 15.7L13 12.5v-.1l3.2-3.2 3.7 2.1c1.1.6 1.1 1.6 0 2.2l-3.7 2.1z" fill="#FFCF00"/><path d="M16.2 15.7L13 12.4 3.6 21.9c.4.4 1 .4 1.7.1l10.9-6.3" fill="#FF3A44"/><path d="M16.2 9.3L5.3 3c-.7-.4-1.3-.3-1.7.1l9.4 9.4 3.2-3.2z" fill="#00E676"/></svg>
+          <span class="lines"><span>GET IT ON</span><span>Google Play</span></span>
+        </a>
+      </div>
+      <div class="hero-note"><span class="dot"></span> Free to play · No sign-up required</div>
+    </div>
+    <div class="hero-visual">
+      <img class="floaty f1" src="assets/puzzlepiece.png" alt="">
+      <img class="floaty f2" src="assets/gift.png" alt="">
+      <img class="floaty f3" src="assets/crown.png" alt="">
+      <div class="device-frame">
+        <img src="assets/tablet_mockup.png" alt="Jigsaw Fun Time! app screenshot">
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="piece-divider" viewBox="0 0 1200 46" preserveAspectRatio="none">
+  <path fill="#ffffff" d="M0,0 L60,0 C66,0 66,6 72,10 C80,16 92,16 100,10 C106,6 106,0 112,0 L232,0 C238,0 238,6 244,10 C252,16 264,16 272,10 C278,6 278,0 284,0 L404,0 C410,0 410,6 416,10 C424,16 436,16 444,10 C450,6 450,0 456,0 L576,0 C582,0 582,6 588,10 C596,16 608,16 616,10 C622,6 622,0 628,0 L748,0 C754,0 754,6 760,10 C768,16 780,16 788,10 C794,6 794,0 800,0 L920,0 C926,0 926,6 932,10 C940,16 952,16 960,10 C966,6 966,0 972,0 L1092,0 C1098,0 1098,6 1104,10 C1112,16 1124,16 1132,10 C1138,6 1138,0 1144,0 L1200,0 L1200,46 L0,46 Z"/>
+</svg>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><b>2M+</b><span>puzzles solved</span></div>
+    <div class="stat"><b>4.8★</b><span>average rating</span></div>
+    <div class="stat"><b>150+</b><span>countries</span></div>
+    <div class="stat"><b>6×8–15×20</b><span>puzzle sizes</span></div>
+    <div class="stat"><b>0</b><span>ads on solo play</span></div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Features</div>
+      <h2>Everything a puzzle night needs</h2>
+      <p>Built for quick breaks and long weekends alike — pick it up, put it down, come back tomorrow.</p>
+    </div>
+    <div class="features-grid">
+      <div class="fcard">
+        <div class="ficon"><img src="assets/addimage.png" alt=""></div>
+        <h3>Any photo becomes a puzzle</h3>
+        <p>Camera roll, a fresh photo, or an AI-generated scene — turn any image into a puzzle in seconds.</p>
+      </div>
+      <div class="fcard">
+        <div class="ficon"><img src="assets/puzzlepiece.png" alt=""></div>
+        <h3>6×8 to 15×20 pieces</h3>
+        <p>Pick your challenge. Start small for a quick break, or go big for a weekend project.</p>
+      </div>
+      <div class="fcard">
+        <div class="ficon"><img src="assets/gift.png" alt=""></div>
+        <h3>Daily rewards</h3>
+        <p>Come back each day to build your streak and earn coins toward hints and cosmetics.</p>
+      </div>
+      <div class="fcard">
+        <div class="ficon"><img src="assets/timericon.png" alt=""></div>
+        <h3>Timer or stopwatch</h3>
+        <p>Race the clock in Timer mode, or take it slow with a stopwatch that just counts up.</p>
+      </div>
+      <div class="fcard">
+        <div class="ficon"><img src="assets/crown.png" alt=""></div>
+        <h3>Premium, without the pressure</h3>
+        <p>Go ad-free anytime for $2.99/month. Every puzzle feature stays free either way.</p>
+      </div>
+      <div class="fcard">
+        <div class="ficon"><img src="assets/zoomicon.png" alt=""></div>
+        <h3>Zoom, pan, and fit</h3>
+        <p>Work piece by piece or pull back for the big picture — the board adapts to you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff; padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">How it works</div>
+      <h2>From photo to puzzle in three steps</h2>
+      <p></p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Choose your image</h3>
+        <p>Snap a new photo, pick one from your gallery, or generate a scene with AI.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Pick your size</h3>
+        <p>Set rows and columns, choose a zoom level, and decide between timer or stopwatch.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Solve & earn rewards</h3>
+        <p>Piece it together at your own pace, then collect coins and streak bonuses for finishing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="screenshots" class="shots">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">See it in action</div>
+      <h2>Designed for tablets and phones alike</h2>
+      <p>The full board on a bigger screen, or a landscape layout built for one-handed play on the go.</p>
+    </div>
+    <div class="shots-row">
+      <div class="shot-frame"><img src="assets/tablet_mockup.png" alt="Jigsaw Fun Time! on tablet"></div>
+      <div class="shot-frame tall"><img src="assets/Mobile_mockup.png" alt="Jigsaw Fun Time! on mobile"></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Pricing</div>
+      <h2>Free to play. Simple to upgrade.</h2>
+      <p>No paywalls on the core game — just optional ways to skip ads or unlock more content.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pcard">
+        <h3>Free</h3>
+        <div class="price">$0</div>
+        <ul>
+          <li>Unlimited puzzles from your own photos</li>
+          <li>All puzzle sizes, 6×8 to 15×20</li>
+          <li>Daily rewards & streaks</li>
+          <li>Timer and stopwatch modes</li>
+          <li>Occasional ads between puzzles</li>
+        </ul>
+        <a class="btn btn-ghost" href="#download">Get started</a>
+      </div>
+      <div class="pcard featured">
+        <div class="tag">Most popular</div>
+        <h3>Ad-Free</h3>
+        <div class="price">$2.99 <small>/ month</small></div>
+        <ul>
+          <li>Everything in Free</li>
+          <li>No ads, anywhere in the app</li>
+          <li>Faster access to hints</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a class="btn btn-primary" href="#download">Go ad-free</a>
+      </div>
+      <div class="pcard">
+        <h3>AI & Theme Packs</h3>
+        <div class="price">from $3.99</div>
+        <ul>
+          <li>50–100 AI-generated images per pack</li>
+          <li>Curated theme collections</li>
+          <li>One-time purchase, yours to keep</li>
+          <li>Stack with Free or Ad-Free</li>
+        </ul>
+        <a class="btn btn-ghost" href="#download">Browse packs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">What people say</div>
+      <h2>Loved by puzzlers of every pace</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="tcard">
+        <div class="tstars">★★★★★</div>
+        <p>"I turned our vacation photos into puzzles for the whole family. My kids ask for it more than they ask for screen time — which feels like a win."</p>
+        <div class="who"><div class="avatar">M</div><div><div class="name">Maya R.</div><div class="meta">iOS · 4.9★ review</div></div></div>
+      </div>
+      <div class="tcard">
+        <div class="tstars">★★★★★</div>
+        <p>"The AI images are genuinely gorgeous, and the difficulty range means I can hand my phone to my mom for an easy one and keep a 15×20 for myself."</p>
+        <div class="who"><div class="avatar">D</div><div><div class="name">Daniel K.</div><div class="meta">Android · 5★ review</div></div></div>
+      </div>
+      <div class="tcard">
+        <div class="tstars">★★★★★</div>
+        <p>"Paid the $2.99 the first week and never looked back. Simple, calming, exactly what I wanted after a long day."</p>
+        <div class="who"><div class="avatar">S</div><div><div class="name">Sofia T.</div><div class="meta">iOS · 4.8★ review</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">FAQ</div>
+      <h2>Good to know</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>Is Jigsaw Fun Time! really free?</summary>
+        <p>Yes. Every puzzle size, your own photos, daily rewards, and both timer modes are free with no sign-up required. Ads may appear between puzzles unless you go Ad-Free.</p>
+      </details>
+      <details>
+        <summary>What happens when I run out of AI credits?</summary>
+        <p>AI credits are used only for AI-generated images — your own photos never require credits. When you run out, you can watch a short rewarded ad for more, or buy an AI Pack for a larger batch.</p>
+      </details>
+      <details>
+        <summary>Can I use my own photos?</summary>
+        <p>Yes — camera roll and live camera photos are free for everyone, with no credit cost at all.</p>
+      </details>
+      <details>
+        <summary>Does the Ad-Free plan remove every ad?</summary>
+        <p>Yes. The $2.99/month Ad-Free subscription removes all ads across the entire app, including between puzzles and on the home screen.</p>
+      </details>
+      <details>
+        <summary>Can I play without an internet connection?</summary>
+        <p>Puzzles you've already generated or saved can be played offline. Generating new AI images and syncing rewards requires a connection.</p>
+      </details>
+      <details>
+        <summary>How do I cancel my subscription?</summary>
+        <p>Ad-Free subscriptions are managed through your Apple ID or Google Play account settings, the same place you manage any other app subscription, and can be cancelled anytime.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Your next puzzle is one photo away.</h2>
+      <p>Free to download. Free to play. Ready in under a minute.</p>
+      <div class="hero-ctas">
+        <a class="storybtn" href="#">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#111"><path d="M16.365 1.43c0 1.14-.475 2.24-1.24 3.05-.83.87-2.19 1.55-3.29 1.46-.14-1.09.42-2.24 1.19-3.03.83-.86 2.28-1.51 3.34-1.48zM20.5 17.14c-.5 1.16-1.1 2.28-1.94 3.31-.9 1.11-1.85 2.2-3.28 2.22-1.4.03-1.85-.83-3.45-.83-1.6 0-2.1.81-3.42.86-1.38.05-2.44-1.2-3.35-2.31-1.85-2.25-3.27-6.36-1.37-9.14 1.02-1.5 2.6-2.44 4.32-2.47 1.35-.03 2.63.91 3.45.91.82 0 2.38-1.12 4.01-.96.68.03 2.6.28 3.83 2.08-.1.06-2.29 1.34-2.26 4-.03 3.18 2.79 4.24 2.86 4.33z"/></svg>
+          <span class="lines"><span>Download on the</span><span>App Store</span></span>
+        </a>
+        <a class="storybtn" href="#">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M3.6 2.6c-.3.3-.5.8-.5 1.4v16c0 .6.2 1.1.5 1.4l.1.1L13 12.5v-.1L3.7 2.5l-.1.1z" fill="#00D9FF"/><path d="M16.2 15.7L13 12.5v-.1l3.2-3.2 3.7 2.1c1.1.6 1.1 1.6 0 2.2l-3.7 2.1z" fill="#FFCF00"/><path d="M16.2 15.7L13 12.4 3.6 21.9c.4.4 1 .4 1.7.1l10.9-6.3" fill="#FF3A44"/><path d="M16.2 9.3L5.3 3c-.7-.4-1.3-.3-1.7.1l9.4 9.4 3.2-3.2z" fill="#00E676"/></svg>
+          <span class="lines"><span>GET IT ON</span><span>Google Play</span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo.png" alt="Jigsaw Fun Time!">
+        <p>Turn any photo into a puzzle you can solve anywhere. Free to play on iOS and Android.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#download">Download</a>
+      </div>
+      <div class="foot-col">
+        <h4>Support</h4>
+        <a href="#faq">FAQ</a>
+        <a href="support.html">Help Center</a>
+        <a href="support.html#contact">Contact us</a>
+        <a href="support.html#report">Report a problem</a>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="terms.html#subscriptions">Subscription terms</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Press kit</a>
+        <a href="support.html#contact">Careers</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <small>© 2026 Jigsaw Fun Time! All rights reserved.</small>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9C7DE" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="#C9C7DE"><path d="M16.5 3c.4 2 1.8 3.4 3.8 3.6v2.6c-1.4 0-2.7-.4-3.8-1.2v6.3a5.4 5.4 0 1 1-5.4-5.4c.3 0 .6 0 .9.1v2.7a2.7 2.7 0 1 0 1.9 2.6V3h2.6z"/></svg></a>
+        <a href="#" aria-label="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="#C9C7DE"><path d="M18 3h3l-7.5 8.6L22 21h-6.9l-5.4-6.6L3.5 21H.5l8-9.2L2 3h7l4.9 6L18 3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

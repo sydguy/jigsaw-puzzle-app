@@ -1,0 +1,334 @@
+[
+  {
+    "path": "design/mobile/Mob-my collection detailed.png",
+    "sha256": "200ab0fe2f4921c75e2e8e90f4c12aa31d38fafa68b4d707a2928bd4e44667e7"
+  },
+  {
+    "path": "design/mobile/Mob-my collection grid.png",
+    "sha256": "cf4f50aa9dc277fd1bd332c5fe3af67e2c95316471ddca785ff6c9cfd50511e6"
+  },
+  {
+    "path": "design/mobile/Mob-photo capturedv1.png",
+    "sha256": "d3d34f36607865f7a04916c2a0e7b849b29e7d53821904c827320917cf7be39c"
+  },
+  {
+    "path": "design/mobile/mobile-account.png",
+    "sha256": "3d760aa0bcdf53eb323af3dc653576048ed293b729c690f1b69148e453076dc1"
+  },
+  {
+    "path": "design/mobile/mobile-AI.png",
+    "sha256": "00b266cc565ba82b45cecdccc025bbe152c74d04a82cce76c607cb74b4c3d9ce"
+  },
+  {
+    "path": "design/mobile/mobile-billing.png",
+    "sha256": "ef1b308b0758e04534c87751785ffa8fdc751b0c80af31f709b16032b2a4d857"
+  },
+  {
+    "path": "design/mobile/mobile-collection pic selection.png",
+    "sha256": "b3c8daf080496f689e84bf406b8fdb8cb2feff02d371e326e8393ed776032ed5"
+  },
+  {
+    "path": "design/mobile/mobile-create puzzle.png",
+    "sha256": "c9bcd726763da7dd8361318fe3d9c6e620cf562774ea7961ca949c2c50e3982f"
+  },
+  {
+    "path": "design/mobile/mobile-curated collection.png",
+    "sha256": "ee7e8c5c3cc028db2b0d7129bc83b4b5b12b2c3e70141d1aa50d91aacfb49722"
+  },
+  {
+    "path": "design/mobile/mobile-homev1.png",
+    "sha256": "8e6446193a5c2943ca7176c84963fc48cdab883e8817649bf5c2052847837c2c"
+  },
+  {
+    "path": "design/mobile/mobile-legal.png",
+    "sha256": "3dbed69edec4b972c58de75e6a9e1f148a8ab02db824e37acbbe05194f5eca17"
+  },
+  {
+    "path": "design/mobile/mobile-photo gallery.png",
+    "sha256": "0bded31a56ba020144af985f8dff2b02582101a0b207ebec3e8578571d0ca6d6"
+  },
+  {
+    "path": "design/mobile/mobile-puzzle-type 2 .png",
+    "sha256": "bfc21137a6c1b7dd9ef5648bbb718c9e2896d308d271cb7d35ac7e411bf569ca"
+  },
+  {
+    "path": "design/mobile/mobile-settings.png",
+    "sha256": "60c9406eaf110749840faab78da391c394881d2bbd6021dd7c4836929050eef1"
+  },
+  {
+    "path": "design/mobile/mobile-take photo.png",
+    "sha256": "b1bdd699bfc989b3d02d58ae269ceb0998667e10a47b6f49704758c8582b561c"
+  },
+  {
+    "path": "design/tablet/Tab-Account.png",
+    "sha256": "51294dd7e43fba45978aebf2c8ab1f446d3de82d8f28d3175ede083e21cc9f79"
+  },
+  {
+    "path": "design/tablet/Tab-AI.png",
+    "sha256": "085e438ef2185ab916f47ab9c0f8bcdaf4cf6e95736cdbcb4addab0eff4ec7d7"
+  },
+  {
+    "path": "design/tablet/tab-billing.png",
+    "sha256": "e4066ac05aa6a41f4af1c06d248c400524aea59f88b9add970fec26cbf5967ae"
+  },
+  {
+    "path": "design/tablet/tab-collection pic selection.png",
+    "sha256": "9065ba9366b2fcde69dee75330c862db49249b99488e553d5e0c1c4f16ec197e"
+  },
+  {
+    "path": "design/tablet/tab-create puzzle.png",
+    "sha256": "620e91373d6b34995ade58974295d51a8de66ed789e04b0ee7560b0a337587fa"
+  },
+  {
+    "path": "design/tablet/tab-Curated collection.png",
+    "sha256": "533c87ea22fdc342ef0e9db9a3b11991c2d557324c0fbfc264c50deff5a7f4aa"
+  },
+  {
+    "path": "design/tablet/tab-homev1.png",
+    "sha256": "112db7345945e19126b81d15b0bdc4847a956efc347796a1c2ea4a25bc394dc2"
+  },
+  {
+    "path": "design/tablet/Tab-my collection detailed v 1.png",
+    "sha256": "6a0b67ca8e69b8e30debb08ecc8f8065a027384b8840e431961aa63da424fc7d"
+  },
+  {
+    "path": "design/tablet/Tab-my collection grid.png",
+    "sha256": "dc5670967701c1bf59600fcfc33a6f9577277683720b1e026baa54aabe69cd1e"
+  },
+  {
+    "path": "design/tablet/Tab-photo capturedv1.png",
+    "sha256": "468968594616273b24c0e37a2b5863327948103b8c1692fe431aea3e23d19fdc"
+  },
+  {
+    "path": "design/tablet/tab-photo gallery.png",
+    "sha256": "3d78143fd24e06e69b7b64c0451ea681932788d0dcc0e94402c6b3a038a71247"
+  },
+  {
+    "path": "design/tablet/Tab-privacy and Legal.png",
+    "sha256": "2d417c5d53c7a2f7e0289cc4f09c107816c2fb748723e9ea9257d83558745dd6"
+  },
+  {
+    "path": "design/tablet/tab-puzzle.png",
+    "sha256": "5a25a4e5f744f2668c1c2d91c22ad3c5c739acb106db62a4119dbc54cd3b09e1"
+  },
+  {
+    "path": "design/tablet/Tab-take photo.png",
+    "sha256": "04d2714d6243a1e6bc1ea5717e223372be8bcd5cdde02e8f610a0d5e96057008"
+  },
+  {
+    "path": "design/tablet/tablet-portrait-designs.zip",
+    "sha256": "9476451c2b6de500fde4d807c00d48c7db0b6cc2b7a760e9f27209085c46e011"
+  },
+  {
+    "path": "design/tablet/portrait/01-account-portrait.png",
+    "sha256": "cab9237940ea429b2607aa64f55596be4ce7864975818cb3e212581c0c07f73a"
+  },
+  {
+    "path": "design/tablet/portrait/02-ai-portrait.png",
+    "sha256": "081869817fc300a73f7a2cd0baa5f788eccef4bc4ca31cad0d9ec82e3070ef23"
+  },
+  {
+    "path": "design/tablet/portrait/03-collection-selection-portrait.png",
+    "sha256": "f8bc13d8db080c50963ee8dfa6f78174f0b16c963ad7bfeab80f643278e30e08"
+  },
+  {
+    "path": "design/tablet/portrait/04-create-puzzle-portrait.png",
+    "sha256": "e4882f2a0b389c6d092393373f457a70d8732ffd169555671e4e3650f86ea5a2"
+  },
+  {
+    "path": "design/tablet/portrait/05-curated-collections-portrait.png",
+    "sha256": "aac4d3c0175d9835c72212152ea0950de9cd28ccd974927d7889e349292e1b4e"
+  },
+  {
+    "path": "design/tablet/portrait/06-home-portrait.png",
+    "sha256": "7ffc5f5b6dda3bae9f1e0ba72705de1d6fe4633624880604ed94c267d7ea8bdf"
+  },
+  {
+    "path": "design/tablet/portrait/07-my-collection-detailed-portrait.png",
+    "sha256": "ed6f37c6fc125b87920078c715af5857fd607d95e13acf8b0d690948e508498d"
+  },
+  {
+    "path": "design/tablet/portrait/08-my-collection-grid-portrait.png",
+    "sha256": "16ef4fbbd159a68f4a9ecaff6349d6b5d0112ccb69a192e2730d2b93ec75f750"
+  },
+  {
+    "path": "design/tablet/portrait/09-photo-captured-portrait.png",
+    "sha256": "bce540989c8ce0cb40460ea45f1bb1927d8d00099efb114bd4549fc524cb9e82"
+  },
+  {
+    "path": "design/tablet/portrait/10-photo-gallery-portrait.png",
+    "sha256": "18e34e202207a5cecdfd7bd77ab85955d27b4fd0eaa8b801de366b8d3e95c39a"
+  },
+  {
+    "path": "design/tablet/portrait/11-puzzle-portrait.png",
+    "sha256": "1eea267c7bd91b44d3586774fbe0693a20b070353b12cd9cf8c143b87f84b732"
+  },
+  {
+    "path": "design/tablet/portrait/12-take-photo-portrait.png",
+    "sha256": "2f5b25ed7dc1fb68cc0bfe8fa4730265880f30803ecb955581b5c6d620a31ee8"
+  },
+  {
+    "path": "design/tablet/portrait/13-billing-portrait.png",
+    "sha256": "356bac75d4d5a8f4291fc33ffc4ba8742e0b52fee7409c9b362f318515d6d136"
+  },
+  {
+    "path": "design/tablet/portrait/14-privacy-legal-portrait.png",
+    "sha256": "e7756857392386d275686c86f835277cba1a03dda1345f4aeac4b8c5992c36be"
+  },
+  {
+    "path": "design/tablet/portrait/generation-prompts.json",
+    "sha256": "233a88670881028e46c6f0a25134a17daedbf26bd93016225eba59c70ee52ad7"
+  },
+  {
+    "path": "design/tablet/portrait/index.html",
+    "sha256": "dd44034996149f68b5e4078008e9a891bb3fc44e460ffca7f0af8ddaaf70f275"
+  },
+  {
+    "path": "graphics/ai_sparkles.png",
+    "sha256": "95667ba7004fd167896ef108273715c8e4c1464a5188835360946ecb8bcb8c5c"
+  },
+  {
+    "path": "graphics/ai_style_artistic.png",
+    "sha256": "5b4a8e56d7f8506115a858ec5922e771a21ecd4afdbc6e47e61013392e9a6343"
+  },
+  {
+    "path": "graphics/ai_style_cartoon.png",
+    "sha256": "9d150d21ee08685ed57bee2b1a46095880b4520b5a524c6417e411744828c2be"
+  },
+  {
+    "path": "graphics/ai_style_realistic.png",
+    "sha256": "084f701af7e4629af488cc9c6312e1cb2f481775b7820e0f5306b6443326381d"
+  },
+  {
+    "path": "graphics/ai_style_sketch.png",
+    "sha256": "397f281355f160626446ca8e22fc87acb1a8abb0f53751d4f2147f7b8f4b0b18"
+  },
+  {
+    "path": "graphics/ai_style_watercolor.png",
+    "sha256": "2b900c02dbc2f3256db8de85def54be99c03d2dbd5c3ba940585fdb4385b62a7"
+  },
+  {
+    "path": "graphics/ASSET_MAP.csv",
+    "sha256": "f00f98f2d865cc482294a963419c2b75c49c9e0294001eab0a55f28cf536a86e"
+  },
+  {
+    "path": "graphics/asset_map.json",
+    "sha256": "e693effedc6ce02414baab4cd84099fa474b248fc82e333df46c988013aeb1ab"
+  },
+  {
+    "path": "graphics/billing_ai_picture_pack.png",
+    "sha256": "e0920fbfbc0623a0a80553946b4f2131116a1dbaf177d491c905d18d7687ef68"
+  },
+  {
+    "path": "graphics/billing_combo_puzzle_pair_straight.png",
+    "sha256": "c4024cce12aaf95a2e46672486f7b0da5b4f5a7c6b1a3689fdccf5f02616f458"
+  },
+  {
+    "path": "graphics/billing_combo_puzzle_pair_tilted.png",
+    "sha256": "cac851d62b9ae5cbd12ed05e24771439b5a029ef87ffc0c8e9f60a7ed07b5811"
+  },
+  {
+    "path": "graphics/billing_themed_collection_piece.png",
+    "sha256": "e25f013ea32e8d8b281dbe829dd8d486d9c07d707365c2dec47d8ba670243943"
+  },
+  {
+    "path": "graphics/collection_packs_shop_bag.png",
+    "sha256": "34208799006291df97426a5d9ae8308196705bebf31f839bb37073075887e01f"
+  },
+  {
+    "path": "graphics/hint_bulb.svg",
+    "sha256": "1b0641c4369ee5b668640b90f60035be6309c287a6641a47553a0bd68cccd432"
+  },
+  {
+    "path": "graphics/image_source_ai_generate.png",
+    "sha256": "2ec06578ccdcb829a46fd110dcc9e9c23d67e4635f0af193a16fa41047a9c615"
+  },
+  {
+    "path": "graphics/image_source_camera.png",
+    "sha256": "3ca72a4d0efc3daf184828ec3298253341df4492c000385a6b23e293343c04f9"
+  },
+  {
+    "path": "graphics/image_source_curated_collections.png",
+    "sha256": "f79403215228c7068f1f57ff54ed0dc8e475e5209ccb52dab94ed368576cf7fc"
+  },
+  {
+    "path": "graphics/image_source_photo_gallery.png",
+    "sha256": "436a41190b956c1c4455246c9202e2f15b0077550936b4a2c18bc0becab3ed49"
+  },
+  {
+    "path": "graphics/legal_cookie_policy.png",
+    "sha256": "efb720abd1eddb679d6df1c2240e34df89e68f0bd17a2c10cf08f0a918cf5052"
+  },
+  {
+    "path": "graphics/legal_privacy_policy.png",
+    "sha256": "f2e14d2f261c316f6b303f3d5d9d867d1bd3cc096d9d93d1a772b9f0aa402275"
+  },
+  {
+    "path": "graphics/legal_terms_conditions.png",
+    "sha256": "5a6eebe5a656e5e5bf28ae4e0bef364238a986d69f6af23bf568b8cf6080e17d"
+  },
+  {
+    "path": "graphics/premium_collection_crown.png",
+    "sha256": "8c28438c3d88ca7ac2cbb13a9f7800d8e3dcdc7e94056221d9569e48193bde44"
+  },
+  {
+    "path": "graphics/premium_collection_lock.png",
+    "sha256": "42d9fa5f87992635d55ec9cc1ad1861a0ba9c00af3febc9211f466b261c18864"
+  },
+  {
+    "path": "graphics/premium_collection_locked_badge.png",
+    "sha256": "11dda87b94d9f6fa1ed94b46d4bff585e5dfd6f3e51536d3c7623580bf7e66ff"
+  },
+  {
+    "path": "graphics/privacy_analytics.png",
+    "sha256": "30f47d1991e47fe0f8656a472fc0d3db587459b1b6e61371856e718f48243b79"
+  },
+  {
+    "path": "graphics/privacy_functional_shield.png",
+    "sha256": "a5af392a98229ef2dcc89b24e5e655bf19ff184a97b89b4f0e774ec40b4c96a5"
+  },
+  {
+    "path": "graphics/privacy_marketing.png",
+    "sha256": "969b14fd6d859ebd815cbb4ac4bb4701a3e1df227410c50cd956e09194361bb4"
+  },
+  {
+    "path": "graphics/puzzle_ready_illustration.png",
+    "sha256": "820b53784fcf7a7c72ce78f87faab518265e7f4294be4754f2e017b441786bbe"
+  },
+  {
+    "path": "graphics/puzzle_size_piece.png",
+    "sha256": "4f24de733e620f8b919050fbe60e5db9d71d628e05f8aecabc8acb242a9253f5"
+  },
+  {
+    "path": "graphics/puzzle_timer_mode.png",
+    "sha256": "f92a64cbabb18f90c69712136a5be9dba31d92ccebaa9b643864458bb996d601"
+  },
+  {
+    "path": "graphics/README.md",
+    "sha256": "b4145266a275813e895f446b0eeb76c29ec7f0c377804a28fb964a10bc598ca1"
+  },
+  {
+    "path": "graphics/settings_account.png",
+    "sha256": "6b9f26fa033096981618f248bfb5ce8240f86839460f387d82c67a88cb1d3482"
+  },
+  {
+    "path": "graphics/settings_billing.png",
+    "sha256": "0d9b6ecb1bf03b354ad458d18641e4b4982ca0857402029504244a33dd85ebfe"
+  },
+  {
+    "path": "graphics/settings_faq.png",
+    "sha256": "3b574f96918cd9b3c9cf9daa2fbd79717e6f33600073d2343612998ce5416700"
+  },
+  {
+    "path": "graphics/settings_privacy_legal.png",
+    "sha256": "7b7a75db0be0a4a453e188a6c4a86e5fcaf6109eb26e24ff52b0a04f407ef7e1"
+  },
+  {
+    "path": "graphics/settings_support.png",
+    "sha256": "d1d8d396ea5f7fbf4068602e191e9ccb7be2b4d0a71a174ad7893668e280285f"
+  },
+  {
+    "path": "graphics/visual_index.jpg",
+    "sha256": "1b98888599a8cc15406039ed43d3d73b9a496c04f2e158c2ba6670b09cb09e05"
+  }
+]

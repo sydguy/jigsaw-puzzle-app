@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-05",
+  "files": [
+    {
+      "original": "docs/Jigsaw-Development-Handover.md",
+      "archived": "docs/superseded/Jigsaw-Development-Handover.md",
+      "sha256": "f556dfdf92f46fb653f093851e564b4f4add9c6ccbe5ac1bdf6ca3f600c4f358",
+      "verified": true
+    },
+    {
+      "original": "docs/04-Jigsaw-Development-Handover-v3-2-.md",
+      "archived": "docs/superseded/04-Jigsaw-Development-Handover-v3-2-.md",
+      "sha256": "852e276ccfc1d6bd3f5be4a30f1b21b2995582efa33e94ea17e854e10ce126d6",
+      "verified": true
+    },
+    {
+      "original": "docs/decision-log.md",
+      "archived": "docs/superseded/decision-log.md",
+      "sha256": "127415a9e0ee5c17722252969956bb12525322e739fcaf89d58f199779332752",
+      "verified": true
+    },
+    {
+      "original": "docs/owner-decisions-sept26.png",
+      "archived": "docs/superseded/owner-decisions-sept26.png",
+      "sha256": "5a8051cd99b67da046124aa942ae341cd5e083f2f168acec9dbbdf5b9fa5fc8b",
+      "verified": true
+    },
+    {
+      "original": "docs/owner-ui-decisions.png",
+      "archived": "docs/superseded/owner-ui-decisions.png",
+      "sha256": "42d2101ea42e5fe15e264bd219ff426a270660afedc67785aa75153516a84562",
+      "verified": true
+    },
+    {
+      "original": "docs/historical-asset-map-v1.md",
+      "archived": "docs/superseded/historical-asset-map-v1.md",
+      "sha256": "703cc147388969ffe59717f25571323443e93ab9da077061f32d35e710000efc",
+      "verified": true
+    },
+    {
+      "original": "docs/security-requirements.md",
+      "archived": "docs/superseded/security-requirements.md",
+      "sha256": "734669d6b777604989004146917f84789a6f19aa1283c532b15f07da8f0f0c13",
+      "verified": true
+    }
+  ]
+}
