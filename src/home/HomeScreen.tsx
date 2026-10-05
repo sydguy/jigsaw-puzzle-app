@@ -7,6 +7,7 @@ import { theme } from "../theme";
 import { useDevice } from "../preview/context";
 import { HomePuzzle, HomeSort, sortPuzzles, useHomeReview } from "./review";
 import SortMenu from "./SortMenu";
+import MobileHomeScreen from "./MobileHomeScreen";
 
 const gradient = Platform.OS === "web" ? { backgroundImage: "linear-gradient(110deg, " + theme.color.gradientStart + ", " + theme.color.gradientEnd + ")" } as ViewStyle : {};
 function HomeButton({ label, onPress, play = false }: { label: string; onPress: () => void; play?: boolean }) {
@@ -62,6 +63,10 @@ function PuzzleRow({ puzzle }: { puzzle: HomePuzzle }) {
   </View>;
 }
 export default function HomeScreen() {
+  const { tablet } = useDevice();
+  return tablet ? <TabletHomeScreen /> : <MobileHomeScreen />;
+}
+function TabletHomeScreen() {
   const review = useHomeReview();
   const { tablet } = useDevice();
   const [sort, setSort] = useState<HomeSort>("Latest Played");

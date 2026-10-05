@@ -6,6 +6,7 @@ import { HomePuzzle, HomeReviewContext, HomeState } from "../home/review";
 
 // Keep visual fixtures and their artwork out of production bundles.
 const homeSeeds: readonly HomePuzzle[] = __DEV__ ? require("./homeSeeds.web").homeSeeds : [];
+const mobileHomeSeeds: readonly HomePuzzle[] = __DEV__ ? require("./homeSeeds.web").mobileHomeSeeds : [];
 
 const devices = [
   { name: "iPhone layout", width: 390, height: 844, tablet: false },
@@ -143,7 +144,7 @@ export default function PreviewHost({ children }: PropsWithChildren) {
             }}
           >
             <DeviceContext.Provider value={device}>
-              <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: __DEV__ && homeState === "populated" ? (device.tablet ? homeSeeds.slice(0, 3) : homeSeeds) : [], notify: setHomeMessage }}>
+              <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: __DEV__ && homeState === "populated" ? (device.tablet ? homeSeeds.slice(0, 5) : mobileHomeSeeds) : [], notify: setHomeMessage }}>
                 {children}
               </HomeReviewContext.Provider>
             </DeviceContext.Provider>

@@ -119,7 +119,8 @@ fs.mkdirSync(output, { recursive: true });
       .fill("Garden study");
     await page.getByRole("button", { name: "Save title" }).click();
     await page.getByText("Title saved.", { exact: true }).waitFor();
-    await page.reload({ waitUntil: "networkidle" });
+    await page.reload({ waitUntil: "domcontentloaded", timeout: 120000 });
+    await page.waitForFunction(() => document.querySelector('input[aria-label="Picture title"]')?.value === "Garden study");
     assert.equal(
       await page.getByLabel("Picture title", { exact: true }).inputValue(),
       "Garden study",
@@ -163,7 +164,8 @@ fs.mkdirSync(output, { recursive: true });
         document.querySelector('input[aria-label="Sound effects"]')?.checked ===
         false,
     );
-    await page.reload({ waitUntil: "networkidle" });
+    await page.reload({ waitUntil: "domcontentloaded", timeout: 120000 });
+    await page.waitForFunction(() => document.querySelector('input[aria-label="Sound effects"]')?.checked === false);
     assert.equal(
       await page.getByRole("switch", { name: "Sound effects" }).isChecked(),
       false,
@@ -190,7 +192,7 @@ fs.mkdirSync(output, { recursive: true });
     await page
       .getByRole("heading", { name: "Make it your collection" })
       .waitFor();
-    await page.reload({ waitUntil: "networkidle" });
+    await page.reload({ waitUntil: "domcontentloaded", timeout: 120000 });
     await page
       .getByRole("heading", { name: "Make it your collection" })
       .waitFor();
@@ -207,7 +209,7 @@ fs.mkdirSync(output, { recursive: true });
           };
         }),
     );
-    await page.reload({ waitUntil: "networkidle" });
+    await page.reload({ waitUntil: "domcontentloaded", timeout: 120000 });
     await page
       .getByRole("alert")
       .filter({ hasText: "newer version" })

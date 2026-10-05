@@ -5,9 +5,13 @@ export type HomePuzzle = {
   id: string;
   title: string;
   image: ImageSourcePropType;
+  // Development reference sprite: display only the supplied thumbnail region.
+  mobileImage?: ImageSourcePropType;
+  mobileCrop?: { x: number; y: number; width: number; height: number; sourceWidth: number; sourceHeight: number };
   pieces: number;
   created: string;
   lastPlayed: string;
+  reviewLastPlayedLabel?: string;
   progress: number;
 };
 export type HomeState = "empty" | "populated";

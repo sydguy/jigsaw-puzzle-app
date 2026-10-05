@@ -4,12 +4,12 @@ import { theme } from "../theme";
 import { HomeSort, sortOptions } from "./review";
 import { ui } from "../components/ui";
 
-export default function SortMenu({ value, onChange }: { value: HomeSort; onChange: (value: HomeSort) => void }) {
+export default function SortMenu({ value, onChange, compact = false }: { value: HomeSort; onChange: (value: HomeSort) => void; compact?: boolean }) {
   const [open, setOpen] = useState(false);
   return <>
     <Pressable accessibilityRole="button" accessibilityLabel={"Sort puzzles: " + value} accessibilityState={{ expanded: open }}
-      onPress={() => setOpen(true)} style={[ui.choice, { minWidth: 164, flexDirection: "row", gap: 12, backgroundColor: theme.color.surface }]}>
-      <Text style={ui.label}>{value}</Text><Text style={ui.label}>⌄</Text>
+      onPress={() => setOpen(true)} style={[ui.choice, { minWidth: compact ? 100 : 164, flexDirection: "row", gap: compact ? 8 : 12, backgroundColor: theme.color.surface }]}>
+      <Text style={[ui.label, compact && { fontSize: 10 }]}>{value}</Text><Text style={ui.label}>⌄</Text>
     </Pressable>
     <Modal visible={open} transparent animationType="none" onRequestClose={() => setOpen(false)}>
       <Pressable accessibilityLabel="Close sorting" onPress={() => setOpen(false)} style={{ flex: 1, justifyContent: "center", padding: 24, backgroundColor: "#17124f40" }}>

@@ -68,8 +68,8 @@
     },
     {
       "path": "docs/decision-log-current.md",
-      "bytes": 3053,
-      "sha256": "a908078e0e5f383a915d56b3a930d73673698913145bcddd70bd24375095afd0"
+      "bytes": 5267,
+      "sha256": "2425e5647aa6691766f150e4299c3ec7d105f759fa5403dc3e1ccb9a40f71fd5"
     },
     {
       "path": "docs/dependency-audit.json",
@@ -78,8 +78,8 @@
     },
     {
       "path": "docs/home-visual-review.md",
-      "bytes": 4511,
-      "sha256": "fa4593df5ed12dec3d1ac1ce1ef68038bf20353e7502e13f3654b826150032ad"
+      "bytes": 12967,
+      "sha256": "5bd9c32f915c6d977a1533a292ba6494793c165b804b4da133ae43e62cf59fd7"
     },
     {
       "path": "docs/m0-report.md",
@@ -707,14 +707,19 @@
       "sha256": "9cb4e83d2e4dfcfc3d8313d8fe459a559da2d5b054f4540120092845cf635da0"
     },
     {
+      "path": "graphics/home-review/mobile-reference.png",
+      "bytes": 1582598,
+      "sha256": "f347f4de293f181d45bef924f676797c48468ceb2cc8009b3afac1bd00fbab8b"
+    },
+    {
       "path": "graphics/home-review/puppy.png",
       "bytes": 2435614,
       "sha256": "1012a99853c88a427d0e3eff3cae10b258f23f60720609c4438f8b1bd7478da5"
     },
     {
       "path": "graphics/home-review/README.md",
-      "bytes": 2358,
-      "sha256": "c806f351a35686fe32d048996cc6da12b11f51bc34dbdf4ac97d1b5964de10de"
+      "bytes": 3102,
+      "sha256": "70e71facc2b2ac72e761fbaf88063d7bfc2841ccd74b6683c7d5374f018a709d"
     },
     {
       "path": "graphics/home-review/tropical.png",

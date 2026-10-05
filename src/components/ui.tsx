@@ -1,10 +1,9 @@
-import { PropsWithChildren, useCallback, useContext } from "react";
+import { PropsWithChildren, useCallback, useContext, useState } from "react";
 import {
   Image,
   ImageSourcePropType,
   Platform,
   Pressable,
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -17,6 +16,7 @@ import { TabVisibility } from "../navigation/visibility";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { theme } from "../theme";
 import { useDevice } from "../preview/context";
+import AppScrollView from "./AppScrollView";
 
 export function Copy({
   children,
@@ -189,14 +189,20 @@ export function Screen({
   back,
   right,
   contentStyle,
+  fixedContent,
+  floatingTabs = false,
 }: PropsWithChildren<{
   title?: string;
   tab?: "Home" | "My Collection" | "Settings";
   back?: () => void;
   right?: React.ReactNode;
   contentStyle?: StyleProp<ViewStyle>;
+  fixedContent?: React.ReactNode;
+  floatingTabs?: boolean;
 }>) {
   const { tablet } = useDevice();
+  const [navHeight, setNavHeight] = useState(70);
+  const floatNav = floatingTabs && !!tab && Platform.OS === "web";
   const setTabHidden = useContext(TabVisibility);
   useFocusEffect(useCallback(() => {
     setTabHidden(!tab);
@@ -223,19 +229,26 @@ export function Screen({
           {right}
         </View>
       )}
-      <ScrollView
+      {fixedContent && <View style={{ flexShrink: 0, zIndex: 2 }}>{fixedContent}</View>}
+      <AppScrollView
         style={{ flex: 1 }}
+        scrollbarTopInset={fixedContent ? 0 : 16}
+        scrollbarBottomInset={floatNav ? navHeight + 20 : 8}
         contentContainerStyle={[{
           padding: tablet ? 24 : 16,
           gap: 20,
           paddingBottom: 28,
-        }, contentStyle]}
+        }, contentStyle, floatNav && { paddingBottom: (StyleSheet.flatten(contentStyle)?.paddingBottom as number ?? 28) + navHeight + 12 }]}
         keyboardShouldPersistTaps="handled"
       >
         {children}
-      </ScrollView>
+      </AppScrollView>
       {tab && Platform.OS === "web" && (
-        <View style={[ui.nav, { marginHorizontal: tablet ? 24 : 16 }]}>
+        <View testID="bottom-tab-bar" onLayout={event => setNavHeight(event.nativeEvent.layout.height)}
+          style={[ui.nav, { marginHorizontal: tablet ? 24 : 16 }, floatNav && {
+            position: "absolute", left: tablet ? 24 : 16, right: tablet ? 24 : 16, bottom: 12,
+            margin: 0, marginHorizontal: 0, zIndex: 3, boxShadow: "0 5px 20px #17124f2e",
+          }]}>
           {(
             [
               { label: "Home", path: "/", icon: art.navHome },
@@ -251,7 +264,7 @@ export function Screen({
               onPress={() => router.replace(item.path)}
               style={[
                 ui.navItem,
-                tablet && { flexDirection: "row", gap: 12, minHeight: 48, borderRadius: 8, paddingVertical: 4 },
+                tablet && { flexDirection: "row", gap: 8, minHeight: 48, borderRadius: 8, paddingVertical: 2 },
                 tab === item.label && { backgroundColor: theme.color.selected },
               ]}
             >
@@ -378,7 +391,7 @@ export const ui = StyleSheet.create({
     flexDirection: "row",
     margin: 12,
     marginTop: 0,
-    padding: 6,
+    padding: 4,
     borderRadius: 16,
     borderWidth: 1,
     borderColor: theme.color.border,
@@ -391,8 +404,8 @@ export const ui = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 12,
-    paddingVertical: 6,
-    gap: 2,
+    paddingVertical: 4,
+    gap: 0,
   },
   input: {
     minHeight: 48,
