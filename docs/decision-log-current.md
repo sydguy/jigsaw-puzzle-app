@@ -1,5 +1,7 @@
 # Current decisions
 
+2026-10-05 latest workflow change: owner requested local browser development first and deferred EAS until browser review is satisfactory. Preserve the existing EAS link/profiles dormant. Supersede native-first sequencing for browser UI/gameplay work only; native compatibility, service and release evidence remain required later. No new cloud build or native provisioning is authorized by this change.
+
 2026-10-05: Owner authorized the approved production-v1 plan and document archival. Latest owner statements override the plan. Imported source bytes must be retained.
 
 - Expo SDK55 compatibility target for iOS/iPadOS15.1 and Android7; exact package versions and native build support must be measured, not inferred.

@@ -1,5 +1,7 @@
 # Project instructions
 
+Latest owner workflow decision (5 October 2026): develop and review locally in Expo web first. Defer EAS builds, signing and native provisioning until the owner revisits them after browser review. Browser UI/gameplay work may proceed before native M1 acceptance; native compatibility and release gates remain unverified. Retain existing EAS configuration dormant.
+
 Read docs/production-v1-plan.md, docs/requirements-register.md, docs/security-requirements.md and docs/readiness.md before implementation.
 
 Also read design/system/DESIGN-SYSTEM.md and docs/v1-architecture.md. Use the supplied tokens through src/theme.ts; do not mutate source design assets to implement the app. Both documents retain their stated proposal/review limits. The root Expo Router project is the app starting point; spikes/native-compatibility is an unfinished isolated experiment.

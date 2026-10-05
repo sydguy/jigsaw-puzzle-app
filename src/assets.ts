@@ -1,0 +1,14 @@
+export const art = {
+  gallery: require("../graphics/image_source_photo_gallery.png"),
+  camera: require("../graphics/image_source_camera.png"),
+  curated: require("../graphics/image_source_curated_collections.png"),
+  crown: require("../graphics/premium_collection_crown.png"),
+  piece: require("../graphics/puzzle_size_piece.png"),
+  timer: require("../graphics/puzzle_timer_mode.png"),
+  ready: require("../graphics/puzzle_ready_illustration.png"),
+  account: require("../graphics/settings_account.png"),
+  billing: require("../graphics/settings_billing.png"),
+  privacy: require("../graphics/settings_privacy_legal.png"),
+  faq: require("../graphics/settings_faq.png"),
+  support: require("../graphics/settings_support.png"),
+} as const;

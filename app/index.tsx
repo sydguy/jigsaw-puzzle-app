@@ -1,29 +1,74 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { theme } from '../src/theme';
+import { Pressable, Text, View } from "react-native";
+import { router } from "expo-router";
+import { art } from "../src/assets";
+import {
+  Art,
+  Card,
+  Copy,
+  Empty,
+  Heading,
+  Screen,
+  ui,
+} from "../src/components/ui";
+import { StorageStatus } from "../src/components/StorageStatus";
+import { theme } from "../src/theme";
 
-/** Minimal foundation screen. Production Home is implemented after M1/M2 gates. */
-export default function Index() {
+export default function Home() {
   return (
-    <SafeAreaView style={styles.screen}>
-      <View style={styles.card}>
-        <Text style={styles.eyebrow}>PROJECT FOUNDATION</Text>
-        <Text accessibilityRole="header" style={styles.title}>Jigsaw Fun Time</Text>
-        <Text style={styles.body}>Expo · React Native · TypeScript</Text>
-        <View style={styles.divider} />
-        <Text style={styles.body}>A clean starting point for your puzzle app.</Text>
-        <Text style={styles.caption}>Expo Router is running. Design tokens are connected. Gameplay and services have not been added.</Text>
+    <Screen tab="Home">
+      <Card style={ui.row}>
+        <Art source={art.crown} size={48} />
+        <View style={{ flex: 1, gap: 4 }}>
+          <Heading>Theme Collection</Heading>
+          <Copy muted>Guest collection · No purchased packs</Copy>
+        </View>
+      </Card>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel="Add Puzzle"
+        onPress={() => router.push("/create")}
+        style={({ pressed }) => ({
+          borderWidth: 1,
+          borderColor: theme.color.border,
+          borderRadius: 16,
+          backgroundColor: theme.color.surfaceSoft,
+          padding: 24,
+          alignItems: "center",
+          gap: 8,
+          opacity: pressed ? 0.8 : 1,
+        })}
+      >
+        <View
+          style={{
+            width: 56,
+            height: 56,
+            borderRadius: 28,
+            backgroundColor: theme.color.primary,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text style={{ color: "#fff", fontSize: 40, lineHeight: 48 }}>+</Text>
+        </View>
+        <Text style={[ui.title, { color: theme.color.primary }]}>
+          Add Puzzle
+        </Text>
+        <Text
+          style={[ui.body, { color: theme.color.primary, textAlign: "center" }]}
+        >
+          Choose a picture and make it a puzzle
+        </Text>
+      </Pressable>
+      <View style={[ui.row, { justifyContent: "space-between" }]}>
+        <Heading>My Puzzles (0)</Heading>
+        <Text style={[ui.label, ui.muted]}>Latest played</Text>
       </View>
-    </SafeAreaView>
+      <StorageStatus />
+      <Empty
+        title="Your first puzzle awaits"
+        description="Start with a picture you love. Your puzzles and progress will appear here."
+        source={art.ready}
+      />
+    </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: theme.color.canvas, justifyContent: 'center', padding: theme.space[6] },
-  card: { width: '100%', maxWidth: 560, alignSelf: 'center', padding: theme.space[8], borderRadius: theme.radius.card, borderWidth: 1, borderColor: theme.color.border, backgroundColor: theme.color.surface, gap: theme.space[4] },
-  eyebrow: { color: theme.color.primary, fontSize: theme.type.caption.size, lineHeight: theme.type.caption.lineHeight, fontWeight: '700', letterSpacing: 1.4 },
-  title: { color: theme.color.text, fontSize: theme.type.display.size, lineHeight: theme.type.display.lineHeight, fontWeight: theme.type.display.weight },
-  body: { color: theme.color.text, fontSize: theme.type.body.size, lineHeight: theme.type.body.lineHeight },
-  caption: { color: theme.color.textSecondary, fontSize: theme.type.label.size, lineHeight: theme.type.body.lineHeight },
-  divider: { height: 1, backgroundColor: theme.color.border }
-});

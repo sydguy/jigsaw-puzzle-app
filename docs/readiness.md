@@ -2,6 +2,8 @@
 
 ## Status
 
+Browser implementation increment: navigation, personal-photo crop/collection and puzzle setup now exist. See [implementation evidence](browser-implementation.md). This supersedes earlier statements that browser inspection was unavailable: isolated Edge automation now runs. Gameplay and native services remain unimplemented/unverified.
+
 M0 local documentation adoption and clean Expo foundation prepared; full readiness remains conditional on the setup and review gates below. See [M0 evidence](m0-report.md). M1 native compatibility and all later milestones NOT ACCEPTED. No production app, signing, clouddeployment or physical testing is claimed.
 
 ## External/setup blockers confirmed by owner
@@ -21,7 +23,7 @@ Never ask for secrets in chat. Owner-controlled provider dashboards, scoped loca
 
 ## Development sequence
 
-Local documentation checks, TypeScript, Expo package compatibility, web export and HTTP startup checks pass. Visual/native verification remains outstanding. A local-only M1 feasibility harness may prove dependency resolution, rendering and Windows preview without live services. It must be labelled as a compatibility harness, exclude fabricated entitlements and not be reported as production UI. Broad feature development remains gated on native compatibility/performance evidence.
+Owner update (5 October 2026): proceed with local browser UI/gameplay development and review first. EAS builds, signing and native provisioning are deferred until the owner revisits them after browser review. The existing EAS project/profiles remain dormant. Native M1 acceptance no longer blocks browser implementation, but remains required before native acceptance and release. Browser layouts do not emulate iOS/Android operating systems. Local documentation checks, TypeScript, Expo package compatibility, web export and HTTP startup checks pass; visual/native verification remains outstanding.
 
 ## Risks
 

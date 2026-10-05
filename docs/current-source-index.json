@@ -62,9 +62,14 @@
       "sha256": "1fdc40f683abf4f66c47a6032b5cf729d1df10d3ba51c1173ea23ad219632382"
     },
     {
+      "path": "docs/browser-implementation.md",
+      "bytes": 4956,
+      "sha256": "ce748d6efc4d4782b6d4e18e20165481ecd839bd0f47ea12af425d6d50d44425"
+    },
+    {
       "path": "docs/decision-log-current.md",
-      "bytes": 2028,
-      "sha256": "ad6b7bae0faa9e950096d5e1a5802a7bd8fa2c887f4bee9f370e832f1277bc47"
+      "bytes": 2430,
+      "sha256": "a7c5d60266bdc293f2c2f73e22eb95a007ba1431359ddf12d1e6ea1591660190"
     },
     {
       "path": "docs/dependency-audit.json",
@@ -78,23 +83,23 @@
     },
     {
       "path": "docs/production-v1-plan.md",
-      "bytes": 40832,
-      "sha256": "87741b03aad2680bfe126792b4d26727451df6c7fa631022953e116edf6d3a12"
+      "bytes": 41585,
+      "sha256": "ff3057cf110b35f19e185a629f1ba31328ed5ec610a7354b5ba4922c163b66f7"
     },
     {
       "path": "docs/readiness.md",
-      "bytes": 3062,
-      "sha256": "f9e7a611b1cb5d2afc46507ff81d2e73f5ce09640a7b24be329ea9159475b613"
+      "bytes": 3513,
+      "sha256": "bb3b041e6d164064dc0385873c91e27d137454af1b3273fbc6bd50d247a17938"
     },
     {
       "path": "docs/README.md",
-      "bytes": 2252,
-      "sha256": "ab7af671fb2393c1a44e24ebb090ef420dd3bfa720d0a161c4545fd7c0ab933d"
+      "bytes": 2388,
+      "sha256": "c9dea9e83110816a5d0df4124cf6d3867cffaeeec2abe8ffc9687449c391c0a4"
     },
     {
       "path": "docs/requirements-register.md",
-      "bytes": 10982,
-      "sha256": "954ef624ca1a34bc9f9a84f6cfcf0fa5bf8d331e0493e7e7802f38745311a387"
+      "bytes": 11506,
+      "sha256": "c1fa9a5ab24802373674c559ca889cc46faafef0381f537620154d244255b2c8"
     },
     {
       "path": "docs/security-requirements.md",

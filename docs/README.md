@@ -1,5 +1,7 @@
 # Active documentation
 
+See [browser implementation evidence](browser-implementation.md) for the current local UI, collection flow, checks and remaining work.
+
 Read [production plan](production-v1-plan.md), [requirements register](requirements-register.md), [security requirements](security-requirements.md), [current decisions](decision-log-current.md), [readiness report](readiness.md) and [UI state inventory](ui-states.md).
 
 The new [design system](../design/system/DESIGN-SYSTEM.md), [visual/entity architecture](v1-architecture.md) and [M0 report](m0-report.md) are current supporting documents. They do not turn proposed designs into physical/native acceptance evidence.

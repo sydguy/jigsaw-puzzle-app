@@ -1,5 +1,7 @@
 # Production v1 development plan — Jigsaw app
 
+Owner sequencing update — 5 October 2026: development and review now proceed in local Expo web on Windows first, covering phone portrait and tablet portrait/landscape layouts and browser-compatible gameplay. EAS builds, signing and native provisioning are deferred until the owner revisits them after browser review. This supersedes the requirement to complete native M1 proof before browser UI/gameplay implementation. Native M1 evidence is still required before native acceptance and release; browser results do not prove iOS/Android compatibility. Existing EAS configuration is retained dormant. Native-only services must remain clearly identified as unavailable or development adapters in browser review, never verified purchases or entitlements.
+
 ## 1. Product baseline and technical direction
 
 Build an Australian, English-language release for iPhone, iPad, Android phones and Android tablets. The priority is enjoyable, reliable puzzle play that preserves progress and matches the approved app designs.

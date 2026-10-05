@@ -1,5 +1,7 @@
 # V1 requirements register
 
+DEV-LOCAL-01 (5 October 2026, retained latest owner decision): local Expo web development/review first; EAS builds and native provisioning deferred until owner reconsideration. Acceptance: phone portrait and tablet portrait/landscape browser review, with native-only behavior labelled unverified. Supersedes native M1 as a prerequisite for browser implementation, not as a release gate.
+
 Authority: latest owner decisions, then [production plan](production-v1-plan.md) and [security requirements](security-requirements.md). Historical sources are evidence, not active instructions. Status below describes requirement disposition, not implementation completion.
 
 ## Historical owner decisions
@@ -90,4 +92,4 @@ The active security document retains each original bullet in order with explicit
 
 ## Not yet accepted
 
-This register is documentation, not a claim of implementation or exhaustive acceptance. M0 remains open for accounts/identifiers, final missing-state owner review and resolved production setup. Native compatibility/performance must pass before broad feature development.
+This register is documentation, not a claim of exhaustive acceptance. Expo is linked; remaining service accounts, final missing-state owner review and production setup remain open. Under DEV-LOCAL-01, browser development can proceed before native compatibility proof. Native compatibility/performance must pass before native acceptance and release. See browser-implementation.md for partial M2/M4 evidence.

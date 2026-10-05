@@ -2,7 +2,7 @@
 
 Read the approved [production plan](docs/production-v1-plan.md), [requirements register](docs/requirements-register.md) and [security requirements](docs/security-requirements.md).
 
-The root is a minimal Expo SDK 55 + React Native + TypeScript + Expo Router project. This is not a released app. See [M0 report](docs/m0-report.md), [readiness](docs/readiness.md), [documentation index](docs/README.md) and [development guide](DEVELOPMENT.md).
+The root is an Expo SDK 55 + React Native + TypeScript + Expo Router app. Browser navigation, personal-photo collection and puzzle setup are implemented; gameplay is not connected yet. See [browser implementation](docs/browser-implementation.md), [M0 report](docs/m0-report.md), [readiness](docs/readiness.md), [documentation index](docs/README.md) and [development guide](DEVELOPMENT.md).
 
 ## Start locally
 
@@ -19,14 +19,16 @@ On this workstation the system Node is older. The existing bundled Node can be s
 
 ## Small project structure
 
-- app/: Expo Router layout, starter route and not-found page.
+- app/: Home, Collection, puzzle setup, picture sources/details, Settings and routing.
+- src/preview/: browser phone/tablet layout fixtures; not OS emulation.
+- src/local/ and src/images/: browser-local collection storage and bounded photo cropping.
 - src/theme.ts: direct re-export of the supplied design tokens.
 - design/system/: visual specification and token source; [architecture](docs/v1-architecture.md) explains entity/service boundaries.
 - spikes/native-compatibility/: earlier unfinished experiment; not imported by the root app and not a native acceptance result.
 
 Primary preview is local Expo web on Windows. EAS native builds and physical checks are separate; cloud simulation is optional. No production accounts, signing or native validation are claimed.
 
-The project is linked to [`@sydguy/jigsaw-puzzle-app`](https://expo.dev/accounts/sydguy/projects/jigsaw-puzzle-app). `eas.json` defines development, preview and production profiles. Starting a cloud build remains an explicit action and may require Apple or Google credentials.
+Current direction: develop and review locally in the browser first. The project link to [`@sydguy/jigsaw-puzzle-app`](https://expo.dev/accounts/sydguy/projects/jigsaw-puzzle-app) and `eas.json` profiles are retained dormant. EAS builds and native setup are deferred until the owner revisits them after browser review. Browser validation covers layouts and compatible gameplay; native iOS/Android behavior remains unverified.
 
 ## References
 
