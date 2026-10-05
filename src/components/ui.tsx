@@ -188,11 +188,13 @@ export function Screen({
   tab,
   back,
   right,
+  contentStyle,
 }: PropsWithChildren<{
   title?: string;
   tab?: "Home" | "My Collection" | "Settings";
   back?: () => void;
   right?: React.ReactNode;
+  contentStyle?: StyleProp<ViewStyle>;
 }>) {
   const { tablet } = useDevice();
   const setTabHidden = useContext(TabVisibility);
@@ -223,11 +225,11 @@ export function Screen({
       )}
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{
+        contentContainerStyle={[{
           padding: tablet ? 24 : 16,
           gap: 20,
           paddingBottom: 28,
-        }}
+        }, contentStyle]}
         keyboardShouldPersistTaps="handled"
       >
         {children}

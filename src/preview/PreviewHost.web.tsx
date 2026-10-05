@@ -1,6 +1,11 @@
 import { PropsWithChildren, useState } from "react";
 import { useWindowDimensions } from "react-native";
 import { DeviceContext } from "./context";
+import { usePathname } from "expo-router";
+import { HomePuzzle, HomeReviewContext, HomeState } from "../home/review";
+
+// Keep visual fixtures and their artwork out of production bundles.
+const homeSeeds: readonly HomePuzzle[] = __DEV__ ? require("./homeSeeds.web").homeSeeds : [];
 
 const devices = [
   { name: "iPhone layout", width: 390, height: 844, tablet: false },
@@ -13,6 +18,9 @@ const devices = [
 export default function PreviewHost({ children }: PropsWithChildren) {
   const [index, setIndex] = useState(0);
   const [fit, setFit] = useState(true);
+  const [homeState, setHomeState] = useState<HomeState>("empty");
+  const [homeMessage, setHomeMessage] = useState("");
+  const onHome = usePathname() === "/";
   const viewport = useWindowDimensions();
   const device = devices[index]!;
   const scale = fit
@@ -89,8 +97,21 @@ export default function PreviewHost({ children }: PropsWithChildren) {
             />{" "}
             Fit to window
           </label>
+          {__DEV__ && onHome && <label style={{ fontSize: 14 }}>
+            Home review{" "}
+            <select aria-label="Home review state" value={homeState}
+              onChange={event => { setHomeState(event.target.value as HomeState); setHomeMessage(""); }}
+              style={{ padding: 10, borderRadius: 8, border: "1px solid #8D84B2", color: "#17124F", background: "#fff" }}>
+              <option value="empty">Empty · zero themes</option>
+              <option value="populated">Populated · seed data</option>
+            </select>
+          </label>}
         </div>
       </header>
+      {__DEV__ && onHome && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
+        Home visual review · {homeState === "populated" ? "Sample puzzles and balances only" : "Empty new-user state"} · No real puzzle or purchase data
+        {homeMessage && <div role="status" style={{ marginTop: 8, color: "#17124F", fontSize: 14 }}>{homeMessage}</div>}
+      </aside>}
       <main
         style={{
           padding: "20px 16px",
@@ -122,7 +143,9 @@ export default function PreviewHost({ children }: PropsWithChildren) {
             }}
           >
             <DeviceContext.Provider value={device}>
-              {children}
+              <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: __DEV__ && homeState === "populated" ? (device.tablet ? homeSeeds.slice(0, 3) : homeSeeds) : [], notify: setHomeMessage }}>
+                {children}
+              </HomeReviewContext.Provider>
             </DeviceContext.Provider>
           </div>
         </div>

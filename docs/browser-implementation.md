@@ -4,6 +4,8 @@ Status: first browser UI and local collection increment, spanning parts of M2/M4
 
 ## Implemented
 
+- Home now follows the confirmed H1–H8 decisions, with empty/populated browser seed previews and working sorting. See [Home review](home-visual-review.md) for screenshot iterations and limits. Seed data does not enter the local collection or gameplay engine.
+
 - Main routes now belong to an Expo Router tab group. Native builds use SDK 55 NativeTabs from expo-router/unstable-native-tabs. Web retains a separate design-matched bar; it does not emulate native tabs. Owner explicitly accepts OS-controlled iPad tab positioning/appearance.
 - Generated navigation artwork is stored in graphics/navigation_home.png, navigation_collection.png and navigation_settings.png; generation provenance is in graphics/navigation-assets.md.
 
@@ -25,7 +27,7 @@ Initial browser import limits: 10 MiB encoded, 24 million decoded pixels, 8,192 
 
 Stored pictures have a schema-validated ID, title, source/theme, timestamp, dimensions and bounded JPEG data. A newer IndexedDB version is refused without rewriting it. Failed writes preserve the crop for retry and do not acknowledge a save. Native save snapshots, recovery, account scopes and puzzle attempts are not implemented by this collection adapter. Large-library paging, cross-tab changes, memory pressure and native image-decoder validation remain M4 work.
 
-No puzzles exist in this increment, so Home counts, Times Used and associated-puzzle deletion counts are zero. These must come from actual puzzle/attempt records when gameplay is connected. Create Puzzle is explicitly disabled with a nearby explanation. Changing this button to create a fake puzzle is not acceptance.
+No real puzzles exist in this increment, so real Home counts, Times Used and associated-puzzle deletion counts are zero. The owner-approved development-only Home review can display isolated seed rows and sample allowances; they are never saved or used as gameplay/account authority. These values must come from actual puzzle/attempt records when gameplay is connected. Create Puzzle is explicitly disabled with a nearby explanation. Changing this button to create a fake puzzle is not acceptance.
 
 ## Verification
 

@@ -63,8 +63,8 @@
     },
     {
       "path": "docs/browser-implementation.md",
-      "bytes": 5422,
-      "sha256": "9cba6aec75e81610afbc3458a543bbd0fad82478832f2a09a49ceecfafcedd29"
+      "bytes": 5863,
+      "sha256": "ba308285b8b929a7ec37be6ffff1f03559f1b0b93c6aa55972020e97cf38d523"
     },
     {
       "path": "docs/decision-log-current.md",
@@ -75,6 +75,11 @@
       "path": "docs/dependency-audit.json",
       "bytes": 16588,
       "sha256": "4019927d727d360ca8997b358c4692b1362a010d6823f22b51f1753bb5d9d871"
+    },
+    {
+      "path": "docs/home-visual-review.md",
+      "bytes": 4511,
+      "sha256": "fa4593df5ed12dec3d1ac1ce1ef68038bf20353e7502e13f3654b826150032ad"
     },
     {
       "path": "docs/m0-report.md",
@@ -227,6 +232,11 @@
       "sha256": "ee7e8c5c3cc028db2b0d7129bc83b4b5b12b2c3e70141d1aa50d91aacfb49722"
     },
     {
+      "path": "design/mobile/mobile-home-empty-new-user.png",
+      "bytes": 1442865,
+      "sha256": "01d5bca59088d0fbd640277b335aa66f9799d9426ef22c96019ecd4b1fb9ce75"
+    },
+    {
       "path": "design/mobile/mobile-homev1.png",
       "bytes": 1447813,
       "sha256": "8e6446193a5c2943ca7176c84963fc48cdab883e8817649bf5c2052847837c2c"
@@ -255,6 +265,26 @@
       "path": "design/mobile/mobile-take photo.png",
       "bytes": 856228,
       "sha256": "b1bdd699bfc989b3d02d58ae269ceb0998667e10a47b6f49704758c8582b561c"
+    },
+    {
+      "path": "design/new-user-empty/mobile-home-empty.png",
+      "bytes": 1136040,
+      "sha256": "6efc0cc254e5306f280c3ac014d91858387ed1018e60e6577c3859e7c05ab96b"
+    },
+    {
+      "path": "design/new-user-empty/README.md",
+      "bytes": 1930,
+      "sha256": "ee54c076042f6ac732df43054a0d486912d9bf88baeb5c318f42f3504e1ad509"
+    },
+    {
+      "path": "design/new-user-empty/tablet-landscape-home-empty.png",
+      "bytes": 976687,
+      "sha256": "c2559e261dbc6d0e751f77b2dd909f065d010f7deab2ada27061bcfc8cefdfed"
+    },
+    {
+      "path": "design/new-user-empty/tablet-portrait-home-empty.png",
+      "bytes": 1100421,
+      "sha256": "79a5e77a76ba83500ebec2a2d71ce6e1eb93d11979e9753e719ac058bcc2df26"
     },
     {
       "path": "design/superseded/mobile/Mob-my collection detailed.png",
@@ -452,6 +482,11 @@
       "sha256": "aac4d3c0175d9835c72212152ea0950de9cd28ccd974927d7889e349292e1b4e"
     },
     {
+      "path": "design/tablet/portrait/06-home-empty-new-user.png",
+      "bytes": 1199857,
+      "sha256": "6810fd13cc41783727253093150272dce8ba48db3f8ab902f3ca41b71f28160e"
+    },
+    {
       "path": "design/tablet/portrait/06-home-portrait.png",
       "bytes": 1526159,
       "sha256": "7ffc5f5b6dda3bae9f1e0ba72705de1d6fe4633624880604ed94c267d7ea8bdf"
@@ -535,6 +570,11 @@
       "path": "design/tablet/tab-Curated collection.png",
       "bytes": 1424195,
       "sha256": "533c87ea22fdc342ef0e9db9a3b11991c2d557324c0fbfc264c50deff5a7f4aa"
+    },
+    {
+      "path": "design/tablet/tab-home-empty-new-user.png",
+      "bytes": 1190857,
+      "sha256": "4cd83a1efeb128f32cf97bd4c2146d3de50ba955f3a42eb3258dd55a2f8e7f05"
     },
     {
       "path": "design/tablet/tab-homev1.png",
@@ -650,6 +690,36 @@
       "path": "graphics/hint_bulb.svg",
       "bytes": 527,
       "sha256": "1b0641c4369ee5b668640b90f60035be6309c287a6641a47553a0bd68cccd432"
+    },
+    {
+      "path": "graphics/home-review/autumn.png",
+      "bytes": 2711454,
+      "sha256": "4ea33059727e6ef2965b90f74bded472ca6ce4839af38ec048a35bc998fd0aa4"
+    },
+    {
+      "path": "graphics/home-review/castle.png",
+      "bytes": 3285420,
+      "sha256": "267f2cce88f057bf0361b44ed5fdbd8bfa85eb1f154284c17d4c81b45bcfdebf"
+    },
+    {
+      "path": "graphics/home-review/lakeside.png",
+      "bytes": 2939478,
+      "sha256": "9cb4e83d2e4dfcfc3d8313d8fe459a559da2d5b054f4540120092845cf635da0"
+    },
+    {
+      "path": "graphics/home-review/puppy.png",
+      "bytes": 2435614,
+      "sha256": "1012a99853c88a427d0e3eff3cae10b258f23f60720609c4438f8b1bd7478da5"
+    },
+    {
+      "path": "graphics/home-review/README.md",
+      "bytes": 2358,
+      "sha256": "c806f351a35686fe32d048996cc6da12b11f51bc34dbdf4ac97d1b5964de10de"
+    },
+    {
+      "path": "graphics/home-review/tropical.png",
+      "bytes": 2901567,
+      "sha256": "95a2c8d8ba93e4ee6a3d1c18fceb16a313f289235d3e53d1ffb6c86522afdc8e"
     },
     {
       "path": "graphics/image_source_ai_generate.png",
