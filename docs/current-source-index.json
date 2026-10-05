@@ -63,13 +63,13 @@
     },
     {
       "path": "docs/browser-implementation.md",
-      "bytes": 4956,
-      "sha256": "ce748d6efc4d4782b6d4e18e20165481ecd839bd0f47ea12af425d6d50d44425"
+      "bytes": 5422,
+      "sha256": "9cba6aec75e81610afbc3458a543bbd0fad82478832f2a09a49ceecfafcedd29"
     },
     {
       "path": "docs/decision-log-current.md",
-      "bytes": 2430,
-      "sha256": "a7c5d60266bdc293f2c2f73e22eb95a007ba1431359ddf12d1e6ea1591660190"
+      "bytes": 3053,
+      "sha256": "a908078e0e5f383a915d56b3a930d73673698913145bcddd70bd24375095afd0"
     },
     {
       "path": "docs/dependency-audit.json",
@@ -82,9 +82,14 @@
       "sha256": "55d33e4de4633a4236b5949e49ef975af7f1da10c89b296072242e60fbaa9191"
     },
     {
+      "path": "docs/navigation-visual-review.md",
+      "bytes": 3516,
+      "sha256": "c181753776e08a14fc3ec26670548aa82c9097c2e0e4139c6b600a4e8d966c65"
+    },
+    {
       "path": "docs/production-v1-plan.md",
-      "bytes": 41585,
-      "sha256": "ff3057cf110b35f19e185a629f1ba31328ed5ec610a7354b5ba4922c163b66f7"
+      "bytes": 41783,
+      "sha256": "77f3c7c2a63016595400c34f1fe461a0456b92311a493c6f254a42a2f9e54aff"
     },
     {
       "path": "docs/readiness.md",
@@ -98,8 +103,8 @@
     },
     {
       "path": "docs/requirements-register.md",
-      "bytes": 11506,
-      "sha256": "c1fa9a5ab24802373674c559ca889cc46faafef0381f537620154d244255b2c8"
+      "bytes": 11685,
+      "sha256": "6f83f50aec138275dce096aaff0450f7d12b9015a85a31cd94dda22adebf2bcc"
     },
     {
       "path": "docs/security-requirements.md",
@@ -680,6 +685,26 @@
       "path": "graphics/legal_terms_conditions.png",
       "bytes": 830799,
       "sha256": "5a6eebe5a656e5e5bf28ae4e0bef364238a986d69f6af23bf568b8cf6080e17d"
+    },
+    {
+      "path": "graphics/navigation-assets.md",
+      "bytes": 1037,
+      "sha256": "2a50160f1635c988081c5f60acc7db6348e80641cf6041eaf65ebad40d68deb8"
+    },
+    {
+      "path": "graphics/navigation_collection.png",
+      "bytes": 575603,
+      "sha256": "50283c06bc94b550c79682182cdb720215b95d3c69e336d283061043d5cd89de"
+    },
+    {
+      "path": "graphics/navigation_home.png",
+      "bytes": 517796,
+      "sha256": "c69aa7a011b0efc21f04f9235832675e5b53739fd7bda3716860c887c2aba0d8"
+    },
+    {
+      "path": "graphics/navigation_settings.png",
+      "bytes": 490442,
+      "sha256": "6db2508f12b36f72c7ff81f5f2d2ad549bcd32c1a444b213244f29a57f5af8d4"
     },
     {
       "path": "graphics/premium_collection_crown.png",

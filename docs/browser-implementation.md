@@ -4,6 +4,9 @@ Status: first browser UI and local collection increment, spanning parts of M2/M4
 
 ## Implemented
 
+- Main routes now belong to an Expo Router tab group. Native builds use SDK 55 NativeTabs from expo-router/unstable-native-tabs. Web retains a separate design-matched bar; it does not emulate native tabs. Owner explicitly accepts OS-controlled iPad tab positioning/appearance.
+- Generated navigation artwork is stored in graphics/navigation_home.png, navigation_collection.png and navigation_settings.png; generation provenance is in graphics/navigation-assets.md.
+
 - Expo Router routes: Home, My Collection, Create Puzzle, image sources, picture details and Settings.
 - Explicit iPhone-sized, Android-phone-sized, tablet portrait and tablet landscape browser fixtures; fit-to-window or full logical size. These are layout fixtures, not OS simulators.
 - Supplied artwork and design tokens, empty first Home, correct navigation labels, hidden deferred AI elements and truthful guest/no-pack state.

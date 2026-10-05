@@ -1,6 +1,6 @@
 import { Pressable, Text, View } from "react-native";
 import { router } from "expo-router";
-import { art } from "../src/assets";
+import { art } from "../../src/assets";
 import {
   Art,
   Card,
@@ -9,9 +9,9 @@ import {
   Heading,
   Screen,
   ui,
-} from "../src/components/ui";
-import { StorageStatus } from "../src/components/StorageStatus";
-import { theme } from "../src/theme";
+} from "../../src/components/ui";
+import { StorageStatus } from "../../src/components/StorageStatus";
+import { theme } from "../../src/theme";
 
 export default function Home() {
   return (

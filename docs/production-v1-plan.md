@@ -177,7 +177,7 @@ Preserve the supplied visual language, navigation, artwork and approved correcti
 ### Explicit owner-image and UI requirements
 
 - Navigation labels: **Home / My Collection / Settings**.
-- Retain full-width tablet bottom navigation on Account, Billing and Legal. Mobile Billing returns to Settings with no bottom menu.
+- Use Expo Router native tabs on native devices. Owner update (5 October 2026) accepts OS-controlled iPad tab position/appearance in place of exact custom bottom-bar geometry. Tablet Account, Billing and Legal retain navigation; mobile Billing returns to Settings with no tab bar. Browser review uses a matching custom bottom bar.
 - App collection grids: **three columns on phones, six on tablets**; detailed view is one item per row. The OS photo picker remains the approved device-photo selector.
 - Highlight the actual selected image source.
 - Exclude-owned ON hides acquired pictures; OFF shows them dimmed and unavailable for another acquisition.

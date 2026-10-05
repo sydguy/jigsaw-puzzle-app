@@ -1,4 +1,7 @@
 export const art = {
+  navHome: require("../graphics/navigation_home.png"),
+  navCollection: require("../graphics/navigation_collection.png"),
+  navSettings: require("../graphics/navigation_settings.png"),
   gallery: require("../graphics/image_source_photo_gallery.png"),
   camera: require("../graphics/image_source_camera.png"),
   curated: require("../graphics/image_source_curated_collections.png"),

@@ -34,7 +34,7 @@ Authority: latest owner decisions, then [production plan](production-v1-plan.md)
 
 | Row | Disposition/current rule | Acceptance |
 |---|---|---|
-| 1 | Retain Home / My Collection / Settings; tablet full-width nav on Account/Billing/Legal; mobile Billing back to Settings, no bottom menu. | UI-01 |
+| 1 | Retain Home / My Collection / Settings; tablet nav on Account/Billing/Legal; mobile Billing back to Settings, no bottom menu. Owner update 5 October: native tabs on all native devices; OS-controlled iPad position/appearance supersedes exact full-width bottom geometry. Browser uses design-matched bottom navigation. | UI-01 |
 | 2 | Retain actual source highlighting; AI source hidden until future release. | UI-02 |
 | 3 | Retain 12x18 =216, not212; counts computed from dimensions. | ENGINE-03 |
 | 4 | Retain exclude-owned ON hides; OFF dims/disables acquisition. | UI-03 |

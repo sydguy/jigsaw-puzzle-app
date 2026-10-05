@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Pressable, Switch, Text, View } from "react-native";
-import { art } from "../src/assets";
+import { art } from "../../src/assets";
 import {
   Action,
   Art,
@@ -10,10 +10,10 @@ import {
   Notice,
   Screen,
   ui,
-} from "../src/components/ui";
-import { useLocal } from "../src/local/store";
-import { useDevice } from "../src/preview/context";
-import { theme } from "../src/theme";
+} from "../../src/components/ui";
+import { useLocal } from "../../src/local/store";
+import { useDevice } from "../../src/preview/context";
+import { theme } from "../../src/theme";
 const sections = [
   { key: "account", label: "Account", art: art.account },
   { key: "billing", label: "Billing", art: art.billing },

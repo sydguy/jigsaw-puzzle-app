@@ -8,12 +8,12 @@ import {
   View,
 } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
-import { art } from "../src/assets";
-import { Action, Choice, Copy, Empty, Screen, ui } from "../src/components/ui";
-import { StorageStatus } from "../src/components/StorageStatus";
-import { useLocal } from "../src/local/store";
-import { useDevice } from "../src/preview/context";
-import { theme } from "../src/theme";
+import { art } from "../../src/assets";
+import { Action, Choice, Copy, Empty, Screen, ui } from "../../src/components/ui";
+import { StorageStatus } from "../../src/components/StorageStatus";
+import { useLocal } from "../../src/local/store";
+import { useDevice } from "../../src/preview/context";
+import { theme } from "../../src/theme";
 export default function Collection() {
   const { select } = useLocalSearchParams<{ select?: string }>();
   const local = useLocal();

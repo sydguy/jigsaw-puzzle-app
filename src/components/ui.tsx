@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useCallback, useContext } from "react";
 import {
   Image,
   ImageSourcePropType,
@@ -11,7 +11,9 @@ import {
   ViewStyle,
   StyleProp,
 } from "react-native";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
+import { art } from "../assets";
+import { TabVisibility } from "../navigation/visibility";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { theme } from "../theme";
 import { useDevice } from "../preview/context";
@@ -193,8 +195,12 @@ export function Screen({
   right?: React.ReactNode;
 }>) {
   const { tablet } = useDevice();
+  const setTabHidden = useContext(TabVisibility);
+  useFocusEffect(useCallback(() => {
+    setTabHidden(!tab);
+  }, [tab, setTabHidden]));
   return (
-    <SafeAreaView style={ui.screen}>
+    <SafeAreaView style={ui.screen} edges={Platform.OS !== "web" && tab ? ["top", "left", "right"] : undefined}>
       {title && (
         <View style={ui.header}>
           {back && (
@@ -226,13 +232,13 @@ export function Screen({
       >
         {children}
       </ScrollView>
-      {tab && (
-        <View style={ui.nav}>
+      {tab && Platform.OS === "web" && (
+        <View style={[ui.nav, { marginHorizontal: tablet ? 24 : 16 }]}>
           {(
             [
-              { label: "Home", path: "/", glyph: "⌂" },
-              { label: "My Collection", path: "/collection", glyph: "▦" },
-              { label: "Settings", path: "/settings", glyph: "⚙" },
+              { label: "Home", path: "/", icon: art.navHome },
+              { label: "My Collection", path: "/collection", icon: art.navCollection },
+              { label: "Settings", path: "/settings", icon: art.navSettings },
             ] as const
           ).map((item) => (
             <Pressable
@@ -243,21 +249,23 @@ export function Screen({
               onPress={() => router.replace(item.path)}
               style={[
                 ui.navItem,
+                tablet && { flexDirection: "row", gap: 12, minHeight: 48, borderRadius: 8, paddingVertical: 4 },
                 tab === item.label && { backgroundColor: theme.color.selected },
               ]}
             >
-              <Text
+              <Image
                 accessible={false}
+                source={item.icon}
+                resizeMode="contain"
                 style={{
-                  fontSize: 26,
-                  color:
+                  width: tablet ? 40 : 32,
+                  height: tablet ? 40 : 32,
+                  tintColor:
                     tab === item.label
                       ? theme.color.primary
                       : theme.color.textSecondary,
                 }}
-              >
-                {item.glyph}
-              </Text>
+              />
               <Text
                 style={[
                   ui.label,
@@ -377,7 +385,7 @@ export const ui = StyleSheet.create({
   },
   navItem: {
     flex: 1,
-    minHeight: 68,
+    minHeight: 56,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 12,
