@@ -233,13 +233,13 @@
     },
     {
       "path": "design/mobile/mobile-home-empty-new-user.png",
-      "bytes": 1442865,
-      "sha256": "01d5bca59088d0fbd640277b335aa66f9799d9426ef22c96019ecd4b1fb9ce75"
+      "bytes": 1452386,
+      "sha256": "145f2f8b02b7f9b9df5505615dd948ffbc1d398437f94de23d7fbff11a7ef6ed"
     },
     {
       "path": "design/mobile/mobile-homev1.png",
-      "bytes": 1447813,
-      "sha256": "8e6446193a5c2943ca7176c84963fc48cdab883e8817649bf5c2052847837c2c"
+      "bytes": 1582598,
+      "sha256": "f347f4de293f181d45bef924f676797c48468ceb2cc8009b3afac1bd00fbab8b"
     },
     {
       "path": "design/mobile/mobile-legal.png",
@@ -483,13 +483,13 @@
     },
     {
       "path": "design/tablet/portrait/06-home-empty-new-user.png",
-      "bytes": 1199857,
-      "sha256": "6810fd13cc41783727253093150272dce8ba48db3f8ab902f3ca41b71f28160e"
+      "bytes": 1247959,
+      "sha256": "4eae161a543603c9aa4a0fd800aa825c1ae1308bad68ed73eb0a74f3a9a14c7f"
     },
     {
       "path": "design/tablet/portrait/06-home-portrait.png",
-      "bytes": 1526159,
-      "sha256": "7ffc5f5b6dda3bae9f1e0ba72705de1d6fe4633624880604ed94c267d7ea8bdf"
+      "bytes": 1452724,
+      "sha256": "49fad52f6e0f66daacb5a1dca7e304af1b25ecfa7048fe72dc506d1d9a7fe33e"
     },
     {
       "path": "design/tablet/portrait/07-my-collection-detailed-portrait.png",
@@ -573,13 +573,13 @@
     },
     {
       "path": "design/tablet/tab-home-empty-new-user.png",
-      "bytes": 1190857,
-      "sha256": "4cd83a1efeb128f32cf97bd4c2146d3de50ba955f3a42eb3258dd55a2f8e7f05"
+      "bytes": 1174449,
+      "sha256": "f0053fed5aa2399bded3828af4ee0a7cde118f0b28347272a861ad863119cacb"
     },
     {
       "path": "design/tablet/tab-homev1.png",
-      "bytes": 1388663,
-      "sha256": "112db7345945e19126b81d15b0bdc4847a956efc347796a1c2ea4a25bc394dc2"
+      "bytes": 1510023,
+      "sha256": "ab355bc01792876973e4a0a73ed0d16b18ca7d4077d6f241042bfd7b8765e234"
     },
     {
       "path": "design/tablet/Tab-my collection detailed v 1.png",
