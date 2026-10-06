@@ -14,12 +14,12 @@ export type Draft = {
   pictureId?: string;
   gridIndex: number;
   rotation: boolean;
-  timer: "stopwatch" | "countdown";
+  timer: "stopwatch" | "countdown" | "none";
 };
 export const defaultDraft: Draft = {
   gridIndex: 2,
   rotation: false,
-  timer: "stopwatch",
+  timer: "countdown",
 };
 export function validatePicture(value: unknown): Picture {
   if (!value || typeof value !== "object")

@@ -34,6 +34,7 @@ fs.mkdirSync(output, { recursive: true });
       fullPage: true,
     });
     await page.getByRole("button", { name: "Add Puzzle", exact: true }).click();
+    await page.getByRole("radio", { name: "None", exact: true }).click();
     await page.getByRole("button", { name: "216 pieces" }).click();
     assert.equal(
       await page.getByLabel("Rows: 12", { exact: true }).innerText(),
@@ -109,8 +110,16 @@ fs.mkdirSync(output, { recursive: true });
     await page
       .getByRole("button", { name: "Add to My Collection", exact: true })
       .click();
-    await page.getByRole("heading", { name: "Test landscape.png" }).waitFor();
+    await page.getByRole("img", { name: "Test landscape.png" }).waitFor();
+    assert.equal(await page.getByRole("button", { name: "Choose from My Collection", exact: true }).count(), 0, "removed shortcut stays absent with a saved picture");
     await page.getByLabel("Rows: 12", { exact: true }).waitFor();
+    assert.ok(await page.getByRole("radio", { name: "None", exact: true }).isChecked(), "import preserves timer-off choice");
+    await page.getByLabel("Columns: 18", { exact: true }).waitFor();
+    const createScroll = page.locator('[data-testid="page-scroll"]:visible');
+    await createScroll.evaluate(node => { node.scrollTop = 0; });
+    await page.getByTestId("device-frame").screenshot({ path: path.join(output, "create-selected-image.png") });
+    await createScroll.evaluate(node => { node.scrollTop = node.scrollHeight; });
+    await page.getByTestId("device-frame").screenshot({ path: path.join(output, "create-selected-none.png") });
     await page.getByRole("button", { name: "Back", exact: true }).click();
     await page.getByRole("tab", { name: "My Collection", exact: true }).click();
     await page.getByRole("button", { name: "Open Test landscape.png" }).click();

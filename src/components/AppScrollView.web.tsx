@@ -3,7 +3,7 @@ import { ScrollViewProps, View } from "react-native";
 import { theme } from "../theme";
 
 /** Shared browser scrolling surface: round violet thumb, pale full-height rail. */
-export default function AppScrollView({ children, contentContainerStyle, scrollbarTopInset = 16, scrollbarBottomInset = 8 }: ScrollViewProps & { scrollbarTopInset?: number; scrollbarBottomInset?: number }) {
+export default function AppScrollView({ children, contentContainerStyle, scrollbarTopInset = 16, scrollbarBottomInset = 8, showScrollbar = true }: ScrollViewProps & { scrollbarTopInset?: number; scrollbarBottomInset?: number; showScrollbar?: boolean }) {
   const id = useId();
   const scroll = useRef<HTMLDivElement>(null);
   const drag = useRef<{ id: number; grab: number } | null>(null);
@@ -34,7 +34,7 @@ export default function AppScrollView({ children, contentContainerStyle, scrollb
       onScroll={sync} style={{ flex: 1, minWidth: 0, overflowY: "auto", overflowX: "hidden", scrollbarWidth: "none", overscrollBehavior: "contain" }}>
       <View style={contentContainerStyle}>{children}</View>
     </div>
-    {max > 1 && <div role="scrollbar" aria-label="Page scrollbar" aria-controls={id} aria-orientation="vertical"
+    {showScrollbar && max > 1 && <div role="scrollbar" aria-label="Page scrollbar" aria-controls={id} aria-orientation="vertical"
       aria-valuemin={0} aria-valuemax={Math.round(max)} aria-valuenow={Math.min(Math.round(max), Math.round(metrics.top))} tabIndex={0}
       onKeyDown={event => {
         const node = scroll.current;

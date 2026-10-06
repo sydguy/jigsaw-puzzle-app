@@ -16,7 +16,7 @@ The main trade-off is older iOS support: **target Expo SDK 55 to retain iOS/iPad
 
 - Curated pictures, personal-photo imports and camera capture.
 - Single-player puzzles from 6 to 384 pieces.
-- Stopwatch and countdown modes.
+- Timer (countdown, default), Stopwatch and None (timer off) modes. Owner update: 6 October 2026.
 - Local collections, exact puzzle saves and replay.
 - Guest play, Apple/Google/email sign-in.
 - Non-expiring premium theme/picture packs.
@@ -206,6 +206,8 @@ Implement the approved placement rules explicitly:
 Render using cached paths and shared image resources. Avoid regenerating every piece or updating the complete React screen on every drag frame.
 
 ### Clocks and lifecycle
+
+Owner update (6 October 2026): Create Puzzle offers Timer / Stopwatch / None, defaulting to Timer for a fresh setup. None means timing is off, with no countdown deadline; do not treat a None attempt as a timed success. This is separate from continuing an expired countdown untimed. Preserve the selected mode when returning to an existing draft. The default change does not invent countdown durations.
 
 Use an explicit gameplay state machine covering ready, running, paused, preview, ad interruption, connectivity pause, timeout and completion.
 

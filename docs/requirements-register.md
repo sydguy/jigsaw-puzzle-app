@@ -59,6 +59,7 @@ Authority: latest owner decisions, then [production plan](production-v1-plan.md)
 | GAME-08 | Horizontal single-row tray, Shuffle; pinch zoom/two-finger pan, zoom/Fit, drag and tap alternative. Ad-free space goes to board. | M1/M3 |
 | CLOCK-01 | Both clocks pause on Home/background/close/lock/ads/forced connectivity pause. Return requires Resume. Preview auto-resumes iff previously running. Pre-start/paused board visible but moves/rotation/hints/shuffle disabled. | M3 |
 | CLOCK-02 | Fixed per-count countdown table version captured per attempt; tune before beta. Hard timeout offers Restart/Home/rewarded untimed continuation; never timed success. | M3/M9 |
+| CLOCK-03 | Owner 6 October: fresh Create Puzzle defaults to Timer (countdown); choices Timer / Stopwatch / None. None turns timing off with no countdown deadline and no timed-success classification. Existing draft selections survive source navigation. Supersedes the old two-mode setup and provisional Stopwatch default; countdown values remain open. | M2/M3 |
 | IMAGE-01 | OS picker -> selected-image confirmation -> bounded3:2 crop. Camera permissions requested just in time. Cancellation adds nothing. Crop reused for all puzzles. | M4 |
 | IMAGE-02 | Default editable titles; catalogue title/theme; photos original/OS name, theme My Photo; AI future generated title/theme AI Image. | M4 |
 | SAVE-01 | Local images/progress only; no manual backup v1; clearly explain uninstall/device-loss risk. Transactional acknowledged saves and validated recovery. | M4 |

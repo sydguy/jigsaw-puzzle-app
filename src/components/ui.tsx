@@ -191,6 +191,7 @@ export function Screen({
   contentStyle,
   fixedContent,
   floatingTabs = false,
+  showScrollbar = true,
 }: PropsWithChildren<{
   title?: string;
   tab?: "Home" | "My Collection" | "Settings";
@@ -199,6 +200,7 @@ export function Screen({
   contentStyle?: StyleProp<ViewStyle>;
   fixedContent?: React.ReactNode;
   floatingTabs?: boolean;
+  showScrollbar?: boolean;
 }>) {
   const { tablet } = useDevice();
   const [navHeight, setNavHeight] = useState(70);
@@ -231,6 +233,7 @@ export function Screen({
       )}
       {fixedContent && <View style={{ flexShrink: 0, zIndex: 2 }}>{fixedContent}</View>}
       <AppScrollView
+        showScrollbar={showScrollbar}
         style={{ flex: 1 }}
         scrollbarTopInset={fixedContent ? 0 : 16}
         scrollbarBottomInset={floatNav ? navHeight + 20 : 8}

@@ -8,6 +8,8 @@ export const art = {
   crown: require("../graphics/premium_collection_crown.png"),
   piece: require("../graphics/puzzle_size_piece.png"),
   timer: require("../graphics/puzzle_timer_mode.png"),
+  addImage: require("../graphics/add-image-camera-circle.png"),
+  rotate: require("../graphics/puzzle_rotate_arrows.png"),
   ready: require("../graphics/puzzle_ready_illustration.png"),
   account: require("../graphics/settings_account.png"),
   billing: require("../graphics/settings_billing.png"),

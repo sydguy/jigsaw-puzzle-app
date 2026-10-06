@@ -3,10 +3,12 @@ import { useWindowDimensions } from "react-native";
 import { DeviceContext } from "./context";
 import { usePathname } from "expo-router";
 import { HomePuzzle, HomeReviewContext, HomeState } from "../home/review";
+import { CreateReviewContext, CreateReviewState } from "../create/review";
 
 // Keep visual fixtures and their artwork out of production bundles.
 const homeSeeds: readonly HomePuzzle[] = __DEV__ ? require("./homeSeeds.web").homeSeeds : [];
 const mobileHomeSeeds: readonly HomePuzzle[] = __DEV__ ? require("./homeSeeds.web").mobileHomeSeeds : [];
+const createReviewImage = __DEV__ ? require("../../graphics/create-review/mountain-lake.png") : null;
 
 const devices = [
   { name: "iPhone layout", width: 390, height: 844, tablet: false },
@@ -21,9 +23,12 @@ export default function PreviewHost({ children }: PropsWithChildren) {
   const [fit, setFit] = useState(true);
   const [homeState, setHomeState] = useState<HomeState>("empty");
   const [homeMessage, setHomeMessage] = useState("");
-  const onHome = usePathname() === "/";
+  const [createState, setCreateState] = useState<CreateReviewState>("before");
+  const pathname = usePathname();
+  const onHome = pathname === "/";
   const viewport = useWindowDimensions();
   const device = devices[index]!;
+  const onCreate = pathname === "/create" && !device.tablet;
   const scale = fit
     ? Math.min(
         1,
@@ -107,8 +112,20 @@ export default function PreviewHost({ children }: PropsWithChildren) {
               <option value="populated">Populated · seed data</option>
             </select>
           </label>}
+          {__DEV__ && onCreate && <label style={{ fontSize: 14 }}>
+            Create Puzzle review{" "}
+            <select aria-label="Create Puzzle review state" value={createState}
+              onChange={event => setCreateState(event.target.value as CreateReviewState)}
+              style={{ padding: 10, borderRadius: 8, border: "1px solid #8D84B2", color: "#17124F", background: "#fff" }}>
+              <option value="before">Before adding image</option>
+              <option value="after">After adding image</option>
+            </select>
+          </label>}
         </div>
       </header>
+      {__DEV__ && onCreate && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
+        Visual review only · After adding image uses your selected picture or sample artwork · Switching states does not save or delete pictures · Gameplay is not connected yet
+      </aside>}
       {__DEV__ && onHome && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
         Home visual review · {homeState === "populated" ? "Sample puzzles and balances only" : "Empty new-user state"} · No real puzzle or purchase data
         {homeMessage && <div role="status" style={{ marginTop: 8, color: "#17124F", fontSize: 14 }}>{homeMessage}</div>}
@@ -145,7 +162,9 @@ export default function PreviewHost({ children }: PropsWithChildren) {
           >
             <DeviceContext.Provider value={device}>
               <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: __DEV__ && homeState === "populated" ? (device.tablet ? homeSeeds.slice(0, 5) : mobileHomeSeeds) : [], notify: setHomeMessage }}>
-                {children}
+                <CreateReviewContext.Provider value={__DEV__ ? { state: createState, setState: setCreateState, image: createReviewImage } : null}>
+                  {children}
+                </CreateReviewContext.Provider>
               </HomeReviewContext.Provider>
             </DeviceContext.Provider>
           </div>

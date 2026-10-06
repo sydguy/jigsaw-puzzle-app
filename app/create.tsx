@@ -15,6 +15,7 @@ import {
 import { useLocal } from "../src/local/store";
 import { useDevice } from "../src/preview/context";
 import { theme } from "../src/theme";
+import MobileCreatePuzzle from "../src/create/MobileCreatePuzzle";
 
 export default function CreatePuzzle() {
   const { draft, setDraft, pictures } = useLocal();
@@ -26,6 +27,7 @@ export default function CreatePuzzle() {
       ...value,
       gridIndex: Math.max(0, Math.min(7, value.gridIndex + change)),
     }));
+  if (!tablet) return <MobileCreatePuzzle />;
   return (
     <Screen title="Create Puzzle" back={() => router.dismissTo("/")}>
       <View
@@ -188,7 +190,7 @@ export default function CreatePuzzle() {
                 " · " +
                 rows * columns +
                 " pieces · " +
-                (draft.timer === "stopwatch" ? "Stopwatch" : "Countdown")
+                (draft.timer === "none" ? "Timer off" : draft.timer === "stopwatch" ? "Stopwatch" : "Countdown")
               : "Choose an image, then set your puzzle size and timer mode."}
           </Copy>
         </View>
