@@ -2,7 +2,7 @@ export type Picture = {
   id: string;
   title: string;
   theme: "My Photo";
-  source: "photo";
+  source: "photo" | "camera";
   addedAt: number;
   data: string;
   width: 1536;
@@ -33,7 +33,7 @@ export function validatePicture(value: unknown): Picture {
     typeof p.title !== "string" ||
     !p.title.trim() ||
     p.title.length > 100 ||
-    p.source !== "photo" ||
+    (p.source !== "photo" && p.source !== "camera") ||
     p.theme !== "My Photo" ||
     typeof p.addedAt !== "number" ||
     !Number.isFinite(p.addedAt) ||

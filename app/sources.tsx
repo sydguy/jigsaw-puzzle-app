@@ -7,13 +7,20 @@ import { StorageStatus } from "../src/components/StorageStatus";
 import PhotoImport from "../src/images/PhotoImport";
 import { useLocal } from "../src/local/store";
 import { theme } from "../src/theme";
+import { useDevice } from "../src/preview/context";
+import MobileImageSources from "../src/images/MobileImageSources";
 export default function Sources() {
   const { returnTo } = useLocalSearchParams<{ returnTo?: string }>();
   const local = useLocal();
+  const { tablet } = useDevice();
   const [source, setSource] = useState<"curated" | "photo" | "camera">(
     "curated",
   );
   const destination = returnTo === "create" ? "/create" : "/collection";
+  if (!tablet) return <MobileImageSources onBack={() => router.dismissTo(destination)} onAdded={id => {
+    if (destination === "/create") local.setDraft(value => ({ ...value, pictureId: id }));
+    router.dismissTo(destination);
+  }} />;
   return (
     <Screen title="Add Picture" back={() => router.dismissTo(destination)}>
       <View style={{ flexDirection: "row", gap: 8 }}>

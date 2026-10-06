@@ -4,6 +4,10 @@ See [browser implementation evidence](browser-implementation.md) for the current
 
 See [mobile Create Puzzle review](create-puzzle-visual-review.md) for the updated setup layout, Timer default, None mode, artwork and screenshot evidence.
 
+See [mobile gallery/camera review](mobile-image-sources-review.md) for the Add Image source screens and browser camera flow.
+
+See [mobile curated review](mobile-curated-review.md) for the collection cards, fixed scroll boundaries, shop panel and preview-only catalogue artwork.
+
 Read [production plan](production-v1-plan.md), [requirements register](requirements-register.md), [security requirements](security-requirements.md), [current decisions](decision-log-current.md), [readiness report](readiness.md) and [UI state inventory](ui-states.md).
 
 The new [design system](../design/system/DESIGN-SYSTEM.md), [visual/entity architecture](v1-architecture.md) and [M0 report](m0-report.md) are current supporting documents. They do not turn proposed designs into physical/native acceptance evidence.

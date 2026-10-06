@@ -2,7 +2,7 @@
 
 ## Status
 
-Browser implementation increment: navigation, personal-photo crop/collection and puzzle setup now exist. See [implementation evidence](browser-implementation.md). This supersedes earlier statements that browser inspection was unavailable: isolated Edge automation now runs. Gameplay and native services remain unimplemented/unverified.
+Browser implementation increment: navigation, personal-photo crop/collection, browser camera capture and puzzle setup now exist. See [implementation evidence](browser-implementation.md) and [mobile source review](mobile-image-sources-review.md). This supersedes earlier statements that browser inspection was unavailable: isolated Edge automation now runs. Gameplay and native services remain unimplemented/unverified. Browser camera testing uses a synthetic device; physical camera verification remains open.
 
 M0 local documentation adoption and clean Expo foundation prepared; full readiness remains conditional on the setup and review gates below. See [M0 evidence](m0-report.md). M1 native compatibility and all later milestones NOT ACCEPTED. No production app, signing, clouddeployment or physical testing is claimed.
 

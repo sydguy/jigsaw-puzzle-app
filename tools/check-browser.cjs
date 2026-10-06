@@ -46,7 +46,7 @@ fs.mkdirSync(output, { recursive: true });
     );
     await page.getByRole("switch", { name: "Rotate pieces" }).check();
     await page.getByRole("button", { name: "Add Image", exact: true }).click();
-    await page.getByRole("button", { name: "My Photos", exact: true }).click();
+    await page.getByRole("button", { name: "Photo Gallery", exact: true }).click();
     const file = page.getByLabel("Choose photo file");
     await file.setInputFiles({
       name: "not-a-photo.png",
@@ -83,7 +83,7 @@ fs.mkdirSync(output, { recursive: true });
       true,
     );
     await page.getByRole("button", { name: "Add Image", exact: true }).click();
-    await page.getByRole("button", { name: "My Photos", exact: true }).click();
+    await page.getByRole("button", { name: "Photo Gallery", exact: true }).click();
     await page
       .getByLabel("Choose photo file")
       .setInputFiles({

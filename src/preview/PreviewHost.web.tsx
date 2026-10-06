@@ -4,6 +4,7 @@ import { DeviceContext } from "./context";
 import { usePathname } from "expo-router";
 import { HomePuzzle, HomeReviewContext, HomeState } from "../home/review";
 import { CreateReviewContext, CreateReviewState } from "../create/review";
+import { SourceReviewContext } from "../images/sourceReview";
 
 // Keep visual fixtures and their artwork out of production bundles.
 const homeSeeds: readonly HomePuzzle[] = __DEV__ ? require("./homeSeeds.web").homeSeeds : [];
@@ -24,16 +25,21 @@ export default function PreviewHost({ children }: PropsWithChildren) {
   const [homeState, setHomeState] = useState<HomeState>("empty");
   const [homeMessage, setHomeMessage] = useState("");
   const [createState, setCreateState] = useState<CreateReviewState>("before");
+  const [sourceMessage, setSourceMessage] = useState("");
   const pathname = usePathname();
   const onHome = pathname === "/";
+  const onSources = pathname === "/sources";
   const viewport = useWindowDimensions();
   const device = devices[index]!;
   const onCreate = pathname === "/create" && !device.tablet;
+  // Compare phone typography at the same zoom while retaining each layout's dimensions.
+  const fitWidth = device.tablet ? device.width : Math.max(...devices.filter(item => !item.tablet).map(item => item.width));
+  const fitHeight = device.tablet ? device.height : Math.max(...devices.filter(item => !item.tablet).map(item => item.height));
   const scale = fit
     ? Math.min(
         1,
-        Math.max(240, viewport.width - 36) / device.width,
-        Math.max(380, viewport.height - 145) / device.height,
+        Math.max(240, viewport.width - 36) / fitWidth,
+        Math.max(380, viewport.height - 145) / fitHeight,
       )
     : 1;
   return (
@@ -123,6 +129,10 @@ export default function PreviewHost({ children }: PropsWithChildren) {
           </label>}
         </div>
       </header>
+      {__DEV__ && onSources && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
+        Local image-source preview · Curated collections use sample artwork and counts · Purchases unavailable
+        {sourceMessage && <div role="status" style={{ marginTop: 4, color: "#17124F" }}>{sourceMessage}</div>}
+      </aside>}
       {__DEV__ && onCreate && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
         Visual review only · After adding image uses your selected picture or sample artwork · Switching states does not save or delete pictures · Gameplay is not connected yet
       </aside>}
@@ -163,7 +173,7 @@ export default function PreviewHost({ children }: PropsWithChildren) {
             <DeviceContext.Provider value={device}>
               <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: __DEV__ && homeState === "populated" ? (device.tablet ? homeSeeds.slice(0, 5) : mobileHomeSeeds) : [], notify: setHomeMessage }}>
                 <CreateReviewContext.Provider value={__DEV__ ? { state: createState, setState: setCreateState, image: createReviewImage } : null}>
-                  {children}
+                  <SourceReviewContext.Provider value={setSourceMessage}>{children}</SourceReviewContext.Provider>
                 </CreateReviewContext.Provider>
               </HomeReviewContext.Provider>
             </DeviceContext.Provider>

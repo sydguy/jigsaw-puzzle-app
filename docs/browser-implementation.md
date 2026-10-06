@@ -4,6 +4,8 @@ Status: first browser UI and local collection increment, spanning parts of M2/M4
 
 ## Implemented
 
+- Mobile gallery/camera source screens now follow the two new references. Explicit Open camera uses a browser video-only stream and reuses the validated crop/save pipeline; media tracks stop on capture, cancellation, source changes, backgrounding and route exit. See [mobile source review](mobile-image-sources-review.md). Physical and native camera validation remain open.
+
 - Home now follows the confirmed H1–H8 decisions, with empty/populated browser seed previews and working sorting. See [Home review](home-visual-review.md) for screenshot iterations and limits. Seed data does not enter the local collection or gameplay engine.
 
 - Main routes now belong to an Expo Router tab group. Native builds use SDK 55 NativeTabs from expo-router/unstable-native-tabs. Web retains a separate design-matched bar; it does not emulate native tabs. Owner explicitly accepts OS-controlled iPad tab positioning/appearance.
@@ -42,4 +44,4 @@ Run the image test with Node 24 through tools/with-node.ps1, passing node and to
 
 ## Next implementation work
 
-Implement and independently test the gameplay engine, then connect the agreed renderer to real puzzle/attempt records. Add durable progress/recovery, camera, full catalogue/filtering and the remaining service flows. Native builds stay deferred under the owner's current instruction. M2 owner review, M3 engine evidence, full M4 durability and production security acceptance remain open; the previously recorded dependency audit findings remain unresolved.
+Implement and independently test the gameplay engine, then connect the agreed renderer to real puzzle/attempt records. Add durable progress/recovery, native camera/photo adapters, full catalogue/filtering and the remaining service flows. Native builds stay deferred under the owner's current instruction. M2 owner review, M3 engine evidence, full M4 durability and production security acceptance remain open; the previously recorded dependency audit findings remain unresolved.

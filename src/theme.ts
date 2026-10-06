@@ -1,2 +1,15 @@
 // Consume the supplied export without copying or editing the reference tokens.
-export { designTokens as theme } from "../design/system/tokens";
+import { designTokens } from "../design/system/tokens";
+
+export const theme = {
+  ...designTokens,
+  color: {
+    ...designTokens.color,
+    // Owner-approved bright green treatment, scoped to free catalogue access.
+    freeAccessText: "#318019",
+    freeAccessBorder: "#75D743",
+    freeAccessSurface: "#EFFFE7",
+    freeAccessBadge: "#A2EB69",
+    freeAccessBadgeText: "#236711",
+  },
+};

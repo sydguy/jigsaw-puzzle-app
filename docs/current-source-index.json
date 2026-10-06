@@ -63,8 +63,8 @@
     },
     {
       "path": "docs/browser-implementation.md",
-      "bytes": 5863,
-      "sha256": "ba308285b8b929a7ec37be6ffff1f03559f1b0b93c6aa55972020e97cf38d523"
+      "bytes": 6260,
+      "sha256": "fb8b34b45f4bf588de49735c90f1e0b0752d06677273bb7cc46256d3c8636e5f"
     },
     {
       "path": "docs/create-puzzle-visual-review.md",
@@ -92,6 +92,16 @@
       "sha256": "55d33e4de4633a4236b5949e49ef975af7f1da10c89b296072242e60fbaa9191"
     },
     {
+      "path": "docs/mobile-curated-review.md",
+      "bytes": 9871,
+      "sha256": "5fb24e0c13585806c7463c8b2100c3c65363ead9a9b8c219698213c76ec8fa01"
+    },
+    {
+      "path": "docs/mobile-image-sources-review.md",
+      "bytes": 5344,
+      "sha256": "172bd898ed3a89d0bd959f5fd7066d25095ffc91d55d9df035e26a094cc68f91"
+    },
+    {
       "path": "docs/navigation-visual-review.md",
       "bytes": 3516,
       "sha256": "c181753776e08a14fc3ec26670548aa82c9097c2e0e4139c6b600a4e8d966c65"
@@ -103,13 +113,13 @@
     },
     {
       "path": "docs/readiness.md",
-      "bytes": 3513,
-      "sha256": "bb3b041e6d164064dc0385873c91e27d137454af1b3273fbc6bd50d247a17938"
+      "bytes": 3687,
+      "sha256": "d29c206de02deb0f9aa6346b23cc530110f12ad5b95853e69943417be727746d"
     },
     {
       "path": "docs/README.md",
-      "bytes": 2544,
-      "sha256": "895f63f47d8a4c119dba9403ab690d2b9d8323a54d1307d4d750929b799aeb82"
+      "bytes": 2823,
+      "sha256": "283dd7bd7bef20f536876eb57b1f60001499da83c647781517b4b51a8daaf23a"
     },
     {
       "path": "docs/requirements-register.md",
@@ -212,6 +222,16 @@
       "sha256": "3d760aa0bcdf53eb323af3dc653576048ed293b729c690f1b69148e453076dc1"
     },
     {
+      "path": "design/mobile/mobile-add-image-camera.png",
+      "bytes": 1290371,
+      "sha256": "1c259f3a9c5422e298a2cc132abdc58324de7e4e3d2059fd0ab07ca32a9ae44f"
+    },
+    {
+      "path": "design/mobile/mobile-add-image-photo-gallery.png",
+      "bytes": 1697194,
+      "sha256": "bd6c39bc0eda7af817d5a9cda9dd7a50436e0a1df456fd243bfbee09e1ec7296"
+    },
+    {
       "path": "design/mobile/mobile-AI.png",
       "bytes": 1091809,
       "sha256": "00b266cc565ba82b45cecdccc025bbe152c74d04a82cce76c607cb74b4c3d9ce"
@@ -238,8 +258,8 @@
     },
     {
       "path": "design/mobile/mobile-curated collection.png",
-      "bytes": 1585611,
-      "sha256": "ee7e8c5c3cc028db2b0d7129bc83b4b5b12b2c3e70141d1aa50d91aacfb49722"
+      "bytes": 1568823,
+      "sha256": "06b6d8d063ceda7b527015cdfadface57f1dbeeda7600b1115d265113dc7bc6d"
     },
     {
       "path": "design/mobile/mobile-home-empty-new-user.png",
@@ -710,6 +730,26 @@
       "path": "graphics/create-review/README.md",
       "bytes": 1364,
       "sha256": "ed19dd54e00498a6e255c7f8646536be616a745147c1ef651ab7844e0cdc205f"
+    },
+    {
+      "path": "graphics/curated-review/fantasy.png",
+      "bytes": 2418563,
+      "sha256": "e854d65d314fb6be81bd11e1622d048dea59268da89a419ca07cb1ae3dc4f5b6"
+    },
+    {
+      "path": "graphics/curated-review/nature.png",
+      "bytes": 3084641,
+      "sha256": "162feb584c9aa650b560a7c9b678b9ee49bd2f8acb5c8f6c187158bd62bd1ba3"
+    },
+    {
+      "path": "graphics/curated-review/README.md",
+      "bytes": 2510,
+      "sha256": "4245d9743db9c76b1536c5914bf577fac2091b116cc67a2db899230f86532c12"
+    },
+    {
+      "path": "graphics/curated-review/wildlife.png",
+      "bytes": 2273518,
+      "sha256": "50ab3c9738766ca29eb58bb4423a3f7afecd662fdb8062772339fcebd4fd7781"
     },
     {
       "path": "graphics/hint_bulb.svg",
