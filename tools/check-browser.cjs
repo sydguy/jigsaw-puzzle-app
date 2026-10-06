@@ -14,6 +14,7 @@ fs.mkdirSync(output, { recursive: true });
   });
   const page = await context.newPage();
   page.setDefaultTimeout(30000);
+  page.setDefaultNavigationTimeout(120000);
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
@@ -123,6 +124,8 @@ fs.mkdirSync(output, { recursive: true });
     await page.getByTestId("device-frame").screenshot({ path: path.join(output, "create-selected-none.png") });
     await page.getByRole("button", { name: "Back", exact: true }).click();
     await page.getByRole("tab", { name: "My Collection", exact: true }).click();
+    // The phone footer no longer exposes management. Tablet retains Picture details.
+    await page.getByLabel("Preview layout", { exact: true }).selectOption("2");
     await page.getByRole("button", { name: "Open Test landscape.png" }).click();
     await page
       .getByLabel("Picture title", { exact: true })
@@ -141,11 +144,11 @@ fs.mkdirSync(output, { recursive: true });
     await page.getByText(/0 associated puzzles/).waitFor();
     await page.getByRole("button", { name: "Cancel deletion" }).click();
     await page.getByRole("button", { name: "Back", exact: true }).click();
-    await page.getByRole("button", { name: "Details", exact: true }).click();
+    await page.getByLabel("Preview layout", { exact: true }).selectOption("0");
+    await page.getByRole("button", { name: "Filter by Theme: All pictures" }).click();
+    await page.getByRole("option", { name: "My Pictures", exact: true }).click();
+    await page.getByRole("button", { name: "Detailed", exact: true }).click();
     await page.getByText(/Times Used: 0/).waitFor();
-    await page.getByLabel("Search collection").fill("no matches");
-    await page.getByRole("heading", { name: "No matching pictures" }).waitFor();
-    await page.getByRole("button", { name: "Clear search" }).click();
     await page.getByRole("button", { name: "Grid", exact: true }).click();
     for (const [layout, name, columns] of [
       ["0", "phone-collection", 3],
@@ -161,7 +164,7 @@ fs.mkdirSync(output, { recursive: true });
         grid: node.getBoundingClientRect().width,
         child: node.firstElementChild.getBoundingClientRect().width,
       }));
-      assert.ok(Math.abs(sizes.child / sizes.grid - 1 / columns) < 0.005);
+      assert.ok(Math.abs((sizes.child * columns + (columns === 3 ? 16 : 0)) - sizes.grid) < 2);
       await page.screenshot({
         path: path.join(output, name + ".png"),
         fullPage: true,
@@ -175,7 +178,7 @@ fs.mkdirSync(output, { recursive: true });
         false,
     );
     await page.reload({ waitUntil: "domcontentloaded", timeout: 120000 });
-    await page.waitForFunction(() => document.querySelector('input[aria-label="Sound effects"]')?.checked === false);
+    await page.waitForFunction(() => document.querySelector('[role="switch"][aria-label="Sound effects"]')?.getAttribute('aria-checked') === 'false');
     assert.equal(
       await page.getByRole("switch", { name: "Sound effects" }).isChecked(),
       false,
@@ -203,6 +206,9 @@ fs.mkdirSync(output, { recursive: true });
       .getByRole("heading", { name: "Make it your collection" })
       .waitFor();
     await page.reload({ waitUntil: "domcontentloaded", timeout: 120000 });
+    await page.waitForLoadState("networkidle");
+    await page.getByRole("button", { name: "Filter by Theme: All pictures" }).click();
+    await page.getByRole("option", { name: "My Pictures", exact: true }).click();
     await page
       .getByRole("heading", { name: "Make it your collection" })
       .waitFor();
@@ -220,6 +226,7 @@ fs.mkdirSync(output, { recursive: true });
         }),
     );
     await page.reload({ waitUntil: "domcontentloaded", timeout: 120000 });
+    await page.waitForLoadState("networkidle");
     await page
       .getByRole("alert")
       .filter({ hasText: "newer version" })
@@ -240,7 +247,7 @@ fs.mkdirSync(output, { recursive: true });
     );
     assert.deepEqual(errors, []);
     console.log(
-      "PASS: navigation, four layouts, linked grids, draft retention, image rejection/cancellation/import, quota failure/retry, future-version preservation, rename/delete persistence, collection columns/search, preferences and Billing navigation.",
+      "PASS: navigation, four layouts, linked grids, draft retention, image rejection/cancellation/import, quota failure/retry, future-version preservation, rename/delete persistence, collection columns/theme filter, preferences and Billing navigation.",
     );
   } catch (error) {
     await page.screenshot({

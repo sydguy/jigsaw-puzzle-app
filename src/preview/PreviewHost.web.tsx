@@ -5,11 +5,14 @@ import { usePathname } from "expo-router";
 import { HomePuzzle, HomeReviewContext, HomeState } from "../home/review";
 import { CreateReviewContext, CreateReviewState, ReviewPicture } from "../create/review";
 import { SourceReviewContext } from "../images/sourceReview";
+import { CollectionReviewContext } from "../collection/review";
+import { SettingsReviewContext } from "../settings/review";
 
 // Keep visual fixtures and their artwork out of production bundles.
 const homeSeeds: readonly HomePuzzle[] = __DEV__ ? require("./homeSeeds.web").homeSeeds : [];
 const mobileHomeSeeds: readonly HomePuzzle[] = __DEV__ ? require("./homeSeeds.web").mobileHomeSeeds : [];
 const createReviewImage = __DEV__ ? require("../../graphics/create-review/mountain-lake.png") : null;
+const collectionItems = __DEV__ ? require("./myCollectionSeeds.web").myCollectionSeeds : [];
 
 const devices = [
   { name: "iPhone layout", width: 390, height: 844, tablet: false },
@@ -27,12 +30,16 @@ export default function PreviewHost({ children }: PropsWithChildren) {
   const [createState, setCreateState] = useState<CreateReviewState>("before");
   const [sourceMessage, setSourceMessage] = useState("");
   const [selectedPicture, setSelectedPicture] = useState<ReviewPicture | null>(null);
+  const [signedIn, setSignedIn] = useState(false);
+  const [settingsMessage, setSettingsMessage] = useState("");
   const pathname = usePathname();
   const onHome = pathname === "/";
   const onSources = pathname === "/sources" || pathname === "/collection-pictures";
   const viewport = useWindowDimensions();
   const device = devices[index]!;
   const onCreate = pathname === "/create" && !device.tablet;
+  const onCollection = pathname === "/collection" && !device.tablet;
+  const onSettings = pathname === "/settings" && !device.tablet;
   // Compare phone typography at the same zoom while retaining each layout's dimensions.
   const fitWidth = device.tablet ? device.width : Math.max(...devices.filter(item => !item.tablet).map(item => item.width));
   const fitHeight = device.tablet ? device.height : Math.max(...devices.filter(item => !item.tablet).map(item => item.height));
@@ -128,8 +135,20 @@ export default function PreviewHost({ children }: PropsWithChildren) {
               <option value="after">After adding image</option>
             </select>
           </label>}
+          {__DEV__ && onSettings && <label style={{ fontSize: 14 }}>Account review{" "}
+            <select aria-label="Settings account review" value={signedIn ? "signed-in" : "guest"} onChange={event => { setSignedIn(event.target.value === "signed-in"); setSettingsMessage(""); }} style={{ padding: 10, borderRadius: 8, border: "1px solid #8D84B2", background: "#fff", color: "#17124F" }}>
+              <option value="guest">Not signed in</option><option value="signed-in">Signed in · sample profile</option>
+            </select>
+          </label>}
         </div>
       </header>
+      {__DEV__ && onCollection && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
+        Collection visual review · Your photos and sample theme pictures share one list · Theme artwork and usage statistics are review fixtures
+      </aside>}
+      {__DEV__ && onSettings && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
+        Account appearance review only · Sign-in services are not connected · Switching profile does not change your saved pictures
+        {settingsMessage && <div role="status">{settingsMessage}</div>}
+      </aside>}
       {__DEV__ && onSources && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
         Local image-source preview · Curated artwork, owned labels and balances are sample data only · Add Picture previews the selection without saving or spending · Purchases unavailable
         {sourceMessage && <div role="status" style={{ marginTop: 4, color: "#17124F" }}>{sourceMessage}</div>}
@@ -174,7 +193,11 @@ export default function PreviewHost({ children }: PropsWithChildren) {
             <DeviceContext.Provider value={device}>
               <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: __DEV__ && homeState === "populated" ? (device.tablet ? homeSeeds.slice(0, 5) : mobileHomeSeeds) : [], notify: setHomeMessage }}>
                 <CreateReviewContext.Provider value={__DEV__ ? { state: createState, setState: setCreateState, image: createReviewImage, selectedPicture, setSelectedPicture } : null}>
-                  <SourceReviewContext.Provider value={setSourceMessage}>{children}</SourceReviewContext.Provider>
+                  <CollectionReviewContext.Provider value={__DEV__ ? { items: collectionItems } : null}>
+                    <SettingsReviewContext.Provider value={__DEV__ ? { signedIn, setSignedIn, notify: setSettingsMessage } : null}>
+                      <SourceReviewContext.Provider value={setSourceMessage}>{children}</SourceReviewContext.Provider>
+                    </SettingsReviewContext.Provider>
+                  </CollectionReviewContext.Provider>
                 </CreateReviewContext.Provider>
               </HomeReviewContext.Provider>
             </DeviceContext.Provider>

@@ -140,7 +140,7 @@ const s = StyleSheet.create({
   allowance: { minHeight: 56, flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: 8, paddingVertical: 2, backgroundColor: theme.color.surface, borderRadius: 12, boxShadow: "0 2px 8px #35217414", borderWidth: 1, borderColor: theme.color.border },
   crown: { width: 38, height: 38, flexShrink: 0, tintColor: "#E69A2D" },
   allowanceText: { flex: 1, minWidth: 0, gap: 2 },
-  allowanceTitle: { fontSize: 16, lineHeight: 20, fontWeight: "800", color: theme.color.text },
+  allowanceTitle: { fontSize: 16, lineHeight: 20, fontWeight: "700", color: theme.color.text },
   noPacks: { fontSize: 12, lineHeight: 16, color: theme.color.textSecondary },
   balanceRow: { flexDirection: "row", flexWrap: "wrap", gap: 6 },
   balance: { fontSize: 14, lineHeight: 18, fontWeight: "700", color: theme.color.primary },

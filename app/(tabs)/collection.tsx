@@ -15,6 +15,7 @@ import { useLocal } from "../../src/local/store";
 import { useDevice } from "../../src/preview/context";
 import { theme } from "../../src/theme";
 import { useCreateReview } from "../../src/create/review";
+import MobileCollection from "../../src/collection/MobileCollection";
 export default function Collection() {
   const { select } = useLocalSearchParams<{ select?: string }>();
   const local = useLocal();
@@ -27,6 +28,7 @@ export default function Collection() {
     .filter((p) => p.title.toLowerCase().includes(query.toLowerCase()))
     .sort((a, b) => (oldest ? a.addedAt - b.addedAt : b.addedAt - a.addedAt));
   const columns = tablet ? 6 : 3;
+  if (!tablet) return <MobileCollection selecting={select === "1"} />;
   return (
     <Screen
       title={select ? "Choose a picture" : "My Collection"}

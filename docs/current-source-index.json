@@ -73,8 +73,8 @@
     },
     {
       "path": "docs/decision-log-current.md",
-      "bytes": 7578,
-      "sha256": "7952dd97b0b4beb30d97504f5c39ad71012dcb87c8f9d96d85f7fb436d2003db"
+      "bytes": 8802,
+      "sha256": "0d6fb38126a047124e21d1170dcc10834d5d4341e2a3b9057fde1f5c8866f5a7"
     },
     {
       "path": "docs/dependency-audit.json",
@@ -112,6 +112,11 @@
       "sha256": "cfd0cf06d3f9bdb75436432dc66ad030c89a32d7ef2604896205270d14c46aea"
     },
     {
+      "path": "docs/mobile-tabs-review.md",
+      "bytes": 13728,
+      "sha256": "af4542a4cb8f08225250c018f7f289cd616aabfedb83bf1a1a5570677202d162"
+    },
+    {
       "path": "docs/navigation-visual-review.md",
       "bytes": 3516,
       "sha256": "c181753776e08a14fc3ec26670548aa82c9097c2e0e4139c6b600a4e8d966c65"
@@ -128,8 +133,8 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 3128,
-      "sha256": "03695d467a52f659b3188b5cf27342deeb2934e8e8897fe3ffb74dda48c7aa1a"
+      "bytes": 3298,
+      "sha256": "77db05ad18f8bf05cbde488783c24138aaeda64c0d6e2b898c8777dec3d0c9a6"
     },
     {
       "path": "docs/requirements-register.md",
@@ -228,8 +233,8 @@
     },
     {
       "path": "design/mobile/mobile-account.png",
-      "bytes": 1073066,
-      "sha256": "3d760aa0bcdf53eb323af3dc653576048ed293b729c690f1b69148e453076dc1"
+      "bytes": 1095636,
+      "sha256": "3f0b3174419cad57edac02dcbfbf4033307e00ab4920ff8bb60fa9cb304fa5e5"
     },
     {
       "path": "design/mobile/mobile-add-image-camera.png",
@@ -295,6 +300,11 @@
       "path": "design/mobile/mobile-puzzle-type 2 .png",
       "bytes": 1598429,
       "sha256": "bfc21137a6c1b7dd9ef5648bbb718c9e2896d308d271cb7d35ac7e411bf569ca"
+    },
+    {
+      "path": "design/mobile/mobile-settings-not-signed-in.png",
+      "bytes": 976450,
+      "sha256": "fdaed1925c2ef11ac8319781e911dbbf47ce742c0c679dd05bb8ed56ce7f24a6"
     },
     {
       "path": "design/mobile/mobile-settings.png",

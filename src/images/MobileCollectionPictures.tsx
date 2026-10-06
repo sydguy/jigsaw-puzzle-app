@@ -63,7 +63,7 @@ export default function MobileCollectionPictures({ collectionId, returnTo, onBac
       <AppScrollView scrollbarTopInset={0} scrollbarBottomInset={0} contentContainerStyle={s.grid}>
         {collection ? pictures.filter(item => !excludeOwned || !item.owned).map(item => <Pressable key={item.id} testID={`collection-picture-${item.id}`}
           accessibilityRole="button" accessibilityLabel={`${item.title}${item.owned ? ", already in collection" : ""}`} accessibilityState={{ selected: item.id === selected, disabled: item.owned }} aria-pressed={item.id === selected}
-          disabled={item.owned} onPress={() => setSelected(item.id)} style={[s.tile, { width: tileWidth, height: tileWidth / 1.2 }, selected === item.id && s.selected]}>
+          disabled={item.owned} onPress={() => setSelected(current => current === item.id ? null : item.id)} style={[s.tile, { width: tileWidth, height: tileWidth / 1.2 }, selected === item.id && s.selected]}>
           <Image source={item.image} accessible={false} resizeMode="cover" style={s.picture} />
           {item.owned && <View style={s.owned}><Text style={s.ownedText}>Already in{"\n"}collection</Text></View>}
           {item.id === selected && <View style={s.tickCircle} accessible={false}><View style={s.tick} /></View>}
@@ -89,7 +89,7 @@ const s = StyleSheet.create({
   allowance: { marginTop: 16, minHeight: 56, flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: 8, paddingVertical: 2, backgroundColor: theme.color.surface, borderRadius: 12, borderWidth: 1, borderColor: theme.color.border, boxShadow: "0 2px 8px #35217414" },
   crown: { width: 38, height: 38, tintColor: "#E69A2D" },
   allowanceText: { flex: 1, minWidth: 0, gap: 2 },
-  allowanceTitle: { fontSize: 16, lineHeight: 20, fontWeight: "800", color: theme.color.text },
+  allowanceTitle: { fontSize: 16, lineHeight: 20, fontWeight: "700", color: theme.color.text },
   balanceRow: { flexDirection: "row", flexWrap: "wrap", gap: 6 },
   balance: { fontSize: 14, lineHeight: 18, fontWeight: "700", color: theme.color.primary },
   unit: { fontSize: 10, fontWeight: "400", color: theme.color.textSecondary },

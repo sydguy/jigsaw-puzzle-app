@@ -1,0 +1,92 @@
+const { chromium } = require('playwright');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+
+(async () => {
+  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } });
+  page.setDefaultTimeout(30000);
+  page.setDefaultNavigationTimeout(120000);
+  const out = '.cache/mobile-tabs-review'; fs.mkdirSync(out, { recursive: true });
+  const errors = []; page.on('pageerror', e => errors.push(e.message));
+  const snap = name => page.getByTestId('device-frame').screenshot({ path: `${out}/${name}.png` });
+  const readyImages = () => page.waitForFunction(() => [...document.querySelectorAll('[data-testid="device-frame"] img')].every(n => n.complete && n.naturalWidth > 0), undefined, { timeout: 60000 });
+  try {
+    for (const [layout, name] of [['0', 'iphone'], ['1', 'android']]) {
+      await page.goto('http://localhost:8081/collection', { waitUntil: 'networkidle', timeout: 120000 });
+      await page.getByLabel('Preview layout', { exact: true }).selectOption(layout);
+      await page.getByTestId('my-collection-header').waitFor();
+      await readyImages();
+      const cards = page.getByTestId('my-collection-item');
+      assert.equal(await cards.count(), 18);
+      const boxes = await Promise.all([0, 1, 2, 3].map(i => cards.nth(i).boundingBox()));
+      assert(Math.abs(boxes[0].y - boxes[2].y) < 1 && boxes[3].y > boxes[0].y + 20, 'exactly three columns');
+      assert(await page.getByRole('button', { name: 'Create Puzzle', exact: true }).isDisabled());
+      await cards.first().click();
+      await snap(`${name}-grid`);
+      const header = await page.getByTestId('my-collection-header').boundingBox();
+      const footer = await page.getByTestId('my-collection-footer').boundingBox();
+      const rail = await page.getByTestId('scrollbar-rail').boundingBox();
+      assert(rail.x > boxes[2].x + boxes[2].width, 'scrollbar sits outside picture cards');
+      await page.getByRole('scrollbar').focus(); await page.keyboard.press('End');
+      await page.waitForFunction(() => document.querySelector('[data-testid="page-scroll"]')?.scrollTop > 0);
+      assert.deepEqual(await page.getByTestId('my-collection-header').boundingBox(), header);
+      assert.deepEqual(await page.getByTestId('my-collection-footer').boundingBox(), footer);
+      const last = await cards.last().boundingBox(); assert(last.y + last.height <= footer.y + 1);
+      await snap(`${name}-grid-scrolled`);
+      await page.getByRole('button', { name: 'Detailed', exact: true }).click();
+      await page.getByTestId('page-scroll').evaluate(n => { n.scrollTop = 0; });
+      await page.getByText('Times Used: 12', { exact: true }).first().waitFor();
+      await snap(`${name}-detailed`);
+      await page.getByRole('button', { name: 'Filter by Theme: All pictures', exact: true }).click();
+      await page.getByRole('option', { name: 'Nature', exact: true }).click();
+      assert.equal(await cards.count(), 4);
+      await page.getByRole('button', { name: 'Filter by Theme: Nature', exact: true }).click();
+      await page.getByRole('option', { name: 'All pictures', exact: true }).click();
+      await page.getByRole('button', { name: 'Sort by: Recently Added', exact: true }).click();
+      await page.getByRole('option', { name: 'Most Used', exact: true }).click();
+      assert.equal(await cards.first().getAttribute('aria-label'), 'Select Tropical Paradise');
+      await cards.first().click();
+      await page.getByRole('button', { name: 'Create Puzzle', exact: true }).click();
+      await page.getByRole('img', { name: 'Tropical Paradise', exact: true }).waitFor();
+      await page.goto('http://localhost:8081/collection', { waitUntil: 'networkidle' });
+      await page.getByLabel('Preview layout', { exact: true }).selectOption(layout);
+      await page.getByRole('button', { name: 'Filter by Theme: All pictures', exact: true }).click();
+      await page.getByRole('option', { name: 'My Pictures', exact: true }).click();
+      await page.getByRole('heading', { name: 'Make it your collection', exact: true }).waitFor();
+      await snap(`${name}-empty`);
+      await page.getByRole('tab', { name: 'Settings', exact: true }).click();
+      await readyImages();
+      await page.getByTestId('mobile-settings-panel').waitFor();
+      const sound = page.getByRole('switch', { name: 'Sound effects', exact: true });
+      await sound.waitFor();
+      await page.waitForFunction(() => !document.querySelector('[role="switch"][aria-label="Sound effects"]')?.disabled);
+      const before = await sound.getAttribute('aria-checked');
+      await sound.click();
+      await page.waitForFunction(expected => document.querySelector('[role="switch"][aria-label="Sound effects"]')?.getAttribute('aria-checked') === expected, before === 'true' ? 'false' : 'true');
+      await page.reload({ waitUntil: 'networkidle' });
+      await page.getByLabel('Preview layout', { exact: true }).selectOption(layout);
+      await page.getByTestId('mobile-settings-panel').waitFor();
+      await page.waitForFunction(expected => document.querySelector('[role="switch"][aria-label="Sound effects"]')?.getAttribute('aria-checked') === expected, before === 'true' ? 'false' : 'true');
+      assert.equal(await sound.getAttribute('aria-checked'), before === 'true' ? 'false' : 'true', 'sound preference persisted');
+      const tracks = page.getByTestId('preference-switch-track');
+      const size = await tracks.first().evaluate(n => [getComputedStyle(n).width, getComputedStyle(n).height]);
+      assert.deepEqual(size, ['48px', '28px']);
+      await readyImages();
+      await snap(`${name}-settings`);
+      await page.getByRole('button', { name: 'Billing', exact: true }).click();
+      await page.getByRole('heading', { name: 'Purchases & subscriptions', exact: true }).waitFor();
+      await page.getByRole('button', { name: 'Back', exact: true }).click();
+      await page.getByTestId('mobile-settings-panel').waitFor();
+    }
+    for (const layout of ['2', '3']) {
+      await page.getByLabel('Preview layout', { exact: true }).selectOption(layout);
+      await snap(`tablet-${layout}-settings-unchanged`);
+      await page.getByRole('tab', { name: 'My Collection', exact: true }).click();
+      await snap(`tablet-${layout}-collection-unchanged`);
+      await page.getByRole('tab', { name: 'Settings', exact: true }).click();
+    }
+    assert.deepEqual(errors, []);
+    console.log('PASS: both phones: Collection grid/detail, filters, sorting, selection, Create handoff, empty state, outside scrollbar/fixed boundaries; Settings switch geometry/persistence and Billing Back. Tablet regression screenshots captured.');
+  } finally { await browser.close(); }
+})().catch(e => { console.error(e); process.exitCode = 1; });

@@ -14,6 +14,7 @@ import {
 import { useLocal } from "../../src/local/store";
 import { useDevice } from "../../src/preview/context";
 import { theme } from "../../src/theme";
+import MobileSettings from "../../src/settings/MobileSettings";
 const sections = [
   { key: "account", label: "Account", art: art.account },
   { key: "billing", label: "Billing", art: art.billing },
@@ -35,6 +36,9 @@ export default function Settings() {
       setError(e instanceof Error ? e.message : "Could not save preferences.");
     }
   };
+  if (!tablet && !section) return <MobileSettings sections={sections} onSection={key => setSection(key as Section)} preferences={local.preferences}
+    disabled={local.busy || local.loading || !!local.error} onPreference={(key, value) => { void save(key, value); }}
+    error={error || local.error} retry={() => { void local.reload(); }} />;
   return (
     <Screen
       title={

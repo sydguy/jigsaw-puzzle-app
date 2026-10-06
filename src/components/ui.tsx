@@ -191,6 +191,7 @@ export function Screen({
   right,
   contentStyle,
   fixedContent,
+  fixedFooter,
   floatingTabs = false,
   showScrollbar = true,
 }: PropsWithChildren<{
@@ -200,12 +201,15 @@ export function Screen({
   right?: React.ReactNode;
   contentStyle?: StyleProp<ViewStyle>;
   fixedContent?: React.ReactNode;
+  fixedFooter?: React.ReactNode;
   floatingTabs?: boolean;
   showScrollbar?: boolean;
 }>) {
   const { tablet } = useDevice();
   const [navHeight, setNavHeight] = useState(70);
+  const [footerHeight, setFooterHeight] = useState(68);
   const floatNav = floatingTabs && !!tab && Platform.OS === "web";
+  const floatFooter = floatNav && !!fixedFooter;
   const setTabHidden = useContext(TabVisibility);
   useFocusEffect(useCallback(() => {
     setTabHidden(!tab);
@@ -226,16 +230,17 @@ export function Screen({
         showScrollbar={showScrollbar}
         style={{ flex: 1 }}
         scrollbarTopInset={fixedContent ? 0 : 16}
-        scrollbarBottomInset={floatNav ? navHeight + 20 : 8}
+        scrollbarBottomInset={floatNav ? navHeight + 20 + (floatFooter ? footerHeight : 0) : 8}
         contentContainerStyle={[{
           padding: tablet ? 24 : 16,
           gap: 20,
           paddingBottom: 28,
-        }, contentStyle, floatNav && { paddingBottom: (StyleSheet.flatten(contentStyle)?.paddingBottom as number ?? 28) + navHeight + 12 }]}
+        }, contentStyle, floatNav && { paddingBottom: (StyleSheet.flatten(contentStyle)?.paddingBottom as number ?? 28) + navHeight + 12 + (floatFooter ? footerHeight + 8 : 0) }]}
         keyboardShouldPersistTaps="handled"
       >
         {children}
       </AppScrollView>
+      {fixedFooter && <View testID="screen-footer-container" onLayout={event => setFooterHeight(event.nativeEvent.layout.height)} style={[{ flexShrink: 0 }, floatFooter && { position: "absolute", left: 0, right: 0, bottom: navHeight + 12, zIndex: 3 }]}>{fixedFooter}</View>}
       {tab && Platform.OS === "web" && (
         <View testID="bottom-tab-bar" onLayout={event => setNavHeight(event.nativeEvent.layout.height)}
           style={[ui.nav, { marginHorizontal: tablet ? 24 : 16 }, floatNav && {

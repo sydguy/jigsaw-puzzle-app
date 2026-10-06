@@ -1,11 +1,13 @@
-import { PropsWithChildren, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { theme } from "../theme";
+import DeleteIcon from "./DeleteIcon";
+import { SwipeDeleteProps } from "./swipeDeleteTypes";
 
-type Props = PropsWithChildren<{ title: string; open: boolean; onOpenChange: (open: boolean) => void; onDelete: () => void }>;
 const reveal = 80;
 
 /** Browser review gesture: horizontal swipes reveal an explicit, confirmed delete. */
-export default function SwipePuzzleRow({ children, title, open, onOpenChange, onDelete }: Props) {
+export default function SwipeDeleteRow({ children, title, open, onOpenChange, onDelete, objectLabel, description, note, testID = "swipe-delete-row" }: SwipeDeleteProps) {
+  const [busy, setBusy] = useState(false), [error, setError] = useState("");
   const [drag, setDrag] = useState<number | null>(null);
   const gesture = useRef<{ id: number; x: number; y: number; scale: number; start: number; offset: number; axis: "x" | "y" | null } | null>(null);
   const suppressClick = useRef(false);
@@ -13,14 +15,14 @@ export default function SwipePuzzleRow({ children, title, open, onOpenChange, on
   const remove = useRef<HTMLButtonElement>(null);
   const offset = drag ?? (open ? -reveal : 0);
   const closeDialog = () => { dialog.current?.close(); remove.current?.focus(); };
-  return <div data-testid="swipe-puzzle-row" role="group" tabIndex={0}
+  return <div data-testid={testID} role="group" tabIndex={0}
     aria-label={title + ". Swipe left or press Left Arrow to reveal Delete."}
     onKeyDown={event => {
       if (event.target !== event.currentTarget) return;
       if (["ArrowLeft", "Delete", "Backspace"].includes(event.key)) { event.preventDefault(); onOpenChange(true); }
       if (["ArrowRight", "Escape"].includes(event.key)) { event.preventDefault(); onOpenChange(false); }
     }}
-    style={{ position: "relative", borderRadius: 12, overflow: "hidden", flexShrink: 0, touchAction: "pan-y", userSelect: "none" }}
+    style={{ position: "relative", borderRadius: 12, overflow: "hidden", flexShrink: 0, width: "100%", minWidth: 0, maxWidth: "100%", touchAction: "pan-y", userSelect: "none" }}
     onDragStart={event => event.preventDefault()}
     onPointerDown={event => {
       if (!event.isPrimary || event.button !== 0 || (event.target as HTMLElement).closest('[data-delete-action], dialog')) return;
@@ -54,21 +56,22 @@ export default function SwipePuzzleRow({ children, title, open, onOpenChange, on
       if (suppressClick.current) { event.preventDefault(); event.stopPropagation(); suppressClick.current = false; }
     }}>
     <button ref={remove} data-delete-action aria-label={"Delete " + title} tabIndex={open ? 0 : -1}
-      onClick={() => dialog.current?.showModal()}
-      style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: reveal, border: 0, background: theme.color.danger,
+      onClick={() => { setError(""); dialog.current?.showModal(); }}
+      style={{ position: "absolute", right: 0, top: 0, bottom: 0, width: reveal, border: 0, background: theme.color.cardDelete, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 6,
         color: theme.color.surface, fontSize: 13, fontWeight: 700, cursor: "pointer", visibility: offset < 0 ? "visible" : "hidden" }}>
-      Delete
+      <DeleteIcon />Delete
     </button>
     <div style={{ transform: `translateX(${offset}px)`, position: "relative", pointerEvents: open && drag === null ? "none" : undefined }}>{children}</div>
-    <dialog ref={dialog} aria-label={"Delete " + title + "?"} onClick={event => event.stopPropagation()}
+    <dialog ref={dialog} aria-label={"Delete " + title + "?"} onClick={event => event.stopPropagation()} onCancel={event => { event.preventDefault(); if (!busy) closeDialog(); }}
       style={{ padding: 20, maxWidth: 300, width: "calc(100vw - 64px)", border: "1px solid " + theme.color.border, borderRadius: 16,
         color: theme.color.text, background: theme.color.surface, boxShadow: "0 12px 36px #17124f33", fontFamily: "system-ui, sans-serif" }}>
-      <h2 style={{ fontSize: 20, margin: "0 0 12px" }}>Delete this puzzle?</h2>
-      <p style={{ fontSize: 14, lineHeight: "21px", margin: "0 0 8px" }}>{title}. Your picture stays in My Collection.</p>
-      <p style={{ fontSize: 12, color: theme.color.textSecondary }}>This removes a seed puzzle from this preview only.</p>
+      <h2 style={{ fontSize: 20, margin: "0 0 12px" }}>Delete this {objectLabel}?</h2>
+      <p style={{ fontSize: 14, lineHeight: "21px", margin: "0 0 8px", overflowWrap: "anywhere" }}>{title}. {description}</p>
+      {note && <p style={{ fontSize: 12, color: theme.color.textSecondary }}>{note}</p>}
+      {error && <p role="alert" style={{ color: theme.color.danger }}>{error}</p>}
       <div style={{ display: "flex", gap: 12, justifyContent: "flex-end", marginTop: 16 }}>
-        <button autoFocus onClick={closeDialog} style={{ minHeight: 48, padding: "0 16px", borderRadius: 8, border: "1px solid " + theme.color.border, background: theme.color.surface, color: theme.color.text, cursor: "pointer" }}>Cancel</button>
-        <button onClick={() => { dialog.current?.close(); onDelete(); }} style={{ minHeight: 48, padding: "0 16px", borderRadius: 8, border: 0, background: theme.color.danger, color: theme.color.surface, cursor: "pointer" }}>Delete puzzle</button>
+        <button autoFocus disabled={busy} onClick={closeDialog} style={{ minHeight: 48, padding: "0 16px", borderRadius: 12, border: "1px solid " + theme.color.border, background: theme.color.surface, color: theme.color.text, cursor: "pointer" }}>Cancel</button>
+        <button disabled={busy} onClick={async () => { setBusy(true); setError(""); try { await onDelete(); dialog.current?.close(); } catch (e) { setError(e instanceof Error ? e.message : "The picture could not be deleted. Please retry."); } finally { setBusy(false); } }} style={{ minHeight: 48, padding: "0 16px", borderRadius: 12, border: 0, background: theme.color.cardDelete, color: theme.color.surface, cursor: "pointer" }}>{busy ? "Deleting…" : `Delete ${objectLabel}`}</button>
       </div>
     </dialog>
   </div>;
