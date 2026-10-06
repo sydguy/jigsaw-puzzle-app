@@ -31,6 +31,8 @@ export default function PreviewHost({ children }: PropsWithChildren) {
   const [sourceMessage, setSourceMessage] = useState("");
   const [selectedPicture, setSelectedPicture] = useState<ReviewPicture | null>(null);
   const [signedIn, setSignedIn] = useState(false);
+  const [profile, setProfile] = useState({ fullName: "Sarah Johnson", email: "sarah@example.com" });
+  const [privacy, setPrivacy] = useState({ analytics: false, marketing: false });
   const [settingsMessage, setSettingsMessage] = useState("");
   const pathname = usePathname();
   const onHome = pathname === "/";
@@ -146,7 +148,7 @@ export default function PreviewHost({ children }: PropsWithChildren) {
         Collection visual review · Your photos and sample theme pictures share one list · Theme artwork and usage statistics are review fixtures
       </aside>}
       {__DEV__ && onSettings && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
-        Account appearance review only · Sign-in services are not connected · Switching profile does not change your saved pictures
+        Settings appearance review only · Account, optional tracking and policy services are not connected · Preview changes stay in memory and do not change your saved pictures
         {settingsMessage && <div role="status">{settingsMessage}</div>}
       </aside>}
       {__DEV__ && onSources && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
@@ -194,7 +196,7 @@ export default function PreviewHost({ children }: PropsWithChildren) {
               <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: __DEV__ && homeState === "populated" ? (device.tablet ? homeSeeds.slice(0, 5) : mobileHomeSeeds) : [], notify: setHomeMessage }}>
                 <CreateReviewContext.Provider value={__DEV__ ? { state: createState, setState: setCreateState, image: createReviewImage, selectedPicture, setSelectedPicture } : null}>
                   <CollectionReviewContext.Provider value={__DEV__ ? { items: collectionItems } : null}>
-                    <SettingsReviewContext.Provider value={__DEV__ ? { signedIn, setSignedIn, notify: setSettingsMessage } : null}>
+                    <SettingsReviewContext.Provider value={__DEV__ ? { signedIn, setSignedIn, profile, setProfile, privacy, setPrivacy, notify: setSettingsMessage } : null}>
                       <SourceReviewContext.Provider value={setSourceMessage}>{children}</SourceReviewContext.Provider>
                     </SettingsReviewContext.Provider>
                   </CollectionReviewContext.Provider>

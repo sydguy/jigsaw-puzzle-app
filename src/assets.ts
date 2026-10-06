@@ -18,6 +18,12 @@ export const art = {
   account: require("../graphics/settings_account.png"),
   billing: require("../graphics/settings_billing.png"),
   privacy: require("../graphics/settings_privacy_legal.png"),
+  functional: require("../graphics/privacy_functional_shield.png"),
+  analytics: require("../graphics/privacy_analytics.png"),
+  marketing: require("../graphics/privacy_marketing.png"),
+  terms: require("../graphics/legal_terms_conditions.png"),
+  privacyPolicy: require("../graphics/legal_privacy_policy.png"),
+  cookiePolicy: require("../graphics/legal_cookie_policy.png"),
   faq: require("../graphics/settings_faq.png"),
   support: require("../graphics/settings_support.png"),
 } as const;

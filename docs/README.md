@@ -14,6 +14,8 @@ See [mobile collection picture review](mobile-collection-pictures-review.md) for
 
 See [mobile Collection and Settings review](mobile-tabs-review.md) for the grid/detail tab, theme/sort controls, saved-picture management and Play preferences switches.
 
+See [mobile Account and Privacy & Legal review](mobile-account-legal-review.md) for the Settings subpages, preview interactions and remaining service gates.
+
 Read [production plan](production-v1-plan.md), [requirements register](requirements-register.md), [security requirements](security-requirements.md), [current decisions](decision-log-current.md), [readiness report](readiness.md) and [UI state inventory](ui-states.md).
 
 The new [design system](../design/system/DESIGN-SYSTEM.md), [visual/entity architecture](v1-architecture.md) and [M0 report](m0-report.md) are current supporting documents. They do not turn proposed designs into physical/native acceptance evidence.

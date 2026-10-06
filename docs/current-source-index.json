@@ -73,8 +73,8 @@
     },
     {
       "path": "docs/decision-log-current.md",
-      "bytes": 8802,
-      "sha256": "0d6fb38126a047124e21d1170dcc10834d5d4341e2a3b9057fde1f5c8866f5a7"
+      "bytes": 9539,
+      "sha256": "e8cc005df4b36ae3c79eac1f8105338aac8bde416b25f0640c856d863ba25c2e"
     },
     {
       "path": "docs/dependency-audit.json",
@@ -90,6 +90,11 @@
       "path": "docs/m0-report.md",
       "bytes": 5073,
       "sha256": "55d33e4de4633a4236b5949e49ef975af7f1da10c89b296072242e60fbaa9191"
+    },
+    {
+      "path": "docs/mobile-account-legal-review.md",
+      "bytes": 3262,
+      "sha256": "3903ed996e59418e08b7dd465d9d040a6a038af5e6c8c5df547a0c84a379a7aa"
     },
     {
       "path": "docs/mobile-collection-pictures-review.md",
@@ -133,8 +138,8 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 3298,
-      "sha256": "77db05ad18f8bf05cbde488783c24138aaeda64c0d6e2b898c8777dec3d0c9a6"
+      "bytes": 3456,
+      "sha256": "d4c82d96c5eb77fc1a57659c5f4330bbb978664b551a72b890d53e9ad9aa803f"
     },
     {
       "path": "docs/requirements-register.md",

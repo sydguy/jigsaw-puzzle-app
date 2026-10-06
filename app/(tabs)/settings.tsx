@@ -15,6 +15,8 @@ import { useLocal } from "../../src/local/store";
 import { useDevice } from "../../src/preview/context";
 import { theme } from "../../src/theme";
 import MobileSettings from "../../src/settings/MobileSettings";
+import MobileAccount from "../../src/settings/MobileAccount";
+import MobileLegal from "../../src/settings/MobileLegal";
 const sections = [
   { key: "account", label: "Account", art: art.account },
   { key: "billing", label: "Billing", art: art.billing },
@@ -39,6 +41,8 @@ export default function Settings() {
   if (!tablet && !section) return <MobileSettings sections={sections} onSection={key => setSection(key as Section)} preferences={local.preferences}
     disabled={local.busy || local.loading || !!local.error} onPreference={(key, value) => { void save(key, value); }}
     error={error || local.error} retry={() => { void local.reload(); }} />;
+  if (!tablet && section === "account") return <MobileAccount onBack={() => setSection(null)} />;
+  if (!tablet && section === "privacy") return <MobileLegal onBack={() => setSection(null)} />;
   return (
     <Screen
       title={

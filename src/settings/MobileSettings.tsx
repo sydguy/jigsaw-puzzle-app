@@ -19,8 +19,8 @@ export default function MobileSettings({ sections, onSection, preferences, disab
   return <Screen tab="Settings" floatingTabs contentStyle={s.content}>
     <View style={[s.panel, { minHeight: Math.max(0, height - 102) }]} testID="mobile-settings-panel">
       <View style={s.profile}>
-        <View style={s.avatar} accessible={false}><Text style={s.initial}>{signedIn ? "S" : "G"}</Text></View>
-        <View style={s.profileCopy}><Text accessibilityRole="header" style={s.name}>{signedIn ? "Sarah Johnson" : "Playing as a guest"}</Text><Text style={s.caption}>{signedIn ? "sarah@example.com" : "Your collection stays on this device."}</Text></View>
+        <View style={s.avatar} accessible={false}><Text style={s.initial}>{signedIn ? review!.profile.fullName.charAt(0).toUpperCase() : "G"}</Text></View>
+        <View style={s.profileCopy}><Text accessibilityRole="header" style={s.name}>{signedIn ? review!.profile.fullName : "Playing as a guest"}</Text><Text style={s.caption}>{signedIn ? review!.profile.email : "Your collection stays on this device."}</Text></View>
       </View>
       <Text accessibilityRole="header" style={s.sectionTitle}>Settings</Text>
       <View style={s.links}>
