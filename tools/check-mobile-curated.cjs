@@ -48,7 +48,7 @@ fs.mkdirSync(out, { recursive: true });
       } else assert.equal(await page.getByRole('scrollbar').count(), 0, 'no scrollbar when every card fits');
       assert.ok(boundary.y >= heading.y + heading.height - 1);
       assert.ok(boundary.y + boundary.height < shop.y, 'list ends above fixed shop panel');
-      const access = await page.getByRole('button', { name: 'Free: Free Collection', exact: true }).boundingBox();
+      const access = await page.getByTestId('curated-access-free').boundingBox();
       assert.ok(access.height >= 48, 'slim visible button retains a 48-point tap target');
       await page.getByTestId('device-frame').screenshot({ path: `${out}/${name}-top.png` });
       if (overflowing) {

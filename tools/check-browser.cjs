@@ -13,6 +13,7 @@ fs.mkdirSync(output, { recursive: true });
     viewport: { width: 1440, height: 1100 },
   });
   const page = await context.newPage();
+  page.setDefaultTimeout(30000);
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
@@ -73,9 +74,9 @@ fs.mkdirSync(output, { recursive: true });
       mimeType: "image/png",
       buffer: Buffer.from(image, "base64"),
     });
-    await page.getByLabel("3:2 crop preview").waitFor();
-    await page.getByRole("button", { name: "Cancel crop" }).click();
-    assert.equal(await page.getByLabel("3:2 crop preview").count(), 0);
+    await page.getByRole("dialog", { name: "Crop your picture" }).waitFor();
+    await page.getByRole("button", { name: "Cancel", exact: true }).click();
+    assert.equal(await page.getByRole("dialog", { name: "Crop your picture" }).count(), 0);
     await page.getByRole("button", { name: "Back", exact: true }).click();
     await page.getByLabel("Rows: 12", { exact: true }).waitFor();
     assert.equal(
@@ -91,7 +92,7 @@ fs.mkdirSync(output, { recursive: true });
         mimeType: "image/png",
         buffer: Buffer.from(image, "base64"),
       });
-    await page.getByLabel("3:2 crop preview").waitFor();
+    await page.getByRole("dialog", { name: "Crop your picture" }).waitFor();
     await page.evaluate(() => {
       const original = IDBObjectStore.prototype.put;
       IDBObjectStore.prototype.put = function (...args) {
@@ -100,15 +101,15 @@ fs.mkdirSync(output, { recursive: true });
       };
     });
     await page
-      .getByRole("button", { name: "Add to My Collection", exact: true })
+      .getByRole("button", { name: "Done", exact: true })
       .click();
     await page
       .getByRole("alert")
       .filter({ hasText: "Storage may be full or blocked" })
       .waitFor();
-    await page.getByLabel("3:2 crop preview").waitFor();
+    await page.getByRole("dialog", { name: "Crop your picture" }).waitFor();
     await page
-      .getByRole("button", { name: "Add to My Collection", exact: true })
+      .getByRole("button", { name: "Done", exact: true })
       .click();
     await page.getByRole("img", { name: "Test landscape.png" }).waitFor();
     assert.equal(await page.getByRole("button", { name: "Choose from My Collection", exact: true }).count(), 0, "removed shortcut stays absent with a saved picture");

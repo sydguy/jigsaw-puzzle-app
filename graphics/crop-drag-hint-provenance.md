@@ -1,0 +1,5 @@
+# Crop drag hint asset
+
+Asset: crop_drag_hint.png. Generated with the built-in image-generation tool for the mobile crop overlay. Original generated output retained under the Codex generated_images directory; copied here unchanged with alpha transparency. Reference: design/mobile/Mob-photo capturedv1.png. Displayed with contain sizing, without distortion. This is an approximate matching pictogram, not extracted original artwork.
+
+Prompt: Generate one transparent PNG UI icon for an image-cropping drag hint. Match the small white hand-with-direction-arrows pictogram visible in the supplied Mob-photo capturedv1.png reference: a clear white pointing index finger/hand cursor with white arrows indicating up, down, left and right around it. Flat monochrome white, crisp rounded strokes, simple compact silhouette legible at 40x40 logical pixels. Centered tightly in a square canvas with only a small transparent margin. No text, no background, no pill container, no phone, no photograph, no shadow, no grey checkerboard. Genuine alpha transparency. This is a project graphic, not a screen mockup.

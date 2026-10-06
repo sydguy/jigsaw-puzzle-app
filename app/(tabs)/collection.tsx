@@ -14,9 +14,11 @@ import { StorageStatus } from "../../src/components/StorageStatus";
 import { useLocal } from "../../src/local/store";
 import { useDevice } from "../../src/preview/context";
 import { theme } from "../../src/theme";
+import { useCreateReview } from "../../src/create/review";
 export default function Collection() {
   const { select } = useLocalSearchParams<{ select?: string }>();
   const local = useLocal();
+  const review = useCreateReview();
   const { tablet } = useDevice();
   const [detailed, setDetailed] = useState(false);
   const [query, setQuery] = useState("");
@@ -111,6 +113,7 @@ export default function Collection() {
               }
               onPress={() => {
                 if (select) {
+                  review?.setSelectedPicture(null);
                   local.setDraft((value) => ({
                     ...value,
                     pictureId: picture.id,

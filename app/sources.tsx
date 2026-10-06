@@ -9,15 +9,18 @@ import { useLocal } from "../src/local/store";
 import { theme } from "../src/theme";
 import { useDevice } from "../src/preview/context";
 import MobileImageSources from "../src/images/MobileImageSources";
+import { useCreateReview } from "../src/create/review";
 export default function Sources() {
   const { returnTo } = useLocalSearchParams<{ returnTo?: string }>();
   const local = useLocal();
+  const review = useCreateReview();
   const { tablet } = useDevice();
   const [source, setSource] = useState<"curated" | "photo" | "camera">(
     "curated",
   );
   const destination = returnTo === "create" ? "/create" : "/collection";
   if (!tablet) return <MobileImageSources onBack={() => router.dismissTo(destination)} onAdded={id => {
+    review?.setSelectedPicture(null);
     if (destination === "/create") local.setDraft(value => ({ ...value, pictureId: id }));
     router.dismissTo(destination);
   }} />;
@@ -73,6 +76,7 @@ export default function Sources() {
       {source === "photo" && (
         <PhotoImport
           onAdded={(id) => {
+            review?.setSelectedPicture(null);
             if (destination === "/create")
               local.setDraft((value) => ({ ...value, pictureId: id }));
             router.dismissTo(destination);

@@ -1,7 +1,7 @@
 import { ReactNode, useCallback, useContext } from "react";
 import { Image, ImageSourcePropType, Platform, Pressable, StyleSheet, Text, View, ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useFocusEffect } from "expo-router";
+import { router, useFocusEffect, useLocalSearchParams } from "expo-router";
 import { art } from "../assets";
 import { Art, Notice } from "../components/ui";
 import AppScrollView from "../components/AppScrollView";
@@ -18,6 +18,8 @@ export default function MobileCuratedCollections({ header, options }: { header: 
   const hideTabs = useContext(TabVisibility);
   useFocusEffect(useCallback(() => { hideTabs(true); }, [hideTabs]));
   const notify = useSourceReviewNotice();
+  const { returnTo } = useLocalSearchParams<{ returnTo?: string }>();
+  const openCollection = (id: string) => router.push({ pathname: "/collection-pictures", params: { collection: id, returnTo: returnTo === "create" ? "create" : "collection" } });
   const { width } = useDevice();
   const imageWidth = Math.round((width - 36) * 0.375);
   const buy = () => notify("Theme packs are not connected yet. This preview does not make purchases or unlock collections.");
@@ -30,22 +32,20 @@ export default function MobileCuratedCollections({ header, options }: { header: 
       </View>
       <View style={s.listBoundary} testID="curated-scroll-boundary">
         <AppScrollView scrollbarTopInset={0} scrollbarBottomInset={0} contentContainerStyle={s.list}>
-          {samples.length ? samples.map(item => <View key={item.id} style={s.row} testID={`curated-card-${item.id}`}>
+          {samples.length ? samples.map(item => <Pressable key={item.id} accessibilityRole="button" accessibilityLabel={`Open ${item.title}`} onPress={() => openCollection(item.id)} style={s.row} testID={`curated-card-${item.id}`}>
             <View style={{ width: imageWidth, height: imageWidth / 1.5, flexShrink: 0 }}>
               <Image source={item.image} accessibilityLabel={`${item.title} artwork`} resizeMode="contain" style={s.image} />
               {item.premium ? <Image source={art.collectionLockBadge} accessible={false} resizeMode="contain" style={s.lockBadge} />
                 : <View style={s.freeBadge}><Text style={s.freeBadgeText}>Free</Text></View>}
             </View>
             <View style={s.metadata}><Text style={s.name}>{item.title}</Text><Text style={s.count}>{item.count} images</Text></View>
-            <Pressable accessibilityRole="button" accessibilityLabel={`${item.premium ? "Premium" : "Free"}: ${item.title}`}
-              onPress={() => item.premium ? buy() : notify("Free Collection is sample data for this screen review. Catalogue picture selection is not connected yet.")}
-              style={s.access}>
+            <View style={s.access} testID={`curated-access-${item.id}`}>
               <View style={[s.accessFace, item.premium ? s.premium : s.free]}>
                 {item.premium && <Image source={art.collectionLock} accessible={false} resizeMode="contain" style={s.lockIcon} />}
                 <Text style={[s.accessLabel, { color: item.premium ? theme.color.primary : theme.color.freeAccessText }]}>{item.premium ? "Premium" : "Free"}</Text>
               </View>
-            </Pressable>
-          </View>) : <Notice>The curated catalogue is being prepared. Choose Photo Gallery or Camera to add your own picture.</Notice>}
+            </View>
+          </Pressable>) : <Notice>The curated catalogue is being prepared. Choose Photo Gallery or Camera to add your own picture.</Notice>}
         </AppScrollView>
       </View>
     </View>

@@ -3,7 +3,7 @@ import { useWindowDimensions } from "react-native";
 import { DeviceContext } from "./context";
 import { usePathname } from "expo-router";
 import { HomePuzzle, HomeReviewContext, HomeState } from "../home/review";
-import { CreateReviewContext, CreateReviewState } from "../create/review";
+import { CreateReviewContext, CreateReviewState, ReviewPicture } from "../create/review";
 import { SourceReviewContext } from "../images/sourceReview";
 
 // Keep visual fixtures and their artwork out of production bundles.
@@ -26,9 +26,10 @@ export default function PreviewHost({ children }: PropsWithChildren) {
   const [homeMessage, setHomeMessage] = useState("");
   const [createState, setCreateState] = useState<CreateReviewState>("before");
   const [sourceMessage, setSourceMessage] = useState("");
+  const [selectedPicture, setSelectedPicture] = useState<ReviewPicture | null>(null);
   const pathname = usePathname();
   const onHome = pathname === "/";
-  const onSources = pathname === "/sources";
+  const onSources = pathname === "/sources" || pathname === "/collection-pictures";
   const viewport = useWindowDimensions();
   const device = devices[index]!;
   const onCreate = pathname === "/create" && !device.tablet;
@@ -130,7 +131,7 @@ export default function PreviewHost({ children }: PropsWithChildren) {
         </div>
       </header>
       {__DEV__ && onSources && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
-        Local image-source preview · Curated collections use sample artwork and counts · Purchases unavailable
+        Local image-source preview · Curated artwork, owned labels and balances are sample data only · Add Picture previews the selection without saving or spending · Purchases unavailable
         {sourceMessage && <div role="status" style={{ marginTop: 4, color: "#17124F" }}>{sourceMessage}</div>}
       </aside>}
       {__DEV__ && onCreate && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
@@ -172,7 +173,7 @@ export default function PreviewHost({ children }: PropsWithChildren) {
           >
             <DeviceContext.Provider value={device}>
               <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: __DEV__ && homeState === "populated" ? (device.tablet ? homeSeeds.slice(0, 5) : mobileHomeSeeds) : [], notify: setHomeMessage }}>
-                <CreateReviewContext.Provider value={__DEV__ ? { state: createState, setState: setCreateState, image: createReviewImage } : null}>
+                <CreateReviewContext.Provider value={__DEV__ ? { state: createState, setState: setCreateState, image: createReviewImage, selectedPicture, setSelectedPicture } : null}>
                   <SourceReviewContext.Provider value={setSourceMessage}>{children}</SourceReviewContext.Provider>
                 </CreateReviewContext.Provider>
               </HomeReviewContext.Provider>

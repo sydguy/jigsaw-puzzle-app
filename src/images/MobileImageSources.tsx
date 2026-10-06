@@ -6,6 +6,7 @@ import { StorageStatus } from "../components/StorageStatus";
 import { theme } from "../theme";
 import PhotoImport from "./PhotoImport";
 import MobileCuratedCollections from "./MobileCuratedCollections";
+import BackButton from "../components/BackButton";
 
 const sources = [
   { id: "photo", title: "Photo Gallery", copy: "Choose from\nyour device", image: art.gallery },
@@ -18,9 +19,7 @@ export default function MobileImageSources({ onBack, onAdded }: { onBack: () => 
   const header = (
     <View style={s.header}>
       <View style={s.titleRow}>
-        <Pressable accessibilityRole="button" accessibilityLabel="Back" onPress={onBack} style={s.backTarget}>
-          <View style={s.backCircle}><View style={s.chevron} /></View>
-        </Pressable>
+        <BackButton onPress={onBack} />
         <Text accessibilityRole="header" style={s.title}>Add Image</Text>
         <View style={{ width: 48 }} />
       </View>
@@ -57,9 +56,6 @@ const s = StyleSheet.create({
   titleRow: { flexDirection: "row", alignItems: "center" },
   title: { flex: 1, fontSize: 24, lineHeight: 32, fontWeight: "700", textAlign: "center", color: theme.color.text },
   subtitle: { fontSize: 14, lineHeight: 20, textAlign: "center", color: theme.color.text },
-  backTarget: { width: 48, height: 48, justifyContent: "center", alignItems: "flex-start" },
-  backCircle: { width: 36, height: 36, borderRadius: 18, backgroundColor: theme.color.surfaceSoft, justifyContent: "center", alignItems: "center", boxShadow: "0 3px 8px #35217415" },
-  chevron: { width: 11, height: 11, borderLeftWidth: 3, borderBottomWidth: 3, borderColor: "#000000", transform: [{ rotate: "45deg" }], marginLeft: 4 },
   sources: { flexDirection: "row", gap: 8, alignItems: "stretch" },
   source: { flex: 1, paddingHorizontal: 4, paddingVertical: 8, alignItems: "center", borderWidth: 2, borderColor: "transparent", borderRadius: 12, backgroundColor: theme.color.surface, boxShadow: "0 4px 16px #3521740f" },
   selected: { borderColor: theme.color.primary, backgroundColor: theme.color.surfaceSoft },

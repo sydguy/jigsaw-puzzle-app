@@ -15,7 +15,7 @@ Status: first browser UI and local collection increment, spanning parts of M2/M4
 - Explicit iPhone-sized, Android-phone-sized, tablet portrait and tablet landscape browser fixtures; fit-to-window or full logical size. These are layout fixtures, not OS simulators.
 - Supplied artwork and design tokens, empty first Home, correct navigation labels, hidden deferred AI elements and truthful guest/no-pack state.
 - Linked 2×3 through 16×24 grids, approved quick picks, rotation off initially and stopwatch/countdown setup. Draft survives source-screen return. Countdown durations remain unapproved.
-- One personal picture at a time through the browser file picker; actual PNG/JPEG header and decoder checks; bounded 3:2 crop with zoom and position; editable title; metadata-free JPEG output.
+- One personal picture at a time through the browser file picker; actual PNG/JPEG header and decoder checks; mobile full-picture 3:2 crop with movable frame/four resize corners and Cancel/Done; metadata-free JPEG output. Tablet retains the earlier slider crop. See [crop review](mobile-crop-review.md).
 - Browser-local picture storage with commit acknowledgement, read/write error states and retry. Collection grid/detail, search, newest/oldest ordering, rename and explicit delete confirmation.
 - Three phone/six tablet collection columns, including portrait tablet.
 - Local sound/haptic preference persistence. Audio and haptic effects themselves await gameplay/native implementation.

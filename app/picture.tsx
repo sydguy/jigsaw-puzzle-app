@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Image, TextInput } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { useLocal } from "../src/local/store";
+import { useCreateReview } from "../src/create/review";
 import {
   Action,
   Card,
@@ -14,6 +15,7 @@ import {
 export default function PictureDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const local = useLocal();
+  const review = useCreateReview();
   const picture = local.pictures.find((p) => p.id === id);
   const [title, setTitle] = useState("");
   const [confirm, setConfirm] = useState(false);
@@ -83,6 +85,7 @@ export default function PictureDetail() {
           <Action
             label="Use for a puzzle"
             onPress={() => {
+              review?.setSelectedPicture(null);
               local.setDraft((value) => ({ ...value, pictureId: picture.id }));
               router.replace("/create");
             }}

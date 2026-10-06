@@ -17,6 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { theme } from "../theme";
 import { useDevice } from "../preview/context";
 import AppScrollView from "./AppScrollView";
+import BackButton from "./BackButton";
 
 export function Copy({
   children,
@@ -213,18 +214,7 @@ export function Screen({
     <SafeAreaView style={ui.screen} edges={Platform.OS !== "web" && tab ? ["top", "left", "right"] : undefined}>
       {title && (
         <View style={ui.header}>
-          {back && (
-            <Pressable
-              accessibilityRole="button"
-              accessibilityLabel="Back"
-              onPress={back}
-              style={ui.back}
-            >
-              <Text style={{ fontSize: 28, color: theme.color.primary }}>
-                ‹
-              </Text>
-            </Pressable>
-          )}
+          {back && <BackButton onPress={back} />}
           <Text accessibilityRole="header" style={[ui.title, { flex: 1 }]}>
             {title}
           </Text>
@@ -382,14 +372,6 @@ export const ui = StyleSheet.create({
   empty: { alignItems: "center", paddingVertical: 28, gap: 16 },
   row: { flexDirection: "row", alignItems: "center", gap: 12 },
   wrap: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
-  back: {
-    minWidth: 48,
-    minHeight: 48,
-    borderRadius: 24,
-    backgroundColor: theme.color.selected,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   nav: {
     flexDirection: "row",
     margin: 12,

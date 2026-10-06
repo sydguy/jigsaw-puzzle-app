@@ -9,6 +9,7 @@ import { MAX_BYTES } from "../images/limits";
 import { theme } from "../theme";
 import { useDevice } from "../preview/context";
 import { useCreateReview } from "./review";
+import BackButton from "../components/BackButton";
 
 const modes: { value: Draft["timer"]; label: string }[] = [
   { value: "countdown", label: "Timer" },
@@ -32,7 +33,7 @@ export default function MobileCreatePuzzle() {
     if (picture) setReviewState?.("after");
   }, [picture?.id, setReviewState]);
   const hasImage = review ? review.state === "after" : !!picture;
-  const imageSource = picture ? { uri: picture.data } : review?.image;
+  const imageSource = review?.selectedPicture?.image ?? (picture ? { uri: picture.data } : review?.image);
   const step = (delta: number) => setDraft(value => ({
     ...value, gridIndex: Math.max(0, Math.min(theme.puzzle.grids.length - 1, value.gridIndex + delta)),
   }));
@@ -40,10 +41,7 @@ export default function MobileCreatePuzzle() {
   return (
     <Screen showScrollbar={false} contentStyle={[s.content, compact && s.compactContent, hasImage && s.populatedContent, hasImage && compact && s.compactPopulatedContent]} fixedContent={
       <View style={[s.header, compact && s.compactHeader]} testID="create-mobile-header">
-        <Pressable accessibilityRole="button" accessibilityLabel="Back"
-          onPress={() => router.dismissTo("/")} style={s.backTarget}>
-          <View style={s.backCircle}><View style={s.chevron} /></View>
-        </Pressable>
+        <BackButton onPress={() => router.dismissTo("/")} />
         <Text accessibilityRole="header" style={s.title}>Create Puzzle</Text>
         <View style={s.headerBalance} />
       </View>
@@ -60,7 +58,7 @@ export default function MobileCreatePuzzle() {
       <View style={s.imageSection} testID="create-image-section">
         {hasImage && imageSource ? <View style={s.selectedImage}>
             <View style={s.pictureFrame} testID="create-selected-picture">
-              <Image accessibilityLabel={picture?.title ?? "Mountain lake sample"} source={imageSource}
+              <Image accessibilityLabel={review?.selectedPicture?.title ?? picture?.title ?? "Mountain lake sample"} source={imageSource}
                 resizeMode="contain" style={s.picture} />
             </View>
           <Pressable accessibilityRole="button" accessibilityLabel="Change image" onPress={chooseImage} style={s.changeTarget}>
@@ -195,9 +193,6 @@ const s = StyleSheet.create({
   header: { paddingHorizontal: 16, paddingTop: 12, paddingBottom: 8, flexDirection: "row", alignItems: "center" },
   title: { flex: 1, textAlign: "center", fontSize: 24, lineHeight: 32, fontWeight: "700", color: theme.color.text },
   headerBalance: { width: 48 },
-  backTarget: { width: 48, height: 48, alignItems: "flex-start", justifyContent: "center" },
-  backCircle: { width: 36, height: 36, borderRadius: 18, backgroundColor: theme.color.selected, alignItems: "center", justifyContent: "center" },
-  chevron: { width: 12, height: 12, borderLeftWidth: 3, borderBottomWidth: 3, borderColor: theme.color.text, transform: [{ rotate: "45deg" }], marginLeft: 5 },
   imageSection: { borderWidth: 1, borderStyle: "dashed", borderColor: theme.color.controlBorder, borderRadius: 12, backgroundColor: theme.color.surfaceSoft, overflow: "hidden" },
   imagePrompt: { minHeight: 170, alignItems: "center", justifyContent: "flex-end", paddingTop: 10, paddingBottom: 10, paddingHorizontal: 8 },
   cameraBox: { width: 64, height: 64, alignItems: "center", justifyContent: "center" },

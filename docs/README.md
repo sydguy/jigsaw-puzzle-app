@@ -6,7 +6,11 @@ See [mobile Create Puzzle review](create-puzzle-visual-review.md) for the update
 
 See [mobile gallery/camera review](mobile-image-sources-review.md) for the Add Image source screens and browser camera flow.
 
+See [mobile crop review](mobile-crop-review.md) for the full-picture selection, movable 3:2 corner frame and Cancel/Done handoff.
+
 See [mobile curated review](mobile-curated-review.md) for the collection cards, fixed scroll boundaries, shop panel and preview-only catalogue artwork.
+
+See [mobile collection picture review](mobile-collection-pictures-review.md) for card navigation, picture selection, owned filtering and the selected-sample Create handoff.
 
 Read [production plan](production-v1-plan.md), [requirements register](requirements-register.md), [security requirements](security-requirements.md), [current decisions](decision-log-current.md), [readiness report](readiness.md) and [UI state inventory](ui-states.md).
 

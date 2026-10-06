@@ -63,8 +63,8 @@
     },
     {
       "path": "docs/browser-implementation.md",
-      "bytes": 6260,
-      "sha256": "fb8b34b45f4bf588de49735c90f1e0b0752d06677273bb7cc46256d3c8636e5f"
+      "bytes": 6370,
+      "sha256": "3928af8406c1d4fa4309743fb49b2a6149d8182283b84658920b62648e286d48"
     },
     {
       "path": "docs/create-puzzle-visual-review.md",
@@ -92,14 +92,24 @@
       "sha256": "55d33e4de4633a4236b5949e49ef975af7f1da10c89b296072242e60fbaa9191"
     },
     {
+      "path": "docs/mobile-collection-pictures-review.md",
+      "bytes": 3990,
+      "sha256": "2f4889a264cb396b0cc10b7b2e003e60416e7904e748a995e8f6b4ed4ee1acc5"
+    },
+    {
+      "path": "docs/mobile-crop-review.md",
+      "bytes": 5512,
+      "sha256": "5f61126ca01437da16598f4805703798cf5f6b401cecd9961a290a679a9910d4"
+    },
+    {
       "path": "docs/mobile-curated-review.md",
       "bytes": 9871,
       "sha256": "5fb24e0c13585806c7463c8b2100c3c65363ead9a9b8c219698213c76ec8fa01"
     },
     {
       "path": "docs/mobile-image-sources-review.md",
-      "bytes": 5344,
-      "sha256": "172bd898ed3a89d0bd959f5fd7066d25095ffc91d55d9df035e26a094cc68f91"
+      "bytes": 7018,
+      "sha256": "cfd0cf06d3f9bdb75436432dc66ad030c89a32d7ef2604896205270d14c46aea"
     },
     {
       "path": "docs/navigation-visual-review.md",
@@ -118,13 +128,13 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 2823,
-      "sha256": "283dd7bd7bef20f536876eb57b1f60001499da83c647781517b4b51a8daaf23a"
+      "bytes": 3128,
+      "sha256": "03695d467a52f659b3188b5cf27342deeb2934e8e8897fe3ffb74dda48c7aa1a"
     },
     {
       "path": "docs/requirements-register.md",
-      "bytes": 12048,
-      "sha256": "4c738bc5b1db94b7a2a6cc2c5e1a80ccd15c5114b5db173240bee9fc92ac202e"
+      "bytes": 12330,
+      "sha256": "9af02dee2beab07e46e2e048d0d15df89533a9bb04ee6ff999b0416e38ecbf9b"
     },
     {
       "path": "docs/security-requirements.md",
@@ -730,6 +740,16 @@
       "path": "graphics/create-review/README.md",
       "bytes": 1364,
       "sha256": "ed19dd54e00498a6e255c7f8646536be616a745147c1ef651ab7844e0cdc205f"
+    },
+    {
+      "path": "graphics/crop-drag-hint-provenance.md",
+      "bytes": 1100,
+      "sha256": "85cbf8041e0d38faca0ea37ac8f9e5f8cea9c83e6e2c71b2866c62a4c8722c7a"
+    },
+    {
+      "path": "graphics/crop_drag_hint.png",
+      "bytes": 218368,
+      "sha256": "9e3e8574e45c0252ad5c0e00c00d80025c9a9671355bb340768ad026240996dc"
     },
     {
       "path": "graphics/curated-review/fantasy.png",

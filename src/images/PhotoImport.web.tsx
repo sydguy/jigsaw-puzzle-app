@@ -1,9 +1,13 @@
-import { useEffect, useRef, useState } from "react";
-import { StyleSheet, Text, TextInput } from "react-native";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useFocusEffect } from "expo-router";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Action, Card, Copy, Heading, Notice, ui } from "../components/ui";
 import { useLocal } from "../local/store";
 import { theme } from "../theme";
 import CameraCapture from "./CameraCapture.web";
+import CropEditor from "./CropEditor.web";
+import { Crop, validateCrop } from "./cropGeometry";
+import { sourceAction } from "./sourceAction.web";
 import {
   checkDimensions,
   cropRectangle,
@@ -32,17 +36,19 @@ export default function PhotoImport({
   const fileInput = useRef<HTMLInputElement>(null);
   const active = useRef(true),
     pending = useRef(false);
-  useEffect(() => {
+  useFocusEffect(useCallback(() => {
     active.current = true;
     return () => {
       active.current = false;
+      setBitmap(null);
     };
-  }, []);
+  }, []));
   useEffect(() => () => bitmap?.close(), [bitmap]);
-  const draw = () => {
+  const draw = (selected?: Crop) => {
     const context = canvas.current?.getContext("2d");
     if (!bitmap || !context) return;
-    const crop = cropRectangle(bitmap.width, bitmap.height, zoom, x, y);
+    const crop = selected ?? cropRectangle(bitmap.width, bitmap.height, zoom, x, y);
+    validateCrop(crop, bitmap.width, bitmap.height);
     context.fillStyle = "#FFFFFF";
     context.fillRect(0, 0, 1536, 1024);
     context.drawImage(
@@ -99,13 +105,13 @@ export default function PhotoImport({
       if (active.current) setWorking(false);
     }
   }
-  async function save() {
+  async function save(selected?: Crop) {
     if (!bitmap || !canvas.current || pending.current) return;
     pending.current = true;
     setWorking(true);
     setError("");
     try {
-      draw();
+      draw(selected);
       const id = crypto.randomUUID();
       const data = canvas.current.toDataURL("image/jpeg", 0.9);
       await local.add({
@@ -118,7 +124,7 @@ export default function PhotoImport({
         width: 1536,
         height: 1024,
       });
-      onAdded(id);
+      if (active.current) onAdded(id);
     } catch (e) {
       if (active.current)
         setError(
@@ -131,16 +137,22 @@ export default function PhotoImport({
       if (active.current) setWorking(false);
     }
   }
+  if (mobile && bitmap) return <>
+    <canvas ref={canvas} width={1536} height={1024} style={{ display: "none" }} />
+    <CropEditor bitmap={bitmap} working={working || local.busy} error={error}
+      onCancel={() => { setBitmap(null); setError(""); }} onDone={crop => void save(crop)} />
+  </>;
   return (
     <Card style={mobile ? [styles.card, !bitmap && styles.sourcePanel] : undefined}>
-      {mobile ? <Text accessibilityRole="header" style={[styles.heading, !bitmap && styles.sourceHeading]}>{bitmap ? "Crop your picture" : mode === "camera" ? "Take a picture" : "Add a photo"}</Text>
-        : <Heading>{bitmap ? "Crop your picture" : "Add a photo"}</Heading>}
-      {mobile ? <Text style={styles.copy}>{mode === "camera"
+      {mobile ? <View style={{ gap: 8 }}>
+        <Text accessibilityRole="header" style={[styles.heading, styles.sourceHeading]}>{mode === "camera" ? "Take a picture" : "Add a photo"}</Text>
+        <Text style={styles.copy}>{mode === "camera"
         ? "JPG or PNG, up to 10 MB. Use your camera to add one photo to create puzzle. Your photo stays on this device."
-        : "JPG or PNG, up to 10 MB.\nYour photo stays on this device."}</Text> : <Copy muted>
+        : "JPG or PNG, up to 10 MB. Select one photo from your device gallery to create puzzle. Your photo stays on this device."}</Text>
+      </View> : <><Heading>{bitmap ? "Crop your picture" : "Add a photo"}</Heading><Copy muted>
         JPG or PNG, up to 10 MB and 24 megapixels. Your photo stays on this
         device.
-      </Copy>}
+      </Copy></>}
       {mode === "photo" && <input
         ref={fileInput}
         aria-label="Choose photo file"
@@ -153,20 +165,18 @@ export default function PhotoImport({
         }}
         style={mobile ? { display: "none" } : { maxWidth: "100%", padding: "12px 0", minHeight: 48 }}
       />}
-      {mobile && mode === "photo" && !bitmap && <div style={{ display: "flex", alignItems: "center", gap: 12,
-        padding: "16px 12px", borderRadius: 12, border: `1px solid ${theme.color.border}`, background: theme.color.surfaceSoft }}>
-        <svg aria-hidden="true" width="40" height="38" viewBox="0 0 40 38" style={{ flexShrink: 0 }}>
-          <rect x="2" y="3" width="28" height="24" rx="4" fill="none" stroke={theme.color.primary} strokeWidth="2.5" />
-          <path d="M3 22l9-11 7 8 5-7 6 10v4H3z" fill={theme.color.primary} />
+      {mobile && mode === "photo" && !bitmap && <button type="button" disabled={working || local.busy || local.loading || !!local.error}
+        onClick={() => fileInput.current?.click()} style={{ ...sourceAction,
+          cursor: working || local.busy || local.loading || local.error ? "default" : "pointer",
+          opacity: working || local.busy || local.loading || local.error ? 0.55 : 1 }}>
+        <svg aria-hidden="true" width="26" height="26" viewBox="0 0 40 38" style={{ flexShrink: 0 }}>
+          <rect x="2" y="3" width="28" height="24" rx="4" fill="none" stroke="white" strokeWidth="2.5" />
+          <path d="M3 22l9-11 7 8 5-7 6 10v4H3z" fill="white" />
           <circle cx="29" cy="27" r="10" fill={theme.color.primary} stroke="white" strokeWidth="1.5" />
           <path d="M29 33V22m-4 4 4-4 4 4" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <span aria-hidden="true" style={{ width: 1, height: 40, background: theme.color.controlBorder }} />
-        <button type="button" disabled={working || local.busy || local.loading || !!local.error}
-          onClick={() => fileInput.current?.click()} style={{ flexShrink: 0, minHeight: 48, padding: "8px 12px", borderRadius: 12,
-            border: `1px solid ${theme.color.primary}`, background: theme.color.surface, color: theme.color.text, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Choose file</button>
-        <span style={{ color: theme.color.textSecondary, fontSize: 14, lineHeight: "20px" }}>No file chosen</span>
-      </div>}
+        Choose file
+      </button>}
       {mode === "camera" && !bitmap && <CameraCapture onCapture={load} disabled={working || local.busy || local.loading || !!local.error} />}
       {!!error && <Notice error>{error}</Notice>}
       {working && <Notice>Processing picture…</Notice>}
@@ -270,7 +280,7 @@ export default function PhotoImport({
 
 const styles = StyleSheet.create({
   card: { padding: 16, paddingVertical: 20, gap: 16, borderRadius: 16, borderWidth: 0, boxShadow: "0 4px 16px #3521740f" },
-  sourcePanel: { minHeight: 210, paddingVertical: 8, justifyContent: "space-between" },
+  sourcePanel: { minHeight: 196, paddingVertical: 8, justifyContent: "space-between" },
   heading: { color: theme.color.text, fontSize: 24, lineHeight: 32, fontWeight: "700" },
   sourceHeading: { fontSize: 20, lineHeight: 28 },
   copy: { color: theme.color.textSecondary, fontSize: 16, lineHeight: 24 },

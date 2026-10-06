@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useFocusEffect } from "expo-router";
 import { Action, Notice } from "../components/ui";
-import { theme } from "../theme";
 import { checkDimensions } from "./limits";
+import { sourceAction } from "./sourceAction.web";
 
 /** Browser camera adapter. Permission is requested only by the explicit button. */
 export default function CameraCapture({ onCapture, disabled }: { onCapture: (file: File) => Promise<void>; disabled: boolean }) {
@@ -87,9 +87,7 @@ export default function CameraCapture({ onCapture, disabled }: { onCapture: (fil
       <Action label="Take photo" disabled={disabled || busy || !ready} onPress={() => void capture()} />
       <Action label="Cancel camera" secondary onPress={stop} />
     </> : <button type="button" disabled={disabled || busy} onClick={() => void open()} style={{
-      display: "flex", alignItems: "center", justifyContent: "center", gap: 12, width: "100%", minHeight: 56,
-      border: 0, borderRadius: 12, padding: "12px 16px", color: "white", fontSize: 18, fontWeight: 700,
-      background: `linear-gradient(110deg, ${theme.color.gradientStart}, ${theme.color.gradientEnd})`,
+      ...sourceAction,
       cursor: disabled || busy ? "default" : "pointer", opacity: disabled || busy ? 0.55 : 1,
     }}>
       <svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24"><path fill="currentColor" d="M8 4h8l2 3h3a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3zm4 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10m0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6" /></svg>

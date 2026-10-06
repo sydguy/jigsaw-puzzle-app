@@ -6,6 +6,7 @@ export const art = {
   camera: require("../graphics/image_source_camera.png"),
   curated: require("../graphics/image_source_curated_collections.png"),
   collectionShop: require("../graphics/collection_packs_shop_bag.png"),
+  cropDrag: require("../graphics/crop_drag_hint.png"),
   collectionLock: require("../graphics/premium_collection_lock.png"),
   collectionLockBadge: require("../graphics/premium_collection_locked_badge.png"),
   crown: require("../graphics/premium_collection_crown.png"),

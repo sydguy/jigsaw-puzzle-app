@@ -1,5 +1,13 @@
 # Mobile gallery and camera review — 6 October 2026
 
+7 October back-button consistency: all app-owned back actions now use the shared BackButton component: 36-point lavender circle (selected token), black chevron and 48-point hit target. This includes Create Puzzle, image sources and the shared phone/tablet page headers.
+
+Latest 7 October action/copy refinement: gallery now has a full-width gradient Choose file button with a white upload/photo icon, sharing the Open camera button's 56-point height, 18-point bold label and 12-point corners. The lavender picker row, divider and No file chosen text are removed. Exact gallery description: JPG or PNG, up to 10 MB. Select one photo from your device gallery to create puzzle. Your photo stays on this device. Both headings are grouped with their descriptions at an eight-point gap; equal panels use a 196-point minimum height with 16 points before the action. This supersedes the earlier row and height refinements below.
+
+7 October Choose file refinement: a 112-point-wide, minimum 40-point visible face with six-point vertical/eight-point horizontal padding and a single-line label. The outer button retains a 48-point touch target. This makes the file action wider and slimmer without changing the native file-dialog trigger.
+
+Latest crop interaction: [mobile crop review](mobile-crop-review.md) supersedes the earlier mobile inline slider/title crop flow with a full-phone image editor, draggable/resizable fixed 3:2 frame and Cancel/Done. Latest source geometry is recorded in [curated review](mobile-curated-review.md): 154-point tiles and equal 210-point initial panels with eight-point vertical padding. Earlier measurements below are historical iteration evidence.
+
 Scope: the mobile Add Image flow reached through Add Image or Change image on Create Puzzle. References: [Photo Gallery](../design/mobile/mobile-add-image-photo-gallery.png) and [Camera](../design/mobile/mobile-add-image-camera.png). Design-system tokens and current owner decisions govern colour, typography, control geometry and behaviour.
 
 Latest owner spacing refinement: source artwork boxes are 64 points, tile vertical padding is eight points, and titles use their natural height instead of a reserved 40-point slot. This removes the excess gap before each description. All three tiles measure 164 points high (previously 182). The initial Add a photo and Take a picture panels each measure exactly 234 points on both phone layouts. Their shared minimum height allows error, camera-preview and crop content to expand safely. Fresh screenshots and measurements are in .cache/source-review/spacing-results.json; both default screens fit without scrolling. TypeScript and whitespace checks passed for this styling refinement.
