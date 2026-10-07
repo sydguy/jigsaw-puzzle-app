@@ -16,10 +16,16 @@ import { useLocal } from "../src/local/store";
 import { useDevice } from "../src/preview/context";
 import { theme } from "../src/theme";
 import MobileCreatePuzzle from "../src/create/MobileCreatePuzzle";
+import { useCreateReview } from "../src/create/review";
+import { useHomePuzzleSetup } from "../src/create/useHomePuzzleSetup";
+import HomePuzzleActions from "../src/create/HomePuzzleActions";
+import PuzzleImage from "../src/components/PuzzleImage";
 
 export default function CreatePuzzle() {
   const { draft, setDraft, pictures } = useLocal();
   const { width, tablet } = useDevice();
+  const review = useCreateReview();
+  const replay = useHomePuzzleSetup();
   const [rows, columns] = theme.puzzle.grids[draft.gridIndex]!;
   const picture = pictures.find((item) => item.id === draft.pictureId);
   const step = (change: number) =>
@@ -29,7 +35,7 @@ export default function CreatePuzzle() {
     }));
   if (!tablet) return <MobileCreatePuzzle />;
   return (
-    <Screen title="Create Puzzle" back={() => router.dismissTo("/")}>
+    <Screen title={replay.original?.title ?? "Create Puzzle"} back={() => { review?.setHomePuzzle(null); review?.notify(""); router.dismissTo("/"); }}>
       <View
         style={{
           flexDirection: tablet && width >= 900 ? "row" : "column",
@@ -43,7 +49,7 @@ export default function CreatePuzzle() {
               backgroundColor: theme.color.surfaceSoft,
             }}
           >
-            {picture ? (
+            {replay.original && review?.selectedPicture ? <PuzzleImage title={review.selectedPicture.title} image={review.selectedPicture.image} /> : picture ? (
               <>
                 <Image
                   accessibilityLabel={picture.title}
@@ -60,7 +66,7 @@ export default function CreatePuzzle() {
               </>
             )}
             <Action
-              label={picture ? "Change picture" : "Add Image"}
+              label={picture || replay.original ? "Change picture" : "Add Image"}
               onPress={() => router.push("/sources?returnTo=create")}
             />
             {pictures.length > 0 && (
@@ -153,6 +159,8 @@ export default function CreatePuzzle() {
                   setDraft((value) => ({ ...value, timer: "countdown" }))
                 }
               />
+              {replay.original && <Choice label="None" selected={draft.timer === "none"}
+                onPress={() => setDraft(value => ({ ...value, timer: "none" }))} />}
             </View>
             {draft.timer === "countdown" && (
               <Copy muted>
@@ -180,10 +188,10 @@ export default function CreatePuzzle() {
         <Art source={art.ready} size={64} />
         <View style={{ flex: 1 }}>
           <Heading>
-            {picture ? "Your puzzle setup" : "Ready to create?"}
+            {replay.original ? replay.heading : picture ? "Your puzzle setup" : "Ready to create?"}
           </Heading>
           <Copy muted>
-            {picture
+            {replay.original ? replay.description : picture
               ? rows +
                 " × " +
                 columns +
@@ -195,9 +203,10 @@ export default function CreatePuzzle() {
           </Copy>
         </View>
       </Card>
-      <Action label="Create Puzzle" disabled />
+      {replay.original ? <HomePuzzleActions changed={replay.changed} canContinue={replay.canContinue} onCreate={replay.create} onPlay={replay.requestPlay} />
+        : <Action label="Create Puzzle" disabled />}
       <Notice>
-        {picture
+        {replay.original ? "Browser review: new Home entries stay in memory. Gameplay is not connected yet." : picture
           ? "Puzzle setup is ready for review. Play becomes available when the gameplay engine is connected."
           : "Choose a picture first. Gameplay is the next implementation stage."}
       </Notice>

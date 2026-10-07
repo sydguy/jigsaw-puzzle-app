@@ -88,6 +88,9 @@ fs.mkdirSync(output, { recursive: true });
     await page.reload({ waitUntil: 'networkidle', timeout: 120000 });
     assert.equal(await state.inputValue(), 'empty');
     await page.getByRole('tab', { name: 'My Collection', exact: true }).click();
+    // Collection now combines personal photos and curated fixtures by default.
+    await page.getByRole('button', { name: 'Filter by Theme: All pictures', exact: true }).click();
+    await page.getByRole('option', { name: 'My Pictures', exact: true }).click();
     await page.getByRole('heading', { name: 'Make it your collection' }).waitFor();
     assert.deepEqual(errors, []);
     console.log('PASS: compact headers, horizontal spacing, mouse/touch swipe, short/vertical gestures, cancellation, isolated deletion, last-row balances, keyboard access and fixture reset.');

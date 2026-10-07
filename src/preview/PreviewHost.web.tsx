@@ -28,6 +28,9 @@ export default function PreviewHost({ children }: PropsWithChildren) {
   const [homeState, setHomeState] = useState<HomeState>("empty");
   const [homeMessage, setHomeMessage] = useState("");
   const [createState, setCreateState] = useState<CreateReviewState>("before");
+  const [homePuzzle, setHomePuzzle] = useState<HomePuzzle | null>(null);
+  const [createdPuzzles, setCreatedPuzzles] = useState<HomePuzzle[]>([]);
+  const [createMessage, setCreateMessage] = useState("");
   const [sourceMessage, setSourceMessage] = useState("");
   const [selectedPicture, setSelectedPicture] = useState<ReviewPicture | null>(null);
   const [signedIn, setSignedIn] = useState(false);
@@ -128,7 +131,7 @@ export default function PreviewHost({ children }: PropsWithChildren) {
               <option value="populated">Populated · seed data</option>
             </select>
           </label>}
-          {__DEV__ && onCreate && <label style={{ fontSize: 14 }}>
+          {__DEV__ && onCreate && !homePuzzle && <label style={{ fontSize: 14 }}>
             Create Puzzle review{" "}
             <select aria-label="Create Puzzle review state" value={createState}
               onChange={event => setCreateState(event.target.value as CreateReviewState)}
@@ -155,8 +158,10 @@ export default function PreviewHost({ children }: PropsWithChildren) {
         Local image-source preview · Curated artwork, owned labels and balances are sample data only · Add Picture previews the selection without saving or spending · Purchases unavailable
         {sourceMessage && <div role="status" style={{ marginTop: 4, color: "#17124F" }}>{sourceMessage}</div>}
       </aside>}
-      {__DEV__ && onCreate && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
-        Visual review only · After adding image uses your selected picture or sample artwork · Switching states does not save or delete pictures · Gameplay is not connected yet
+      {__DEV__ && (onCreate || (pathname === "/create" && homePuzzle)) && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
+        {homePuzzle ? "Home puzzle review · New puzzle entries stay in preview memory · Play Again / Continue require the gameplay engine"
+          : "Visual review only · After adding image uses your selected picture or sample artwork · Switching states does not save or delete pictures · Gameplay is not connected yet"}
+        {createMessage && <div role="status">{createMessage}</div>}
       </aside>}
       {__DEV__ && onHome && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
         Home visual review · {homeState === "populated" ? "Sample puzzles and balances only" : "Empty new-user state"} · No real puzzle or purchase data
@@ -193,8 +198,9 @@ export default function PreviewHost({ children }: PropsWithChildren) {
             }}
           >
             <DeviceContext.Provider value={device}>
-              <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: __DEV__ && homeState === "populated" ? (device.tablet ? homeSeeds.slice(0, 5) : mobileHomeSeeds) : [], notify: setHomeMessage }}>
-                <CreateReviewContext.Provider value={__DEV__ ? { state: createState, setState: setCreateState, image: createReviewImage, selectedPicture, setSelectedPicture } : null}>
+              <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: __DEV__ && homeState === "populated" ? [...createdPuzzles, ...(device.tablet ? homeSeeds.slice(0, 5) : mobileHomeSeeds)] : [], notify: setHomeMessage,
+                addPuzzle: __DEV__ ? puzzle => { setCreatedPuzzles(current => current.some(item => item.id === puzzle.id) ? current : [puzzle, ...current]); setHomeState("populated"); setHomeMessage("New puzzle added to this browser review. The original puzzle is unchanged. Preview entries reset on reload."); } : undefined }}>
+                <CreateReviewContext.Provider value={__DEV__ ? { state: createState, setState: setCreateState, image: createReviewImage, selectedPicture, setSelectedPicture, homePuzzle, setHomePuzzle, notify: setCreateMessage } : null}>
                   <CollectionReviewContext.Provider value={__DEV__ ? { items: collectionItems } : null}>
                     <SettingsReviewContext.Provider value={__DEV__ ? { signedIn, setSignedIn, profile, setProfile, privacy, setPrivacy, notify: setSettingsMessage } : null}>
                       <SourceReviewContext.Provider value={setSourceMessage}>{children}</SourceReviewContext.Provider>

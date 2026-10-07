@@ -8,6 +8,8 @@ import { useDevice } from "../preview/context";
 import { HomePuzzle, HomeSort, sortPuzzles, useHomeReview } from "./review";
 import SortMenu from "./SortMenu";
 import SwipePuzzleRow from "./SwipePuzzleRow";
+import { useOpenPuzzle } from "./useOpenPuzzle";
+import { useCreateReview } from "../create/review";
 
 // Mobile-only density measured from the owner's latest 1024px references.
 // Keep readable scaling and real controls; never scale/rasterize the whole screen.
@@ -16,7 +18,7 @@ const gradient = Platform.OS === "web" ? {
 } as ViewStyle : {};
 
 function CompactButton({ label, onPress, play = false }: { label: string; onPress: () => void; play?: boolean }) {
-  return <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={onPress}
+  return <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={event => { event.stopPropagation(); onPress(); }}
     style={({ pressed }) => [s.buttonTarget, pressed && { opacity: 0.8 }]}>
     <View style={[s.buttonFace, gradient]}>
       {play && <Text accessible={false} style={s.play}>▶</Text>}
@@ -64,11 +66,11 @@ function Status({ puzzle }: { puzzle: HomePuzzle }) {
 
 const PuzzleRow = memo(function PuzzleRow({ puzzle }: { puzzle: HomePuzzle }) {
   const { width } = useDevice();
-  const review = useHomeReview();
+  const openPuzzle = useOpenPuzzle();
   const imageWidth = Math.round((width - 32) * 0.3);
   const actionWidth = Math.round((width - 32) * 0.285);
   const date = new Date(puzzle.created + "T12:00:00").toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }).replace("Sept", "Sep");
-  return <View testID="home-puzzle-row" accessibilityLabel={puzzle.title} style={s.puzzleRow}>
+  return <Pressable testID="home-puzzle-row" accessibilityRole="link" accessibilityLabel={"Open " + puzzle.title} onPress={() => openPuzzle(puzzle)} style={s.puzzleRow}>
     <Thumbnail puzzle={puzzle} width={imageWidth} />
     <View style={s.metadata}>
       <Text style={s.puzzleTitle}>{puzzle.title}</Text>
@@ -79,13 +81,14 @@ const PuzzleRow = memo(function PuzzleRow({ puzzle }: { puzzle: HomePuzzle }) {
     <View testID="puzzle-actions" style={{ width: actionWidth, flexShrink: 0 }}>
       <Status puzzle={puzzle} />
       <View testID="puzzle-action"><CompactButton label={puzzle.progress === 100 ? "Play Again" : "Continue"} play
-        onPress={() => review.notify(puzzle.title + " is seed data for Home review. Gameplay is not connected; nothing was changed.")} /></View>
+        onPress={() => openPuzzle(puzzle)} /></View>
     </View>
-  </View>;
+  </Pressable>;
 });
 
 export default function MobileHomeScreen() {
   const review = useHomeReview();
+  const createReview = useCreateReview();
   const [sort, setSort] = useState<HomeSort>("Latest Played");
   const [deleted, setDeleted] = useState<string[]>([]);
   const [openRow, setOpenRow] = useState<string | null>(null);
@@ -107,7 +110,7 @@ export default function MobileHomeScreen() {
       <View style={{ width: 108 }}><CompactButton label="Buy Theme Packs"
         onPress={() => review.notify("Theme-pack purchases are not connected in this Home review. No purchase or balance change was made.")} /></View>
     </View>
-    <Pressable testID="home-add-puzzle" accessibilityRole="button" accessibilityLabel="Add Puzzle" onPress={() => router.push("/create")}
+    <Pressable testID="home-add-puzzle" accessibilityRole="button" accessibilityLabel="Add Puzzle" onPress={() => { createReview?.setHomePuzzle(null); createReview?.notify(""); router.push("/create"); }}
       style={({ pressed }) => [s.hero, pressed && { opacity: 0.85 }]}>
       <Decoration /><Decoration right />
       <View testID="add-puzzle-circle" accessible={false} style={[s.plus, gradient]}>

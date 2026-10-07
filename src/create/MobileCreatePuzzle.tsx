@@ -10,6 +10,9 @@ import { theme } from "../theme";
 import { useDevice } from "../preview/context";
 import { useCreateReview } from "./review";
 import BackButton from "../components/BackButton";
+import PuzzleImage from "../components/PuzzleImage";
+import { useHomePuzzleSetup } from "./useHomePuzzleSetup";
+import HomePuzzleActions from "./HomePuzzleActions";
 
 const modes: { value: Draft["timer"]; label: string }[] = [
   { value: "countdown", label: "Timer" },
@@ -28,11 +31,12 @@ export default function MobileCreatePuzzle() {
   const [rows, columns] = theme.puzzle.grids[draft.gridIndex]!;
   const picture = pictures.find(item => item.id === draft.pictureId);
   const review = useCreateReview();
+  const replay = useHomePuzzleSetup();
   const setReviewState = review?.setState;
   useEffect(() => {
     if (picture) setReviewState?.("after");
   }, [picture?.id, setReviewState]);
-  const hasImage = review ? review.state === "after" : !!picture;
+  const hasImage = review?.homePuzzle ? true : review ? review.state === "after" : !!picture;
   const imageSource = review?.selectedPicture?.image ?? (picture ? { uri: picture.data } : review?.image);
   const step = (delta: number) => setDraft(value => ({
     ...value, gridIndex: Math.max(0, Math.min(theme.puzzle.grids.length - 1, value.gridIndex + delta)),
@@ -41,25 +45,31 @@ export default function MobileCreatePuzzle() {
   return (
     <Screen showScrollbar={false} contentStyle={[s.content, compact && s.compactContent, hasImage && s.populatedContent, hasImage && compact && s.compactPopulatedContent]} fixedContent={
       <View style={[s.header, compact && s.compactHeader]} testID="create-mobile-header">
-        <BackButton onPress={() => router.dismissTo("/")} />
-        <Text accessibilityRole="header" style={s.title}>Create Puzzle</Text>
+        <BackButton onPress={() => { review?.setHomePuzzle(null); review?.notify(""); router.dismissTo("/"); }} />
+        <Text accessibilityRole="header" numberOfLines={1} style={s.title}>{review?.homePuzzle?.title ?? "Create Puzzle"}</Text>
         <View style={s.headerBalance} />
       </View>
     }>
       <View style={s.readyOuter} testID="create-ready-card">
-        <View style={s.ready}>
+        {replay.original ? <View style={[s.replayReady, compact && { paddingVertical: 4 }]}>
+          <Text accessibilityRole="header" style={s.replayTitle}>{replay.heading}</Text>
+          <View style={s.replayDescription}>
+            <Art source={art.ready} size={36} />
+            <Text style={s.replayBody}>{replay.description}</Text>
+          </View>
+        </View> : <View style={s.ready}>
           <Art source={art.ready} size={compact || hasImage ? 68 : 84} />
           <View style={s.readyCopy}>
             <Text accessibilityRole="header" style={s.readyTitle}>Ready to Create?</Text>
             <Text style={s.readyBody}>Choose an image, set your puzzle size and timer mode, then create your puzzle!</Text>
           </View>
-        </View>
+        </View>}
       </View>
       <View style={s.imageSection} testID="create-image-section">
         {hasImage && imageSource ? <View style={s.selectedImage}>
             <View style={s.pictureFrame} testID="create-selected-picture">
-              <Image accessibilityLabel={review?.selectedPicture?.title ?? picture?.title ?? "Mountain lake sample"} source={imageSource}
-                resizeMode="contain" style={s.picture} />
+              <PuzzleImage title={review?.selectedPicture?.title ?? picture?.title ?? "Mountain lake sample"} image={imageSource}
+                mobileImage={review?.selectedPicture?.mobileImage} mobileCrop={review?.selectedPicture?.mobileCrop} />
             </View>
           <Pressable accessibilityRole="button" accessibilityLabel="Change image" onPress={chooseImage} style={s.changeTarget}>
             <View style={s.changeFace}>
@@ -158,10 +168,12 @@ export default function MobileCreatePuzzle() {
       </Pressable>
 
       <View style={s.footer}>
-        <Pressable accessibilityRole="button" accessibilityLabel="Create Puzzle" accessibilityState={{ disabled: true }}
+        {replay.original ? <HomePuzzleActions changed={replay.changed} canContinue={replay.canContinue} onCreate={replay.create} onPlay={replay.requestPlay} />
+        : <Pressable accessibilityRole="button" accessibilityLabel="Create Puzzle" accessibilityState={{ disabled: true }}
           disabled style={[s.createDisabled, hasImage && s.createPreview, hasImage && primaryGradient]}>
+          <Image accessible={false} source={art.piece} resizeMode="contain" style={{ width: 24, height: 24, tintColor: hasImage ? theme.color.surface : theme.color.disabledText }} />
           <Text style={[s.createLabel, hasImage && s.createPreviewLabel]}>Create Puzzle</Text>
-        </Pressable>
+        </Pressable>}
         {!review && <Text style={s.footerNote}>{picture
           ? "Puzzle setup only for now. Play will be available when the gameplay engine is connected."
           : "Choose a picture first. Play is not available in this preview yet."}</Text>}
@@ -253,8 +265,12 @@ const s = StyleSheet.create({
   readyCopy: { flex: 1, gap: 4 },
   readyTitle: { fontSize: 18, lineHeight: 24, fontWeight: "700", color: theme.color.text },
   readyBody: { fontSize: 14, lineHeight: 20, color: theme.color.textSecondary },
+  replayReady: { padding: 8, gap: 4, borderRadius: 12, backgroundColor: theme.color.surfaceSoft },
+  replayTitle: { fontSize: 16, lineHeight: 20, fontWeight: "700", color: theme.color.text },
+  replayDescription: { flexDirection: "row", alignItems: "center", gap: 8 },
+  replayBody: { flex: 1, fontSize: 13, lineHeight: 18, color: theme.color.textSecondary },
   footer: { gap: 8 },
-  createDisabled: { minHeight: 48, borderRadius: 12, justifyContent: "center", alignItems: "center", backgroundColor: theme.color.disabledSurface, padding: 12 },
+  createDisabled: { minHeight: 48, borderRadius: 12, flexDirection: "row", gap: 8, justifyContent: "center", alignItems: "center", backgroundColor: theme.color.disabledSurface, padding: 12 },
   createLabel: { fontSize: 18, lineHeight: 24, fontWeight: "700", color: theme.color.disabledText },
   createPreview: { backgroundColor: theme.color.primary },
   createPreviewLabel: { color: theme.color.surface },

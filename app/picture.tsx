@@ -85,6 +85,8 @@ export default function PictureDetail() {
           <Action
             label="Use for a puzzle"
             onPress={() => {
+              review?.setHomePuzzle(null);
+              review?.notify("");
               review?.setSelectedPicture(null);
               local.setDraft((value) => ({ ...value, pictureId: picture.id }));
               router.replace("/create");

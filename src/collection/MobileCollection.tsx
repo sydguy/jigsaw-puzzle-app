@@ -36,6 +36,8 @@ export default function MobileCollection({ selecting = false }: { selecting?: bo
   const tileWidth = (width - 16 - 24 - 16) / 3;
   const start = () => {
     if (!selected) return;
+    createReview?.setHomePuzzle(null);
+    createReview?.notify("");
     if (selected.sample) { createReview?.setSelectedPicture({ title: selected.title, image: selected.image }); createReview?.setState("after"); }
     else { createReview?.setSelectedPicture(null); local.setDraft(value => ({ ...value, pictureId: selected.id })); }
     router.push("/create");

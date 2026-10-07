@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import type { ImageSourcePropType } from "react-native";
+import type { Draft } from "../local/types";
 
 export type HomePuzzle = {
   id: string;
@@ -13,12 +14,14 @@ export type HomePuzzle = {
   lastPlayed: string;
   reviewLastPlayedLabel?: string;
   progress: number;
+  settings?: Draft;
 };
 export type HomeState = "empty" | "populated";
 export const HomeReviewContext = createContext<{
   state: HomeState;
   puzzles: readonly HomePuzzle[];
   notify: (message: string) => void;
+  addPuzzle?: (puzzle: HomePuzzle) => void;
 }>({ state: "empty", puzzles: [], notify: () => {} });
 export const useHomeReview = () => useContext(HomeReviewContext);
 

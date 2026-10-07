@@ -8,10 +8,12 @@ import { useDevice } from "../preview/context";
 import { HomePuzzle, HomeSort, sortPuzzles, useHomeReview } from "./review";
 import SortMenu from "./SortMenu";
 import MobileHomeScreen from "./MobileHomeScreen";
+import { useOpenPuzzle } from "./useOpenPuzzle";
+import { useCreateReview } from "../create/review";
 
 const gradient = Platform.OS === "web" ? { backgroundImage: "linear-gradient(110deg, " + theme.color.gradientStart + ", " + theme.color.gradientEnd + ")" } as ViewStyle : {};
 function HomeButton({ label, onPress, play = false }: { label: string; onPress: () => void; play?: boolean }) {
-  return <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={onPress}
+  return <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={event => { event.stopPropagation(); onPress(); }}
     style={({ pressed }) => [s.button, gradient, play && { paddingHorizontal: 8 }, pressed && { opacity: 0.85 }]}>
     {play && <Text accessible={false} style={{ color: theme.color.surface, fontSize: 16 }}>▶</Text>}
     <Text style={s.buttonText}>{label}</Text>
@@ -41,26 +43,26 @@ function PuzzleRow({ puzzle }: { puzzle: HomePuzzle }) {
   const { tablet, width, height } = useDevice();
   const landscape = tablet && width > height;
   const imageWidth = tablet ? (landscape ? 240 : 216) : 80;
-  const review = useHomeReview();
+  const openPuzzle = useOpenPuzzle();
   const actions = <View testID="puzzle-actions" style={{ flexDirection: landscape ? "row" : "column", gap: 8, width: landscape ? 304 : tablet ? "100%" : 112, maxWidth: "100%" }}>
     <View style={{ flex: landscape ? 1 : undefined }}><PuzzleStatus puzzle={puzzle} /></View>
     <View testID="puzzle-action" style={{ flex: landscape ? 1 : undefined }}><HomeButton label={puzzle.progress === 100 ? "Play Again" : "Continue"} play
-      onPress={() => review.notify(puzzle.title + " is seed data for Home review. Gameplay is not connected; nothing was changed.")} /></View>
+      onPress={() => openPuzzle(puzzle)} /></View>
   </View>;
   const date = new Date(puzzle.created + "T12:00:00").toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" });
-  return <View testID="home-puzzle-row" accessibilityLabel={puzzle.title} style={[s.card, { flexDirection: "row", alignItems: "center", gap: tablet ? 16 : 8 }]}>
+  return <Pressable testID="home-puzzle-row" accessibilityRole="link" accessibilityLabel={"Open " + puzzle.title} onPress={() => openPuzzle(puzzle)} style={[s.card, { flexDirection: "row", alignItems: "center", gap: tablet ? 16 : 8 }]}>
     <Image testID="puzzle-thumbnail" accessibilityLabel={puzzle.title + " puzzle image"} source={puzzle.image} resizeMode="contain"
       style={{ width: imageWidth, height: imageWidth / 1.5, borderRadius: theme.radius.small, alignSelf: "center" }} />
     <View style={{ flex: 1, gap: 8, minWidth: 0 }}>
       <Text style={[s.label, tablet && s.section]}>{puzzle.title}</Text>
       <View style={{ flexDirection: landscape ? "row" : "column", gap: 4, flexWrap: "wrap" }}>
-        <Text style={s.caption}>Created: {date}</Text><Text style={s.caption}>{landscape ? " · " : ""}Last played: {puzzle.lastPlayed.slice(11, 16)}</Text>
+        <Text style={s.caption}>Created: {date}</Text><Text style={s.caption}>{landscape ? " · " : ""}Last played: {puzzle.reviewLastPlayedLabel ?? puzzle.lastPlayed.slice(11, 16)}</Text>
       </View>
       <Text style={s.caption}>{puzzle.pieces} pieces</Text>
       {tablet && !landscape && actions}
     </View>
     {(!tablet || landscape) && actions}
-  </View>;
+  </Pressable>;
 }
 export default function HomeScreen() {
   const { tablet } = useDevice();
@@ -68,6 +70,7 @@ export default function HomeScreen() {
 }
 function TabletHomeScreen() {
   const review = useHomeReview();
+  const createReview = useCreateReview();
   const { tablet } = useDevice();
   const [sort, setSort] = useState<HomeSort>("Latest Played");
   const puzzles = sortPuzzles(review.puzzles, sort);
@@ -81,7 +84,7 @@ function TabletHomeScreen() {
       </View>
       {review.state === "empty" && <HomeButton label="Buy theme packs" onPress={() => review.notify("Theme-pack purchases are not connected in this Home review. No purchase or balance change was made.")} />}
     </View>
-    <Pressable testID="home-add-puzzle" accessibilityRole="button" accessibilityLabel="Add Puzzle" onPress={() => router.push("/create")}
+    <Pressable testID="home-add-puzzle" accessibilityRole="button" accessibilityLabel="Add Puzzle" onPress={() => { createReview?.setHomePuzzle(null); createReview?.notify(""); router.push("/create"); }}
       style={({ pressed }) => [s.hero, pressed && { opacity: 0.85 }]}>
       <Decoration /><Decoration right />
       <View style={[s.plus, gradient]}><Text accessible={false} style={{ fontSize: 36, lineHeight: 44, color: theme.color.surface }}>+</Text></View>

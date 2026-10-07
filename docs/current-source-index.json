@@ -73,13 +73,18 @@
     },
     {
       "path": "docs/decision-log-current.md",
-      "bytes": 9539,
-      "sha256": "e8cc005df4b36ae3c79eac1f8105338aac8bde416b25f0640c856d863ba25c2e"
+      "bytes": 10276,
+      "sha256": "86d060714e571413c9e032252eda55c62c19fe0b34a524d316d0adf23a55e4eb"
     },
     {
       "path": "docs/dependency-audit.json",
       "bytes": 16588,
       "sha256": "4019927d727d360ca8997b358c4692b1362a010d6823f22b51f1753bb5d9d871"
+    },
+    {
+      "path": "docs/home-replay-review.md",
+      "bytes": 3961,
+      "sha256": "a9807adc8826dd691290f52cbdda40b80185a3866d86d72fb441ecce9f45dd52"
     },
     {
       "path": "docs/home-visual-review.md",
@@ -138,8 +143,8 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 3456,
-      "sha256": "d4c82d96c5eb77fc1a57659c5f4330bbb978664b551a72b890d53e9ad9aa803f"
+      "bytes": 3620,
+      "sha256": "a957e575361aa6031104b7cbf3cbdddbb1e59d0505bd1c4594ddf4de79188d7e"
     },
     {
       "path": "docs/requirements-register.md",

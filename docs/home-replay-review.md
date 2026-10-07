@@ -1,0 +1,19 @@
+# Home replay setup review — 8 October 2026
+
+Home cards and their existing action buttons open the named puzzle setup. Completed puzzles show “Play Again or create a new Puzzle?” with two lines of supporting copy and a full-width restart action. Unfinished puzzles show “Continue Playing or Play Again or create a new Puzzle?” with two lines of supporting copy and equal-width Play Again / Continue Playing actions. The white puzzle-piece Create Puzzle action follows the supplied button reference and the existing design-system colours, corners and 48-point targets.
+
+Grid, timer and rotation are copied from the selected Home record. Comparison uses current values, including picture identity, against the original setup. Changing any value offers Create Puzzle; restoring every value restores the original actions. Cancelling image selection preserves the setup. Image replacement is a new puzzle choice, never an edit to the original Home record.
+
+Create registers a separate preview record with its own ID, chosen settings, zero progress and “Not yet” last-played metadata, then returns Home. A synchronous submit guard prevents duplicate creation from repeated presses. The original record remains unchanged. Normal Add Puzzle and Collection entry retain the ordinary Create screen. Tablet Home navigation supports the same new behaviour within its existing layout; its fresh Create screen remains unchanged.
+
+Legacy sample counts 100/64/200 have been replaced by valid 96/54/216-piece settings. Sample timer/rotation values are explicit fixtures, not recovered gameplay saves. The existing review sprite thumbnail is shown consistently on Home and setup; no imported artwork bytes are edited or published as catalogue content.
+
+## Evidence and limits
+
+Verification uses `tools/check-home-replay.cjs` with isolated Edge storage and the local Expo server. It covers completed/unfinished cards, preloaded settings, every setting change and reversal, partial reversals, source cancellation, equal action widths, phone fit, new-record isolation and repeated submission. Captures/results are written to `.cache/home-replay/` for iPhone, Android phone and both tablet orientations.
+
+The replay checks, normal `check-mobile-create.cjs` regression and `check-mobile-home-actions.cjs` mouse/touch/keyboard deletion checks pass. The deletion check's final collection assertion now filters My Pictures, matching the already-approved unified fixture/personal list. TypeScript and Expo web export pass. Screenshot comparison confirms the supplied white piece/gradient Create action, matching Home imagery, readable two-line supporting copy and equal-width unfinished actions. Both phone states fit: iPhone scroll content/viewport 784/784 points; Android 847/847. Tablet retains its existing scrollable layout. This is functional/layout review, not a pixel-identity claim against a full replay mockup.
+
+The first browser run could not start because Playwright was not on the module path; it was rerun with the existing bundled runtime. An unresponsive Expo process was restarted. The first visual pass caught eight points of iPhone overflow, corrected with scoped guidance padding; a nested-button warning was corrected by giving the enclosing navigation card link semantics. Final browser results report no page/console errors. The build's environment colour warning and Metro's recoverable old-cache warning do not constitute native verification.
+
+All Home records—including new ones—remain development-preview memory and reset on reload. Play Again / Continue currently explain that gameplay is not connected; they do not reset progress, claim a save, create attempts or navigate to a fake game. Real engine/cut reuse, restart confirmation, attempt statistics, durable puzzle storage, native touch and physical device validation remain integration gates. No schema migration, network service, personal-photo upload or new dependency is introduced.
