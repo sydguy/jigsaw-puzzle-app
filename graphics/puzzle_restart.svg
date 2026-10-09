@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none">
+  <title>Restart</title>
+  <defs>
+    <linearGradient id="face" x1="64" y1="8" x2="190" y2="248" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff"/><stop offset="1" stop-color="#f4f5f8"/>
+    </linearGradient>
+    <path id="arrow" d="M244 136Q252 136 250 145C241 206 190 249 127 249C59 249 4 194 4 126S59 3 127 3C153 3 177 11 197 26L218 5Q229-6 232 10L249 80Q253 95 239 95H161Q145 95 155 83L174 63C161 53 144 48 127 48C84 48 49 83 49 126S84 204 127 204C165 204 196 178 204 143Q205 136 212 136Z"/>
+  </defs>
+  <use href="#arrow" transform="translate(0 5)" fill="#aeb1bc" opacity=".6"/>
+  <use href="#arrow" fill="url(#face)" stroke="#e3e4ea" stroke-width=".65"/>
+</svg>

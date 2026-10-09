@@ -204,9 +204,9 @@ export default function CreatePuzzle() {
         </View>
       </Card>
       {replay.original ? <HomePuzzleActions changed={replay.changed} canContinue={replay.canContinue} onCreate={replay.create} onPlay={replay.requestPlay} />
-        : <Action label="Create Puzzle" disabled />}
+        : <Action label="Create Puzzle" disabled={!replay.canCreate} onPress={replay.create} />}
       <Notice>
-        {replay.original ? "Browser review: new Home entries stay in memory. Gameplay is not connected yet." : picture
+        {replay.canCreate ? "Browser review: opens the puzzle screen with these settings. Gameplay is not connected yet." : picture
           ? "Puzzle setup is ready for review. Play becomes available when the gameplay engine is connected."
           : "Choose a picture first. Gameplay is the next implementation stage."}
       </Notice>

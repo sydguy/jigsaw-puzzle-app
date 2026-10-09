@@ -10,6 +10,7 @@ import SortMenu from "./SortMenu";
 import MobileHomeScreen from "./MobileHomeScreen";
 import { useOpenPuzzle } from "./useOpenPuzzle";
 import { useCreateReview } from "../create/review";
+import { usePuzzleSession } from "../puzzle/session";
 
 const gradient = Platform.OS === "web" ? { backgroundImage: "linear-gradient(110deg, " + theme.color.gradientStart + ", " + theme.color.gradientEnd + ")" } as ViewStyle : {};
 function HomeButton({ label, onPress, play = false }: { label: string; onPress: () => void; play?: boolean }) {
@@ -44,10 +45,11 @@ function PuzzleRow({ puzzle }: { puzzle: HomePuzzle }) {
   const landscape = tablet && width > height;
   const imageWidth = tablet ? (landscape ? 240 : 216) : 80;
   const openPuzzle = useOpenPuzzle();
+  const game = usePuzzleSession();
   const actions = <View testID="puzzle-actions" style={{ flexDirection: landscape ? "row" : "column", gap: 8, width: landscape ? 304 : tablet ? "100%" : 112, maxWidth: "100%" }}>
     <View style={{ flex: landscape ? 1 : undefined }}><PuzzleStatus puzzle={puzzle} /></View>
     <View testID="puzzle-action" style={{ flex: landscape ? 1 : undefined }}><HomeButton label={puzzle.progress === 100 ? "Play Again" : "Continue"} play
-      onPress={() => openPuzzle(puzzle)} /></View>
+      onPress={() => game.open(puzzle, puzzle.progress === 100 ? "replay" : "continue")} /></View>
   </View>;
   const date = new Date(puzzle.created + "T12:00:00").toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" });
   return <Pressable testID="home-puzzle-row" accessibilityRole="link" accessibilityLabel={"Open " + puzzle.title} onPress={() => openPuzzle(puzzle)} style={[s.card, { flexDirection: "row", alignItems: "center", gap: tablet ? 16 : 8 }]}>

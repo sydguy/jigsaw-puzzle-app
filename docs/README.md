@@ -6,6 +6,8 @@ See [mobile Create Puzzle review](create-puzzle-visual-review.md) for the update
 
 See [Home replay setup review](home-replay-review.md) for named puzzle setup, completed/unfinished actions, settings comparison and separate preview Home entries.
 
+See [puzzle screen review](puzzle-screen-review.md) for the configured board presentation, Home/setup entry routes and deferred gameplay boundary.
+
 See [mobile gallery/camera review](mobile-image-sources-review.md) for the Add Image source screens and browser camera flow.
 
 See [mobile crop review](mobile-crop-review.md) for the full-picture selection, movable 3:2 corner frame and Cancel/Done handoff.

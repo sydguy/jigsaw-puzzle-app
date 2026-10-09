@@ -61,7 +61,7 @@ fs.mkdirSync(out, { recursive: true });
       dimensions.push({ layout: name, populatedSize });
       const image = await page.getByRole('img', { name: 'Mountain lake sample', exact: true }).boundingBox();
       assert.ok(Math.abs(image.width / image.height - 1.5) < 0.01, 'sample image retains full 3:2 aspect');
-      assert.ok(await page.getByRole('button', { name: 'Create Puzzle', exact: true }).isDisabled());
+      assert.ok(await page.getByRole('button', { name: 'Create Puzzle', exact: true }).isEnabled(), 'configured image can open puzzle presentation');
       await page.getByLabel('Create Puzzle review state', { exact: true }).selectOption('before');
       await page.getByRole('button', { name: 'Add Image', exact: true }).waitFor();
     }
@@ -127,7 +127,7 @@ fs.mkdirSync(out, { recursive: true });
     assert.ok(await page.getByRole('radio', { name: 'None', exact: true }).isChecked());
     assert.deepEqual(errors, []);
     fs.writeFileSync(path.join(out, 'results.json'), JSON.stringify({ passed: true, dimensions, errors }, null, 2));
-    console.log('PASS: mobile entry, default Timer, three modes/keyboard, linked grids/bounds/presets, rotation, draft retention, disabled creation, screenshots at 390/412.');
+    console.log('PASS: mobile entry, default Timer, three modes/keyboard, linked grids/bounds/presets, rotation, draft retention, image-gated creation, screenshots at 390/412.');
   } catch (error) {
     console.error('URL:', page.url(), 'browser errors:', errors);
     await page.screenshot({ path: path.join(out, 'failure.png'), fullPage: true });

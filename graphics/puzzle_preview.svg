@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="184" viewBox="0 0 320 184" fill="none">
+  <title>Preview</title>
+  <defs>
+    <linearGradient id="face" x1="60" y1="8" x2="230" y2="178" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff"/><stop offset="1" stop-color="#f4f5f8"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#face)" fill-rule="evenodd" clip-rule="evenodd" d="M2 88C44 35 99 2 160 2S276 35 318 88Q321 92 318 96C276 149 221 182 160 182S44 149 2 96Q-1 92 2 88ZM225 92A65 65 0 1 0 95 92A65 65 0 1 0 225 92Z"/>
+  <circle cx="160" cy="92" r="34" fill="url(#face)"/>
+</svg>

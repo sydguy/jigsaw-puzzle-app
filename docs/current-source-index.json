@@ -73,8 +73,8 @@
     },
     {
       "path": "docs/decision-log-current.md",
-      "bytes": 10276,
-      "sha256": "86d060714e571413c9e032252eda55c62c19fe0b34a524d316d0adf23a55e4eb"
+      "bytes": 11041,
+      "sha256": "697cff9601baf7f065119318019d7fc92b811382f188f52f33dbc1b139fa1150"
     },
     {
       "path": "docs/dependency-audit.json",
@@ -137,14 +137,19 @@
       "sha256": "cb14cc3fa4d0fc67dfbb97099326054cb9f37695fba77a54caf061d870405935"
     },
     {
+      "path": "docs/puzzle-screen-review.md",
+      "bytes": 4801,
+      "sha256": "fe25e6210db4626833b6a1c8c3ebf79c2af1df7fab53d45311bcfa02d5da2b5c"
+    },
+    {
       "path": "docs/readiness.md",
       "bytes": 3687,
       "sha256": "d29c206de02deb0f9aa6346b23cc530110f12ad5b95853e69943417be727746d"
     },
     {
       "path": "docs/README.md",
-      "bytes": 3620,
-      "sha256": "a957e575361aa6031104b7cbf3cbdddbb1e59d0505bd1c4594ddf4de79188d7e"
+      "bytes": 3768,
+      "sha256": "967519f2e733b05a86f94c7b7fd67ed1e8de8aa0a930a5298c0fa676f73d51f3"
     },
     {
       "path": "docs/requirements-register.md",
@@ -232,6 +237,11 @@
       "sha256": "200ab0fe2f4921c75e2e8e90f4c12aa31d38fafa68b4d707a2928bd4e44667e7"
     },
     {
+      "path": "design/mobile/Mob-my collection grid loading.png",
+      "bytes": 1600158,
+      "sha256": "75d095058aaf1ba43c05a0d14f728ddc6ae44b47d00f6cf8665a0782ab9f4f56"
+    },
+    {
       "path": "design/mobile/Mob-my collection grid.png",
       "bytes": 1740437,
       "sha256": "cf4f50aa9dc277fd1bd332c5fe3af67e2c95316471ddca785ff6c9cfd50511e6"
@@ -310,6 +320,11 @@
       "path": "design/mobile/mobile-puzzle-type 2 .png",
       "bytes": 1598429,
       "sha256": "bfc21137a6c1b7dd9ef5648bbb718c9e2896d308d271cb7d35ac7e411bf569ca"
+    },
+    {
+      "path": "design/mobile/mobile-puzzle-type 2 _square.png",
+      "bytes": 1763797,
+      "sha256": "29e8aee1a1a746b333454c9bb0ac4199ceba7e4f7e189d5e4bd951e635bf2086"
     },
     {
       "path": "design/mobile/mobile-settings-not-signed-in.png",
@@ -577,6 +592,11 @@
       "sha256": "1eea267c7bd91b44d3586774fbe0693a20b070353b12cd9cf8c143b87f84b732"
     },
     {
+      "path": "design/tablet/portrait/11-puzzle-portrait_square.png",
+      "bytes": 1853762,
+      "sha256": "4f4c925ab8515c904dc6eb0871284175bc9d320815004756d846f008c9c303ff"
+    },
+    {
       "path": "design/tablet/portrait/12-take-photo-portrait.png",
       "bytes": 1082948,
       "sha256": "2f5b25ed7dc1fb68cc0bfe8fa4730265880f30803ecb955581b5c6d620a31ee8"
@@ -670,6 +690,11 @@
       "path": "design/tablet/tab-puzzle.png",
       "bytes": 1744171,
       "sha256": "5a25a4e5f744f2668c1c2d91c22ad3c5c739acb106db62a4119dbc54cd3b09e1"
+    },
+    {
+      "path": "design/tablet/tab-puzzle_square.png",
+      "bytes": 1789108,
+      "sha256": "9a8eb2dd5171c19557c4ec992f51af8cf71f055a53482ef68fb34a1e83122b93"
     },
     {
       "path": "design/tablet/Tab-take photo.png",
@@ -922,14 +947,29 @@
       "sha256": "72f8d9fb36c76fcf8297c602b7ef6623a5e8e031568a6d1fdaec3fc37ecb6e2f"
     },
     {
+      "path": "graphics/puzzle_preview.svg",
+      "bytes": 609,
+      "sha256": "241ae37a82fae93c4e4ba17677efa80b8cd0ace1867524b059611653ba45421b"
+    },
+    {
       "path": "graphics/puzzle_ready_illustration.png",
       "bytes": 872572,
       "sha256": "820b53784fcf7a7c72ce78f87faab518265e7f4294be4754f2e017b441786bbe"
     },
     {
+      "path": "graphics/puzzle_restart.svg",
+      "bytes": 781,
+      "sha256": "901def6cad853ed1c308def6eca90de868613761437c8293637209107006e206"
+    },
+    {
       "path": "graphics/puzzle_rotate_arrows.png",
       "bytes": 371750,
       "sha256": "b9526f78200220b76b1de94ed2397bce8126c8850a5ca5fb8229c1830761a45e"
+    },
+    {
+      "path": "graphics/puzzle_shuffle.svg",
+      "bytes": 1202,
+      "sha256": "97d3faa0fbad650323adc714067e23423bc73a116fbbf3f38332af1fd1390f63"
     },
     {
       "path": "graphics/puzzle_size_piece.png",

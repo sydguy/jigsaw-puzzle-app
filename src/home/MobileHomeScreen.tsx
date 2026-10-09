@@ -10,6 +10,7 @@ import SortMenu from "./SortMenu";
 import SwipePuzzleRow from "./SwipePuzzleRow";
 import { useOpenPuzzle } from "./useOpenPuzzle";
 import { useCreateReview } from "../create/review";
+import { usePuzzleSession } from "../puzzle/session";
 
 // Mobile-only density measured from the owner's latest 1024px references.
 // Keep readable scaling and real controls; never scale/rasterize the whole screen.
@@ -67,6 +68,7 @@ function Status({ puzzle }: { puzzle: HomePuzzle }) {
 const PuzzleRow = memo(function PuzzleRow({ puzzle }: { puzzle: HomePuzzle }) {
   const { width } = useDevice();
   const openPuzzle = useOpenPuzzle();
+  const game = usePuzzleSession();
   const imageWidth = Math.round((width - 32) * 0.3);
   const actionWidth = Math.round((width - 32) * 0.285);
   const date = new Date(puzzle.created + "T12:00:00").toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }).replace("Sept", "Sep");
@@ -81,7 +83,7 @@ const PuzzleRow = memo(function PuzzleRow({ puzzle }: { puzzle: HomePuzzle }) {
     <View testID="puzzle-actions" style={{ width: actionWidth, flexShrink: 0 }}>
       <Status puzzle={puzzle} />
       <View testID="puzzle-action"><CompactButton label={puzzle.progress === 100 ? "Play Again" : "Continue"} play
-        onPress={() => openPuzzle(puzzle)} /></View>
+        onPress={() => game.open(puzzle, puzzle.progress === 100 ? "replay" : "continue")} /></View>
     </View>
   </Pressable>;
 });

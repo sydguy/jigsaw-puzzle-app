@@ -74,9 +74,15 @@ fs.mkdirSync(out, { recursive: true });
           await button('Change image').click(); await back(); await assertActions(false, unfinished);
         }
         await button('Play Again').click();
-        await page.getByRole('status').filter({ hasText: 'Gameplay is not connected' }).waitFor();
-        if (unfinished) await button('Continue Playing').click();
+        await page.getByTestId('puzzle-screen').waitFor();
+        assert.equal(await page.getByRole('progressbar', { name: 'Puzzle progress' }).getAttribute('aria-valuenow'), '0');
         await back();
+        if (unfinished) {
+          await page.getByRole('link', { name: 'Open ' + title, exact: true }).click();
+          await button('Continue Playing').click();
+          await page.getByTestId('puzzle-screen').waitFor();
+          await back();
+        }
         assert.equal(await page.getByTestId('home-puzzle-row').count(), Number(layout) < 2 ? 7 : 5);
       }
     }
@@ -89,6 +95,8 @@ fs.mkdirSync(out, { recursive: true });
     // Dispatch twice to the same target before navigation, rather than double-clicking
     // screen coordinates that become a Home tab after the first click navigates.
     await button('Create Puzzle').evaluate(n => { n.click(); n.click(); });
+    await page.getByTestId('puzzle-screen').waitFor();
+    await back();
     await page.getByRole('heading', { name: 'My Puzzles (8)', exact: true }).waitFor();
     const castles = page.getByTestId('home-puzzle-row').filter({ hasText: 'Fairy Tale Castle' });
     assert.equal(await castles.count(), 2, 'new identity, original retained');

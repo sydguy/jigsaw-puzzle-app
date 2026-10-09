@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="256" viewBox="0 0 320 256" fill="none">
+  <title>Shuffle</title>
+  <defs>
+    <linearGradient id="face" x1="80" y1="4" x2="230" y2="248" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff"/><stop offset="1" stop-color="#f4f5f8"/>
+    </linearGradient>
+    <path id="back" d="M19 46H63C97 46 116 65 134 91L121 120Q120 124 117 118C102 87 86 76 61 76H19C-1 76-1 46 19 46ZM170 149C189 176 204 182 228 182H253L242 163C232 143 249 134 260 143L309 188Q322 200 310 211L261 249C247 260 233 246 242 231L251 216H226C190 216 169 202 157 184Q153 179 157 172Z"/>
+    <path id="front" d="M21 183H65C95 183 107 174 122 147L151 96C173 61 192 44 228 44H256L243 25C232 7 246-7 261 6L312 50Q325 60 312 72L263 115C248 127 234 114 243 96L255 77H231C207 77 196 85 181 109L152 160C128 201 107 216 67 216H21C-1 216-1 183 21 183Z"/>
+  </defs>
+  <use href="#back" transform="translate(0 5)" fill="#aeb1bc" opacity=".6"/>
+  <use href="#back" fill="url(#face)" stroke="#e3e4ea" stroke-width=".65"/>
+  <use href="#front" transform="translate(0 5)" fill="#aeb1bc" opacity=".6"/>
+  <use href="#front" fill="url(#face)" stroke="#e3e4ea" stroke-width=".65"/>
+</svg>

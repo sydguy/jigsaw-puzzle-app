@@ -169,8 +169,8 @@ export default function MobileCreatePuzzle() {
 
       <View style={s.footer}>
         {replay.original ? <HomePuzzleActions changed={replay.changed} canContinue={replay.canContinue} onCreate={replay.create} onPlay={replay.requestPlay} />
-        : <Pressable accessibilityRole="button" accessibilityLabel="Create Puzzle" accessibilityState={{ disabled: true }}
-          disabled style={[s.createDisabled, hasImage && s.createPreview, hasImage && primaryGradient]}>
+        : <Pressable accessibilityRole="button" accessibilityLabel="Create Puzzle" accessibilityState={{ disabled: !replay.canCreate }}
+          disabled={!replay.canCreate} onPress={replay.create} style={[s.createDisabled, hasImage && s.createPreview, hasImage && primaryGradient]}>
           <Image accessible={false} source={art.piece} resizeMode="contain" style={{ width: 24, height: 24, tintColor: hasImage ? theme.color.surface : theme.color.disabledText }} />
           <Text style={[s.createLabel, hasImage && s.createPreviewLabel]}>Create Puzzle</Text>
         </Pressable>}

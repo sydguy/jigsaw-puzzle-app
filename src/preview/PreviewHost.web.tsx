@@ -159,8 +159,12 @@ export default function PreviewHost({ children }: PropsWithChildren) {
         {sourceMessage && <div role="status" style={{ marginTop: 4, color: "#17124F" }}>{sourceMessage}</div>}
       </aside>}
       {__DEV__ && (onCreate || (pathname === "/create" && homePuzzle)) && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
-        {homePuzzle ? "Home puzzle review · New puzzle entries stay in preview memory · Play Again / Continue require the gameplay engine"
-          : "Visual review only · After adding image uses your selected picture or sample artwork · Switching states does not save or delete pictures · Gameplay is not connected yet"}
+        {homePuzzle ? "Home puzzle review · New puzzle entries stay in preview memory · Actions open the configured puzzle screen"
+          : "Create review · Choose a picture and settings to open the puzzle screen · New Home entries remain in preview memory"}
+        {createMessage && <div role="status">{createMessage}</div>}
+      </aside>}
+      {__DEV__ && pathname === "/puzzle" && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
+        Puzzle screen review · Board seams and tray pieces are illustrative · Gameplay, saved board positions, clocks and ads are not connected · Continue uses sample progress; unavailable saved statistics show —
         {createMessage && <div role="status">{createMessage}</div>}
       </aside>}
       {__DEV__ && onHome && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
