@@ -10,7 +10,8 @@
     "ios": "expo start --ios",
     "typecheck": "tsc --noEmit",
     "export:web": "expo export --platform web",
-    "check:docs": "python tools/verify_documents.py"
+    "check:docs": "python tools/verify_documents.py",
+    "check:engine": "node tools/check-engine.cjs"
   },
   "engines": {
     "node": ">=20.19.4"

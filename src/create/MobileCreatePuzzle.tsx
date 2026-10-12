@@ -180,8 +180,8 @@ export default function MobileCreatePuzzle() {
           <Text style={[s.createLabel, hasImage && s.createPreviewLabel]}>Create Puzzle</Text>
         </Pressable>}
         {!review && <Text style={s.footerNote}>{picture
-          ? "Puzzle setup only for now. Play will be available when the gameplay engine is connected."
-          : "Choose a picture first. Play is not available in this preview yet."}</Text>}
+          ? "Your puzzle and progress stay on this device."
+          : "Choose a picture first."}</Text>}
       </View>
     </Screen>
   );

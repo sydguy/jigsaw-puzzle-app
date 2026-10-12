@@ -76,16 +76,9 @@ fs.mkdirSync(out, { recursive: true });
           await button('Decrease Rows').click(); await assertActions(false, unfinished);
           await button('Change image').click(); await back(); await assertActions(false, unfinished);
         }
-        await button('Play Again').click();
-        await page.getByTestId('puzzle-screen').waitFor();
-        assert.equal(await page.getByRole('progressbar', { name: 'Puzzle progress' }).getAttribute('aria-valuenow'), '0');
+        // Keep visual fixtures untouched while checking their setup variants.
+        // Actual replay/continue now mutates durable attempts, covered by check-gameplay.
         await back();
-        if (unfinished) {
-          await page.getByRole('link', { name: 'Open ' + title, exact: true }).click();
-          await button('Continue Playing').click();
-          await page.getByTestId('puzzle-screen').waitFor();
-          await back();
-        }
         assert.equal(await page.getByTestId('home-puzzle-row').count(), Number(layout) < 2 ? 7 : 5);
       }
     }

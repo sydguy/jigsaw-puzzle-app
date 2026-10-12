@@ -7,6 +7,8 @@ import { CreateReviewContext, CreateReviewState, ReviewPicture } from "../create
 import { SourceReviewContext } from "../images/sourceReview";
 import { CollectionReviewContext } from "../collection/review";
 import { SettingsReviewContext } from "../settings/review";
+import { useGameLibrary } from "../game/library";
+import { homePuzzle as savedHomePuzzle } from "../game/record";
 
 // Keep visual fixtures and their artwork out of production bundles.
 const homeSeeds: readonly HomePuzzle[] = __DEV__ ? require("./homeSeeds.web").homeSeeds : [];
@@ -23,6 +25,7 @@ const devices = [
 
 /** Browser-only review controls; no OS or entitlement emulation. */
 export default function PreviewHost({ children }: PropsWithChildren) {
+  const library = useGameLibrary();
   const [ready, setReady] = useState(false);
   useEffect(() => { setReady(true); }, []);
   const [index, setIndex] = useState(0);
@@ -31,7 +34,6 @@ export default function PreviewHost({ children }: PropsWithChildren) {
   const [homeMessage, setHomeMessage] = useState("");
   const [createState, setCreateState] = useState<CreateReviewState>("before");
   const [homePuzzle, setHomePuzzle] = useState<HomePuzzle | null>(null);
-  const [createdPuzzles, setCreatedPuzzles] = useState<HomePuzzle[]>([]);
   const [createMessage, setCreateMessage] = useState("");
   const [sourceMessage, setSourceMessage] = useState("");
   const [selectedPicture, setSelectedPicture] = useState<ReviewPicture | null>(null);
@@ -162,16 +164,16 @@ export default function PreviewHost({ children }: PropsWithChildren) {
         {sourceMessage && <div role="status" style={{ marginTop: 4, color: "#17124F" }}>{sourceMessage}</div>}
       </aside>}
       {__DEV__ && (onCreate || (pathname === "/create" && homePuzzle)) && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
-        {homePuzzle ? "Home puzzle review · New puzzle entries stay in preview memory · Actions open the configured puzzle screen"
-          : "Create review · Choose a picture and settings to open the puzzle screen · New Home entries remain in preview memory"}
+        {homePuzzle ? "Saved puzzle setup · Replay keeps the exact cut · Changed settings create a separate local puzzle"
+          : "Create a puzzle · Pictures and progress save locally in this browser · No cloud sync"}
         {createMessage && <div role="status">{createMessage}</div>}
       </aside>}
       {__DEV__ && pathname === "/puzzle" && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
-        Puzzle screen review · Board seams and tray pieces are illustrative · Gameplay, saved board positions, clocks and ads are not connected · Continue uses sample progress; unavailable saved statistics show —
+        Browser gameplay · Progress saves on this device · Native ads are unavailable; hints use the approved unavailable-ad fallback · Native renderer/device validation remains open
         {createMessage && <div role="status">{createMessage}</div>}
       </aside>}
       {__DEV__ && onHome && <aside style={{ padding: "8px 20px", fontSize: 12, color: "#625B87", background: "#EFEEFD" }}>
-        Home visual review · {homeState === "populated" ? "Sample puzzles and balances only" : "Empty new-user state"} · No real puzzle or purchase data
+        Home · Saved local puzzles{homeState === "populated" ? " plus development samples and sample balances" : ""} · Purchases unavailable
         {homeMessage && <div role="status" style={{ marginTop: 8, color: "#17124F", fontSize: 14 }}>{homeMessage}</div>}
       </aside>}
       <main
@@ -205,9 +207,8 @@ export default function PreviewHost({ children }: PropsWithChildren) {
             }}
           >
             <DeviceContext.Provider value={device}>
-              <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: __DEV__ && homeState === "populated" ? [...createdPuzzles, ...(device.tablet ? homeSeeds.slice(0, 5) : mobileHomeSeeds)] : [], notify: setHomeMessage,
-                addPuzzle: __DEV__ ? puzzle => { setCreatedPuzzles(current => current.some(item => item.id === puzzle.id) ? current : [puzzle, ...current]); setHomeState("populated"); setHomeMessage("New puzzle added to this browser review. The original puzzle is unchanged. Preview entries reset on reload."); } : undefined }}>
-                <CreateReviewContext.Provider value={__DEV__ ? { state: createState, setState: setCreateState, image: createReviewImage, selectedPicture, setSelectedPicture, homePuzzle, setHomePuzzle, notify: setCreateMessage } : null}>
+              <HomeReviewContext.Provider value={{ state: __DEV__ ? homeState : "empty", puzzles: [...library.records.map(savedHomePuzzle), ...(__DEV__ && homeState === "populated" ? (device.tablet ? homeSeeds.slice(0, 5) : mobileHomeSeeds).filter(p => !library.records.some(r => r.id === p.id)) : [])], notify: setHomeMessage }}>
+                <CreateReviewContext.Provider value={{ state: createState, setState: setCreateState, image: __DEV__ ? createReviewImage : undefined, selectedPicture, setSelectedPicture, homePuzzle, setHomePuzzle, notify: setCreateMessage }}>
                   <CollectionReviewContext.Provider value={__DEV__ ? { items: collectionItems } : null}>
                     <SettingsReviewContext.Provider value={__DEV__ ? { signedIn, setSignedIn, profile, setProfile, privacy, setPrivacy, notify: setSettingsMessage } : null}>
                       <SourceReviewContext.Provider value={setSourceMessage}>{children}</SourceReviewContext.Provider>

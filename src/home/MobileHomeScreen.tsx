@@ -11,6 +11,7 @@ import SwipePuzzleRow from "./SwipePuzzleRow";
 import { useOpenPuzzle } from "./useOpenPuzzle";
 import { useCreateReview } from "../create/review";
 import { usePuzzleSession } from "../puzzle/session";
+import { useGameLibrary } from "../game/library";
 
 // Mobile-only density measured from the owner's latest 1024px references.
 // Keep readable scaling and real controls; never scale/rasterize the whole screen.
@@ -89,6 +90,7 @@ const PuzzleRow = memo(function PuzzleRow({ puzzle }: { puzzle: HomePuzzle }) {
 });
 
 export default function MobileHomeScreen() {
+  const library = useGameLibrary();
   const review = useHomeReview();
   const createReview = useCreateReview();
   const [sort, setSort] = useState<HomeSort>("Latest Played");
@@ -128,15 +130,17 @@ export default function MobileHomeScreen() {
         <View style={s.sortRow}><Text style={s.sortLabel}>Sort by:</Text><SortMenu compact value={sort} onChange={setSort} /></View>
       </View>
     </View>}>
+      {!!library.issue && <Text accessibilityRole="alert" style={s.emptyDescription}>{library.issue}</Text>}
       {empty ? <View testID="home-empty" style={s.empty}>
         <Art source={art.ready} size={112} />
         <Text accessibilityRole="header" style={s.emptyTitle}>Your first puzzle awaits</Text>
         <Text style={s.emptyDescription}>Start with a picture you love. Your puzzles and progress will appear here.</Text>
-      </View> : puzzles.map(puzzle => <SwipePuzzleRow key={puzzle.id} title={puzzle.title} open={openRow === puzzle.id}
+      </View> : puzzles.map(puzzle => <SwipePuzzleRow key={puzzle.id} title={puzzle.title} saved={!!library.get(puzzle.id)} open={openRow === puzzle.id}
         onOpenChange={open => setOpenRow(open ? puzzle.id : null)}
-        onDelete={() => {
+        onDelete={async () => {
+          if (library.get(puzzle.id)) await library.remove(puzzle.id);
           setDeleted(current => [...current, puzzle.id]); setOpenRow(null);
-          review.notify(puzzle.title + " was removed from this seed preview only. Collection pictures are unchanged. Switch Home review states or reload to reset.");
+          review.notify(puzzle.title + " was removed. Your collection picture is unchanged.");
         }}><PuzzleRow puzzle={puzzle} /></SwipePuzzleRow>)}
   </Screen>;
 }

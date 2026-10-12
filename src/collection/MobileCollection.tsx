@@ -12,6 +12,7 @@ import { useCreateReview } from "../create/review";
 import { CollectionItem, useCollectionReview } from "./review";
 import CollectionMenu from "./CollectionMenu";
 import SwipeDeleteRow from "../components/SwipeDeleteRow";
+import { useGameLibrary } from "../game/library";
 
 const gradient = Platform.OS === "web" ? { backgroundImage: `linear-gradient(110deg, ${theme.color.gradientStart}, ${theme.color.gradientEnd})` } as ViewStyle : {};
 const sortOptions = ["Recently Added", "Last Used", "Most Used", "Title A–Z"];
@@ -23,12 +24,14 @@ const badgeColors: Record<string, { backgroundColor: string; color: string }> = 
 const date = (value: number | null) => value === null ? "Not yet" : new Date(value).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }).replace("Sept", "Sep");
 
 export default function MobileCollection({ selecting = false }: { selecting?: boolean }) {
+  const library = useGameLibrary();
   const local = useLocal(), review = useCollectionReview(), createReview = useCreateReview();
   const { width } = useDevice();
   const [detailed, setDetailed] = useState(false), [sort, setSort] = useState("Recently Added"), [filter, setFilter] = useState("All pictures");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [openRow, setOpenRow] = useState<string | null>(null), [deletedSamples, setDeletedSamples] = useState<string[]>([]);
-  const all: CollectionItem[] = [...local.pictures.map(p => ({ id: p.id, title: p.title, image: { uri: p.data }, theme: "My Pictures", addedAt: p.addedAt, lastUsed: null, timesUsed: 0, sample: false })), ...(review?.items ?? [])];
+  const linked = (id: string) => library.records.filter(r => r.puzzle.settings?.pictureId === id);
+  const all: CollectionItem[] = [...local.pictures.map(p => ({ id: p.id, title: p.title, image: { uri: p.data }, theme: "My Pictures", addedAt: p.addedAt, lastUsed: Math.max(0, ...linked(p.id).map(r => r.lastStartedAt ?? 0)) || null, timesUsed: linked(p.id).reduce((sum, r) => sum + r.attemptsStarted, 0), sample: false })), ...(review?.items ?? [])];
   const themes = ["All pictures", "My Pictures", "All Curated Themes", ...new Set(all.filter(p => p.sample).map(p => p.theme))];
   const activeFilter = themes.includes(filter) ? filter : "All pictures";
   const items = all.filter(p => !deletedSamples.includes(p.id) && (activeFilter === "All pictures" || (activeFilter === "All Curated Themes" ? p.theme !== "My Pictures" : p.theme === activeFilter))).sort((a, b) => sort === "Last Used" ? (b.lastUsed ?? 0) - (a.lastUsed ?? 0) : sort === "Most Used" ? b.timesUsed - a.timesUsed : sort === "Title A–Z" ? a.title.localeCompare(b.title) : b.addedAt - a.addedAt);
@@ -48,6 +51,7 @@ export default function MobileCollection({ selecting = false }: { selecting?: bo
       const picture = local.pictures.find(p => p.id === item.id);
       if (!picture) throw new Error("This picture is no longer available. Reload the collection.");
       await local.remove(picture);
+      await library.reload();
     }
     if (createReview?.selectedPicture?.title === item.title) createReview.setSelectedPicture(null);
     setSelectedId(current => current === item.id ? null : current); setOpenRow(null);
@@ -75,7 +79,7 @@ export default function MobileCollection({ selecting = false }: { selecting?: bo
     {!items.length && !local.loading && !local.error && <Empty title={activeFilter === "My Pictures" || activeFilter === "All pictures" ? "Make it your collection" : "No matching pictures"} description="Add a picture once and use it for as many puzzles as you like." source={art.gallery} action={{ label: "Add Picture", onPress: () => router.push(`/sources?returnTo=${selecting ? "create" : "collection"}`) }} />}
     <View style={[s.items, detailed && s.details]} testID="collection-grid">
       {items.map(item => detailed ? <SwipeDeleteRow key={item.id} title={item.title} open={openRow === item.id} onOpenChange={open => setOpenRow(open ? item.id : null)} objectLabel="picture"
-        description={item.sample ? "Remove this sample picture from the collection preview?" : "This permanently removes the picture from this device. There are 0 linked puzzles; gameplay is not connected yet."}
+        description={item.sample ? "Remove this sample picture from the collection preview?" : `This removes the picture and ${linked(item.id).length} linked puzzle${linked(item.id).length === 1 ? "" : "s"} from this device.`}
         note={item.sample ? "Preview only. Your saved photos and purchased content are unchanged." : "This cannot be undone."} onDelete={() => remove(item)}>
         <DetailRow item={item} selected={item.id === selectedId} onPress={() => setSelectedId(current => current === item.id ? null : item.id)} />
       </SwipeDeleteRow> : <Pressable key={item.id} testID="my-collection-item" accessibilityRole="button" accessibilityLabel={`Select ${item.title}`} aria-pressed={item.id === selectedId} onPress={() => setSelectedId(current => current === item.id ? null : item.id)}

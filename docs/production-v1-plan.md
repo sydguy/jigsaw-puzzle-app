@@ -220,7 +220,7 @@ Use an explicit gameplay state machine covering ready, running, paused, preview,
 - Timeout offers rewarded untimed continuation, Restart and Home.
 - An untimed continuation never becomes a timed success.
 
-Countdown values will be tuned during gameplay testing and owner-approved before beta. Changing the configuration must not alter an existing attempt’s duration.
+Owner approval (13 October 2026): initial countdown is 20 seconds per piece, rounded up to a whole minute, for square 5×5–20×20 puzzles. Quick picks yield 9, 22, 34 and 75 minutes; 20×20 yields 134 minutes. Tune with playtesting before beta. Changing the configuration must not alter a saved puzzle's captured duration. Browser implementation and native/service limits are recorded in [gameplay review](gameplay-review.md).
 
 ### Persistence and image handling
 

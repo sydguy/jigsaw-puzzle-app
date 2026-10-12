@@ -2,6 +2,8 @@
 
 These requirements are mandatory across the approved v1 milestones. The current plan and latest owner decisions supersede historical technology and product rules. Prototype code establishes intended behaviour, not a trusted production implementation. This addendum is a requirements update, not a completed security audit or certification.
 
+13 October owner supersession: allowed grids are square 5×5 through 20×20 (25–400 pieces), default 5×5; named picture/crop screens use squares. These bounds override historical rectangular counts below without relaxing input validation. Browser engine/save evidence and remaining native/service gates are recorded in [gameplay review](gameplay-review.md).
+
 ## Security mindset when porting prototype logic
 
 - Treat JSX, HTML, website mockups and their dependencies as unreviewed reference material. Do not copy implementation details merely because they work in the prototype. Reimplement approved behaviour in maintainable React Native/TypeScript code with explicit validation and tests.

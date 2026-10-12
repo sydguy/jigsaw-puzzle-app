@@ -1,5 +1,7 @@
 # V1 requirements register
 
+Owner update (13 October 2026): gameplay is now enabled. All rectangular-grid references below are superseded by linked square sizes 5×5–20×20, presets 5×5/8×8/10×10/15×15, default 5×5. All named image/crop revisions use squares. CLOCK-02/03 duration is approved at 20 seconds per piece, rounded up to a whole minute; saved definitions retain their captured duration. Browser ENGINE, CLOCK and SAVE implementation evidence is in [gameplay review](gameplay-review.md). This is not native/service acceptance.
+
 DEV-LOCAL-01 (5 October 2026, retained latest owner decision): local Expo web development/review first; EAS builds and native provisioning deferred until owner reconsideration. Acceptance: phone portrait and tablet portrait/landscape browser review, with native-only behavior labelled unverified. Supersedes native M1 as a prerequisite for browser implementation, not as a release gate.
 
 Authority: latest owner decisions, then [production plan](production-v1-plan.md) and [security requirements](security-requirements.md). Historical sources are evidence, not active instructions. Status below describes requirement disposition, not implementation completion.

@@ -21,7 +21,6 @@ export const HomeReviewContext = createContext<{
   state: HomeState;
   puzzles: readonly HomePuzzle[];
   notify: (message: string) => void;
-  addPuzzle?: (puzzle: HomePuzzle) => void;
 }>({ state: "empty", puzzles: [], notify: () => {} });
 export const useHomeReview = () => useContext(HomeReviewContext);
 

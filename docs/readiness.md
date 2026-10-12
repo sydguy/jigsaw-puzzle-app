@@ -2,7 +2,7 @@
 
 ## Status
 
-Browser implementation increment: navigation, personal-photo crop/collection, browser camera capture and puzzle setup now exist. See [implementation evidence](browser-implementation.md) and [mobile source review](mobile-image-sources-review.md). This supersedes earlier statements that browser inspection was unavailable: isolated Edge automation now runs. Gameplay and native services remain unimplemented/unverified. Browser camera testing uses a synthetic device; physical camera verification remains open.
+Browser implementation increment (13 October): playable puzzles now include real cuts, placement/rotation/swaps, hints, shuffle, clocks, replay, completion and durable local progress. See [gameplay evidence and limits](gameplay-review.md), [earlier implementation evidence](browser-implementation.md) and [mobile source review](mobile-image-sources-review.md). Isolated Edge automation covers every square grid in the engine and actual browser flows. Native renderer/storage/services remain unimplemented or unverified; M1/M3 native acceptance is not claimed. Browser camera testing uses a synthetic device; physical camera verification remains open.
 
 M0 local documentation adoption and clean Expo foundation prepared; full readiness remains conditional on the setup and review gates below. See [M0 evidence](m0-report.md). M1 native compatibility and all later milestones NOT ACCEPTED. No production app, signing, clouddeployment or physical testing is claimed.
 
@@ -17,7 +17,7 @@ M0 local documentation adoption and clean Expo foundation prepared; full readine
 | Supabase/RevenueCat/AdMob/Resend/Sentry resources | Not provisioned/verified | Service integration acceptance |
 | Physical iPad and older supported hardware | Not available/verified | Native release acceptance |
 | Catalogue originals and rights approvals | Not supplied | Contentbeta |
-| Product prices/quantities, countdown table, policies/retention | Scheduled owner decisions | Paidbeta/release |
+| Product prices/quantities, policies/retention | Scheduled owner decisions; countdown approved at 20 seconds/piece rounded up to a minute on 13 October | Paidbeta/release; countdown still requires playtesting |
 
 Never ask for secrets in chat. Owner-controlled provider dashboards, scoped local environment variables and managed secret stores are the setup route.
 

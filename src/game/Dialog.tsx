@@ -1,0 +1,4 @@
+import { Modal, Pressable, Text, View } from "react-native";
+import type { GameDialogProps } from "./Dialog.types";
+import { theme } from "../theme";
+export default function GameDialog({ title, text, actions, onCancel }: GameDialogProps) { return <Modal transparent onRequestClose={onCancel}><View style={{ flex: 1, backgroundColor: "#17124f88", justifyContent: "center", padding: 24 }}><View style={{ backgroundColor: "white", borderRadius: 16, padding: 24, gap: 16 }}><Text style={{ fontSize: 22, fontWeight: "700" }}>{title}</Text><Text>{text}</Text>{actions.map(a => <Pressable key={a.label} onPress={a.onPress} style={{ minHeight: 48, borderRadius: 12, justifyContent: "center", alignItems: "center", backgroundColor: a.secondary ? theme.color.surfaceSoft : theme.color.primary }}><Text style={{ color: a.secondary ? theme.color.primary : "white" }}>{a.label}</Text></Pressable>)}</View></View></Modal>; }

@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { useFocusEffect } from "expo-router";
 import { useCallback } from "react";
 import { useLocal } from "../local/store";
-import { useHomeReview } from "../home/review";
 import { theme } from "../theme";
 import { useCreateReview } from "./review";
 import { samePuzzleSettings } from "./puzzleSettings";
@@ -12,7 +11,6 @@ import type { HomePuzzle } from "../home/review";
 export function useHomePuzzleSetup() {
   const { draft, pictures } = useLocal();
   const review = useCreateReview();
-  const home = useHomeReview();
   const game = usePuzzleSession();
   const submitted = useRef(false);
   const original = review?.homePuzzle;
@@ -28,28 +26,24 @@ export function useHomePuzzleSetup() {
   useFocusEffect(useCallback(() => { submitted.current = false; }, []));
   useEffect(() => { notify?.(""); }, [original?.id, changed, notify]);
   return {
-    original, changed, canContinue, canCreate: hasImage && !!home.addPuzzle,
+    original, changed, canContinue, canCreate: hasImage && !game.busy,
     heading: canContinue ? "Continue Playing or create a new Puzzle?" : "Play Again or create a new Puzzle?",
     description: canContinue
       ? "Pick up where you left off, or restart.\nChange settings to make a new puzzle."
       : "Completed! Play again with this setup.\nChange settings to make a new puzzle.",
     create: () => {
-      if ((original && !changed) || !hasImage || !image || !home.addPuzzle || submitted.current) return;
+      if ((original && !changed) || !hasImage || !image || submitted.current || game.busy) return;
       submitted.current = true;
       const now = new Date().toISOString();
       const [rows, columns] = theme.puzzle.grids[draft.gridIndex]!;
       const puzzle: HomePuzzle = {
-        id: `review-${now}-${Math.random().toString(36).slice(2)}`,
+        id: `puzzle-${now}-${Math.random().toString(36).slice(2)}`,
         title: selected?.title ?? localPicture?.title ?? original?.title ?? "Mountain lake sample",
         image, mobileImage: selected?.mobileImage, mobileCrop: selected?.mobileCrop,
-        settings: { ...draft }, pieces: rows * columns, progress: 0,
+        settings: { ...draft, pictureId: localPicture && (!selected || sameImage) ? localPicture.id : undefined }, pieces: rows * columns, progress: 0,
         created: now.slice(0, 10), lastPlayed: "", reviewLastPlayedLabel: "Not yet",
       };
-      home.addPuzzle(puzzle);
-      // This setup now represents the registered puzzle, preventing accidental copies on return.
-      review?.setHomePuzzle(puzzle);
-      review?.setSelectedPicture(puzzle);
-      game.open(puzzle, "create");
+      void game.open(puzzle, "create").then(() => { submitted.current = false; });
     },
     requestPlay: (action: "Play Again" | "Continue Playing") => {
       if (!original || changed) return;

@@ -4,11 +4,11 @@ import type { HomePuzzle } from "../home/review";
 
 export type CreateReviewState = "before" | "after";
 export type ReviewPicture = { title: string; image: ImageSourcePropType; mobileImage?: HomePuzzle["mobileImage"]; mobileCrop?: HomePuzzle["mobileCrop"] };
-// Browser development fixtures never enter the local collection or puzzle draft.
+// Shared browser setup handoff. Development sample art is optional and never a collection import.
 export const CreateReviewContext = createContext<{
   state: CreateReviewState;
   setState: (state: CreateReviewState) => void;
-  image: ImageSourcePropType;
+  image?: ImageSourcePropType;
   selectedPicture: ReviewPicture | null;
   setSelectedPicture: (picture: ReviewPicture | null) => void;
   homePuzzle: HomePuzzle | null;

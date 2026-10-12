@@ -215,7 +215,7 @@ fs.mkdirSync(output, { recursive: true });
     await page.evaluate(
       () =>
         new Promise((resolve, reject) => {
-          const request = indexedDB.open("jigsaw-browser-preview", 2);
+          const request = indexedDB.open("jigsaw-browser-preview", 3);
           request.onupgradeneeded = () =>
             request.result.createObjectStore("future-data");
           request.onerror = () => reject(request.error);
@@ -243,7 +243,7 @@ fs.mkdirSync(output, { recursive: true });
             };
           }),
       ),
-      2,
+      3,
     );
     assert.deepEqual(errors, []);
     console.log(

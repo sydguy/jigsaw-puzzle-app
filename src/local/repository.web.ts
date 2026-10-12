@@ -1,10 +1,11 @@
 import { Picture, Preferences, validatePicture } from "./types";
-function openDatabase(): Promise<IDBDatabase> {
+export function openDatabase(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open("jigsaw-browser-preview", 1);
+    const request = indexedDB.open("jigsaw-browser-preview", 2);
     request.onupgradeneeded = () => {
-      request.result.createObjectStore("pictures", { keyPath: "id" });
-      request.result.createObjectStore("preferences");
+      if (!request.result.objectStoreNames.contains("pictures")) request.result.createObjectStore("pictures", { keyPath: "id" });
+      if (!request.result.objectStoreNames.contains("preferences")) request.result.createObjectStore("preferences");
+      if (!request.result.objectStoreNames.contains("games")) request.result.createObjectStore("games", { keyPath: "id" });
     };
     request.onerror = () =>
       reject(
@@ -60,7 +61,16 @@ export async function putPicture(picture: Picture): Promise<void> {
   await transact("pictures", "readwrite", (store) => store.put(picture));
 }
 export async function removePicture(id: string): Promise<void> {
-  await transact("pictures", "readwrite", (store) => store.delete(id));
+  const db = await openDatabase();
+  await new Promise<void>((resolve, reject) => {
+    const tx = db.transaction(["pictures", "games"], "readwrite");
+    tx.objectStore("pictures").delete(id);
+    const cursor = tx.objectStore("games").openCursor();
+    cursor.onsuccess = () => { const row = cursor.result; if (!row) return;
+      if (row.value.current?.puzzle?.settings?.pictureId === id) row.delete(); row.continue(); };
+    tx.oncomplete = () => { db.close(); resolve(); };
+    tx.onabort = tx.onerror = () => { db.close(); reject(new Error("Could not delete the picture and linked puzzles. Nothing was deleted.")); };
+  });
 }
 export async function readPreferences(): Promise<Preferences | null> {
   const value: unknown = await transact("preferences", "readonly", (store) =>

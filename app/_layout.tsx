@@ -4,10 +4,11 @@ import { theme } from "../src/theme";
 import PreviewHost from "../src/preview/PreviewHost";
 import { LocalProvider } from "../src/local/store";
 import { PuzzleSessionProvider } from "../src/puzzle/session";
+import { GameLibraryProvider } from "../src/game/library";
 
 export default function RootLayout() {
   return (
-    <PreviewHost>
+    <GameLibraryProvider><PreviewHost>
       <LocalProvider>
         <PuzzleSessionProvider>
         <StatusBar style="dark" />
@@ -20,6 +21,6 @@ export default function RootLayout() {
         />
         </PuzzleSessionProvider>
       </LocalProvider>
-    </PreviewHost>
+    </PreviewHost></GameLibraryProvider>
   );
 }

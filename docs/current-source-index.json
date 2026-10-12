@@ -73,13 +73,18 @@
     },
     {
       "path": "docs/decision-log-current.md",
-      "bytes": 11586,
-      "sha256": "dd8e2d9f735fc16e802a6ff27d517177b19f410ec2d2f037148e2139f792f951"
+      "bytes": 12394,
+      "sha256": "4ed3446992fba596eb65ead66dd94b251d6679d4945fb3611d5e44b780c037f0"
     },
     {
       "path": "docs/dependency-audit.json",
       "bytes": 16588,
       "sha256": "4019927d727d360ca8997b358c4692b1362a010d6823f22b51f1753bb5d9d871"
+    },
+    {
+      "path": "docs/gameplay-review.md",
+      "bytes": 9070,
+      "sha256": "52be78a9da0afa3ae4165d71cbac6ee0fd004237b42f913918527e818c58182e"
     },
     {
       "path": "docs/home-replay-review.md",
@@ -133,8 +138,8 @@
     },
     {
       "path": "docs/production-v1-plan.md",
-      "bytes": 42249,
-      "sha256": "cb14cc3fa4d0fc67dfbb97099326054cb9f37695fba77a54caf061d870405935"
+      "bytes": 42514,
+      "sha256": "5c0460eeb1f588fcc4bdfbeb4b3a0aebc5c0fae4283279bb879308f5bafa7bef"
     },
     {
       "path": "docs/puzzle-screen-review.md",
@@ -143,8 +148,8 @@
     },
     {
       "path": "docs/readiness.md",
-      "bytes": 3687,
-      "sha256": "d29c206de02deb0f9aa6346b23cc530110f12ad5b95853e69943417be727746d"
+      "bytes": 3927,
+      "sha256": "68f48bfb1f395c0123ae99457ae73749ace84292016ed1c695b1178dfb2a2c67"
     },
     {
       "path": "docs/README.md",
@@ -153,13 +158,13 @@
     },
     {
       "path": "docs/requirements-register.md",
-      "bytes": 12330,
-      "sha256": "9af02dee2beab07e46e2e048d0d15df89533a9bb04ee6ff999b0416e38ecbf9b"
+      "bytes": 12847,
+      "sha256": "bddece296003f0729e09e599deda449665d3d0afd2b8f4a927fdc5b8bcbbec1b"
     },
     {
       "path": "docs/security-requirements.md",
-      "bytes": 8073,
-      "sha256": "26beb29cf4b644f571405e5c11c3912524092e7f0e6fa3b38ab422295091421f"
+      "bytes": 8437,
+      "sha256": "a47a6c655816f19ccf306671b23030f0d805c4c89fc084aa44c8fb66ecfa0200"
     },
     {
       "path": "docs/security-traceability.json",

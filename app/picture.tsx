@@ -3,6 +3,7 @@ import { Image, TextInput } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { useLocal } from "../src/local/store";
 import { useCreateReview } from "../src/create/review";
+import { useGameLibrary } from "../src/game/library";
 import {
   Action,
   Card,
@@ -15,6 +16,10 @@ import {
 export default function PictureDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const local = useLocal();
+  const library = useGameLibrary();
+  const linked = library.records.filter(r => r.puzzle.settings?.pictureId === id);
+  const timesUsed = linked.reduce((sum, r) => sum + r.attemptsStarted, 0);
+  const lastUsed = Math.max(0, ...linked.map(r => r.lastStartedAt ?? 0));
   const review = useCreateReview();
   const picture = local.pictures.find((p) => p.id === id);
   const [title, setTitle] = useState("");
@@ -76,9 +81,9 @@ export default function PictureDetail() {
               }}
             />
             <Copy muted>
-              My Photo · Times Used: 0{"\n"}Date Added:{" "}
+              My Photo · Times Used: {timesUsed}{"\n"}Date Added:{" "}
               {new Date(picture.addedAt).toLocaleDateString("en-AU")}
-              {"\n"}Last Used: Not yet
+              {"\n"}Last Used: {lastUsed ? new Date(lastUsed).toLocaleDateString("en-AU") : "Not yet"}
             </Copy>
           </Card>
           {!!error && <Notice error>{error}</Notice>}
@@ -97,7 +102,7 @@ export default function PictureDetail() {
             <Card>
               <Heading>Delete this picture?</Heading>
               <Copy>
-                This removes “{picture.title}” from this browser and its 0
+                This removes “{picture.title}” from this browser and its {linked.length}{" "}
                 associated puzzles. This cannot be undone.
               </Copy>
               <Action
@@ -112,6 +117,7 @@ export default function PictureDetail() {
                 onPress={() => {
                   void run(async () => {
                     await local.remove(picture);
+                    await library.reload();
                     router.replace("/collection");
                   });
                 }}
