@@ -1,6 +1,7 @@
 import { KeyboardEvent, useEffect } from "react";
 import { Image, ImageSourcePropType, Platform, Pressable, StyleSheet, Text, View, ViewStyle } from "react-native";
 import { router } from "expo-router";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { art } from "../assets";
 import { Art, Screen } from "../components/ui";
 import { useLocal } from "../local/store";
@@ -26,8 +27,12 @@ const primaryGradient = Platform.OS === "web" ? {
 /** Mobile-only geometry. Tablet layout remains in app/create.tsx for its own review. */
 export default function MobileCreatePuzzle() {
   const { draft, setDraft, pictures } = useLocal();
-  const { height } = useDevice();
+  const { width, height } = useDevice();
+  const insets = useSafeAreaInsets();
   const compact = height <= 860;
+  // Reserve readable controls and their touch targets before sizing the square.
+  const imageSize = Math.min((width - 32) * 0.88, Math.max(120,
+    height - insets.top - insets.bottom - (compact ? 620 : 650)));
   const [rows, columns] = theme.puzzle.grids[draft.gridIndex]!;
   const picture = pictures.find(item => item.id === draft.pictureId);
   const review = useCreateReview();
@@ -65,10 +70,10 @@ export default function MobileCreatePuzzle() {
           </View>
         </View>}
       </View>
-      <View style={s.imageSection} testID="create-image-section">
+      <View style={[s.imageSection, hasImage && s.squareImageSection, hasImage && { width: imageSize }]} testID="create-image-section">
         {hasImage && imageSource ? <View style={s.selectedImage}>
             <View style={s.pictureFrame} testID="create-selected-picture">
-              <PuzzleImage title={review?.selectedPicture?.title ?? picture?.title ?? "Mountain lake sample"} image={imageSource}
+              <PuzzleImage square title={review?.selectedPicture?.title ?? picture?.title ?? "Mountain lake sample"} image={imageSource}
                 mobileImage={review?.selectedPicture?.mobileImage} mobileCrop={review?.selectedPicture?.mobileCrop} />
             </View>
           <Pressable accessibilityRole="button" accessibilityLabel="Change image" onPress={chooseImage} style={s.changeTarget}>
@@ -213,7 +218,8 @@ const s = StyleSheet.create({
   imageCopy: { fontSize: 14, lineHeight: 20, color: theme.color.text, textAlign: "center", marginTop: 8, marginBottom: 6 },
   caption: { fontSize: 12, lineHeight: 16, color: theme.color.textSecondary },
   selectedImage: { padding: 6 },
-  pictureFrame: { width: "100%", aspectRatio: 1.5, borderRadius: 10, overflow: "hidden" },
+  squareImageSection: { alignSelf: "center" },
+  pictureFrame: { width: "100%", aspectRatio: 1, borderRadius: 10, overflow: "hidden" },
   picture: { position: "absolute", width: "100%", height: "100%" },
   changeTarget: { position: "absolute", right: 12, bottom: 10, minHeight: 48, justifyContent: "center" },
   changeFace: { flexDirection: "row", alignItems: "center", gap: 8, borderRadius: 999, borderWidth: 1.5, borderColor: "#fff", backgroundColor: "#294C7899", paddingHorizontal: 12, paddingVertical: 8 },

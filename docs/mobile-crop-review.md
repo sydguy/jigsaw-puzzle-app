@@ -1,5 +1,7 @@
 # Mobile picture selection and crop review
 
+10 October update: the [square image revision](square-image-review.md) replaces the 3:2 crop below with 1:1 and saves 1024×1024 images. Interaction, privacy and safety limits remain in effect; earlier ratios are historical review evidence.
+
 7 October refinement: Cancel/Done now have wider 104-point faces and a slimmer 40-point visible height, with eight-point vertical padding. Transparent outer padding retains 48-point tap targets; 12-point corners, labels and primary/secondary styling remain. This overrides the earlier visible-action padding described below.
 
 Reference: [Mob-photo capturedv1.png](<../design/mobile/Mob-photo capturedv1.png>). Latest owner instructions specify Cancel/Done and an immediate return to populated Create Puzzle. Those actions supersede Retake Photo/Use Photo from the raster. No new graphics are required.

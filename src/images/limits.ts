@@ -69,8 +69,8 @@ export function cropRectangle(
   if (![zoom, x, y].every(Number.isFinite))
     throw new Error("Invalid crop position.");
   const cropWidth =
-    Math.min(width, height * 1.5) / Math.min(3, Math.max(1, zoom));
-  const cropHeight = cropWidth / 1.5;
+    Math.min(width, height) / Math.min(3, Math.max(1, zoom));
+  const cropHeight = cropWidth;
   return {
     x: ((width - cropWidth) * Math.min(100, Math.max(0, x))) / 100,
     y: ((height - cropHeight) * Math.min(100, Math.max(0, y))) / 100,

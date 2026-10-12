@@ -87,7 +87,7 @@ export default function CropEditor({ bitmap, working, error, onCancel, onDone }:
       <button type="button" style={{ ...headerAction, color: theme.color.primary, opacity: working ? 0.6 : 1 }} disabled={working} onClick={onCancel}>
         <span style={{ ...actionFace, border: `1px solid ${theme.color.controlBorder}`, background: theme.color.surface }}>Cancel</span>
       </button>
-      <span style={{ fontSize: 14, fontWeight: 600 }}>Crop · 3:2</span>
+      <span style={{ fontSize: 14, fontWeight: 600 }}>Crop · 1:1</span>
       <button type="button" style={{ ...headerAction, opacity: working ? 0.6 : 1 }} disabled={working}
         onClick={() => { drag.current = null; onDone(crop); }}>
         <span style={{ ...actionFace, background: `linear-gradient(110deg, ${theme.color.gradientStart}, ${theme.color.gradientEnd})` }}>{working ? "Saving…" : "Done"}</span>

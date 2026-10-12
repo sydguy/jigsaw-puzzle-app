@@ -1,5 +1,11 @@
 # Puzzle presentation review — 8 October 2026
 
+Latest 13 October revision supersedes the visible tray indicator below: hide the scrollbar while preserving left/right swipes and mouse/wheel/keyboard browsing. All configurations and board seams use linked square grids from 5×5 through 20×20; Quick Picks are 5×5, 8×8, 10×10 and 15×15. See [square image review](square-image-review.md).
+
+13 October refinement: Preview now uses a brighter orange gradient (`#F79B31` to `#E8600B`) through the app theme. The illustrated piece tray supports horizontal touch scrolling, mouse dragging (including scaled browser previews), wheel/trackpad scrolling and keyboard navigation. Its scrollbar uses violet/lavender styling; native retains a horizontal ScrollView. Piece placement and all gameplay remain deferred. The puzzle browser checks pass wheel, drag, keyboard and simulated phone touch interactions, confirm no piece clipping or outer-page wheel movement, and capture both phones and tablet orientations. Phone/tablet captures were visually reviewed. Physical-device gestures remain unverified.
+
+10 October update: the [square image revision](square-image-review.md) supersedes the earlier 3:2 board decision below, using `mobile-puzzle-type 2 _square.png`. The board and Preview are square; existing grid settings and gameplay deferral remain in effect.
+
 Reference: `design/mobile/mobile-puzzle-type 2 .png`. The page has the shared lavender/black Back button, selected picture title, progress ring/statistics/start panel, picture board, horizontally scrolling illustrated piece tray, green Hint/orange Preview/red Restart/blue Shuffle controls and an Ad Banner placeholder. It carries rows/columns, timer mode and rotation from the selected setup; the total piece count is derived from the grid.
 
 Home card bodies retain their setup destination. Their Play Again/Continue actions open the puzzle directly. Setup replay/Continue and Create also open the puzzle. The session is an immutable copy of the configuration; opening a screen does not start an attempt. New creation registers a separate preview Home entry once, preserving the original. Back returns Home; direct /puzzle without a session explains how to choose a puzzle.

@@ -51,7 +51,8 @@ export default function PictureDetail() {
           <Image
             accessibilityLabel={picture.title}
             source={{ uri: picture.data }}
-            style={{ width: "100%", aspectRatio: 1.5, borderRadius: 16 }}
+            resizeMode="stretch"
+            style={{ width: "100%", aspectRatio: 1, borderRadius: 16 }}
           />
           <Card>
             <Heading>Picture title</Heading>

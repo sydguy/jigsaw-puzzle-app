@@ -13,6 +13,7 @@ const fs = require('node:fs');
   try {
     console.log('Opening collection');
     await page.goto('http://localhost:8081/collection', { waitUntil: 'networkidle' });
+    await page.locator('[data-preview-ready="true"]').waitFor();
     await page.getByTestId('my-collection-header').waitFor();
     console.log('Adding isolated photo fixtures');
     // Isolated test photos exercise both import sources; never touch owner's browser data.
@@ -28,6 +29,7 @@ const fs = require('node:fs');
       };
     }));
     await page.reload({ waitUntil: 'networkidle' });
+    await page.locator('[data-preview-ready="true"]').waitFor();
     console.log('Fixtures loaded');
     for (const [layout, name] of [['0', 'iphone'], ['1', 'android']]) {
       console.log(`Checking ${name}`);
@@ -68,7 +70,10 @@ const fs = require('node:fs');
         const a = n.getBoundingClientRect(), b = (n.querySelector('[aria-label][style*="background-image"]') ?? n.querySelector('img')).getBoundingClientRect();
         return { ratio: b.width/b.height, left: b.x-a.x, top: b.y-a.y, bottom: a.bottom-b.bottom };
       });
-      assert(Math.abs(measured.ratio - 1.5) < .01); assert(Math.abs(measured.top-measured.left) < 1); assert(Math.abs(measured.bottom-measured.left) < 1);
+      assert(Math.abs(measured.ratio - 1) < .01); assert(Math.abs(measured.top-measured.left) < 1); assert(Math.abs(measured.bottom-measured.left) < 1);
+      const squareFrame = await page.getByTestId('my-collection-square-image').first().boundingBox();
+      const previewScale = await page.getByTestId('device-frame').evaluate(n => new DOMMatrix(getComputedStyle(n).transform).a);
+      assert(Math.abs(squareFrame.height / previewScale - Math.round(((layout === '0' ? 390 : 412) - 40) / 3) / 1.5) < 1, 'detail thumbnail keeps its previous height');
       assert(await page.getByTestId('page-scroll').evaluate(n => n.scrollWidth <= n.clientWidth), 'detailed rows stay within their scroll viewport');
       const photoSize = await cards.first().locator('img').boundingBox(), themeSize = await cards.nth(2).locator('img').boundingBox();
       assert.equal(photoSize.width, themeSize.width); assert.equal(photoSize.height, themeSize.height);

@@ -20,7 +20,7 @@ for (const [w, h] of [
             crop.x + crop.width <= w + 0.001 &&
             crop.y + crop.height <= h + 0.001,
         );
-        assert.ok(Math.abs(crop.width / crop.height - 1.5) < 0.0001);
+        assert.ok(Math.abs(crop.width / crop.height - 1) < 0.0001);
       }
 }
 assert.throws(() => inspectRaster(new Uint8Array([1, 2, 3])));
@@ -44,5 +44,5 @@ assert.deepEqual(inspectRaster(png), {
 view.setUint32(16, 100000);
 assert.throws(() => inspectRaster(png));
 console.log(
-  "PASS: 108 bounded 3:2 crop cases, invalid formats, invalid crop and oversized allocation rejection.",
+  "PASS: 108 bounded square crop cases, invalid formats, invalid crop and oversized allocation rejection.",
 );

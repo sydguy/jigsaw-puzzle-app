@@ -19,6 +19,7 @@ fs.mkdirSync(out, { recursive: true });
   };
   try {
     await page.goto('http://localhost:8081/', { waitUntil: 'networkidle', timeout: 120000 });
+    await page.locator('[data-preview-ready="true"]').waitFor();
     await page.getByRole('button', { name: 'Add Puzzle', exact: true }).click();
     await page.getByTestId('create-mobile-header').waitFor();
     assert.equal(await page.getByRole('radio', { name: 'Timer', exact: true }).isChecked(), true, 'Timer is the initial mode');
@@ -58,24 +59,29 @@ fs.mkdirSync(out, { recursive: true });
       await frame.screenshot({ path: path.join(out, `${name}-populated.png`) });
       const populatedSize = await scroll.evaluate(n => ({ viewport: n.clientHeight, content: n.scrollHeight }));
       assert.ok(populatedSize.content <= populatedSize.viewport + 1, `full populated ${name} setup fits without scrolling`);
+      const actionBox = await page.getByRole('button', { name: 'Create Puzzle', exact: true }).boundingBox();
+      const frameBox = await frame.boundingBox();
+      assert.ok(actionBox.y + actionBox.height <= frameBox.y + frameBox.height + 1, 'square populated setup keeps footer reachable');
+      await scroll.evaluate(n => { n.scrollTop = 0; });
       dimensions.push({ layout: name, populatedSize });
       const image = await page.getByRole('img', { name: 'Mountain lake sample', exact: true }).boundingBox();
-      assert.ok(Math.abs(image.width / image.height - 1.5) < 0.01, 'sample image retains full 3:2 aspect');
+      assert.ok(Math.abs(image.width / image.height - 1) < 0.01, 'sample image uses square aspect');
       assert.ok(await page.getByRole('button', { name: 'Create Puzzle', exact: true }).isEnabled(), 'configured image can open puzzle presentation');
       await page.getByLabel('Create Puzzle review state', { exact: true }).selectOption('before');
       await page.getByRole('button', { name: 'Add Image', exact: true }).waitFor();
     }
     await page.getByLabel('Preview layout', { exact: true }).selectOption('0');
     // Both controls change the same valid pair, including boundaries.
-    for (let i = 0; i < 2; i++) await page.getByRole('button', { name: 'Decrease Rows', exact: true }).click();
     assert.ok(await page.getByRole('button', { name: 'Decrease Columns', exact: true }).isDisabled());
-    await page.getByLabel('Rows: 2', { exact: true }).waitFor();
-    await page.getByLabel('Columns: 3', { exact: true }).waitFor();
-    for (let i = 0; i < 7; i++) await page.getByRole('button', { name: 'Increase Columns', exact: true }).click();
-    await page.getByLabel('Rows: 16', { exact: true }).waitFor();
-    await page.getByLabel('Columns: 24', { exact: true }).waitFor();
+    await page.getByLabel('Rows: 5', { exact: true }).waitFor();
+    await page.getByLabel('Columns: 5', { exact: true }).waitFor();
+    for (let side = 6; side <= 20; side++) {
+      await page.getByRole('button', { name: side % 2 ? 'Increase Rows' : 'Increase Columns', exact: true }).click();
+      await page.getByLabel(`Rows: ${side}`, { exact: true }).waitFor();
+      await page.getByLabel(`Columns: ${side}`, { exact: true }).waitFor();
+    }
     assert.ok(await page.getByRole('button', { name: 'Increase Rows', exact: true }).isDisabled());
-    for (const [pieces, rows, columns] of [[54,6,9],[96,8,12],[150,10,15],[216,12,18]]) {
+    for (const [pieces, rows, columns] of [[25,5,5],[64,8,8],[100,10,10],[225,15,15]]) {
       await page.getByRole('button', { name: `${pieces} pieces`, exact: true }).click();
       await page.getByLabel(`Rows: ${rows}`, { exact: true }).waitFor();
       await page.getByLabel(`Columns: ${columns}`, { exact: true }).waitFor();
@@ -101,10 +107,10 @@ fs.mkdirSync(out, { recursive: true });
     await page.getByTestId('create-mobile-header').waitFor();
     assert.ok(await page.getByRole('radio', { name: 'None', exact: true }).isChecked(), 'source return keeps None');
     assert.ok(await page.getByRole('switch', { name: 'Rotate pieces' }).isChecked());
-    await page.getByLabel('Rows: 12', { exact: true }).waitFor();
+    await page.getByLabel('Rows: 15', { exact: true }).waitFor();
     await page.getByLabel('Create Puzzle review state', { exact: true }).selectOption('after');
     await page.getByLabel('Create Puzzle review state', { exact: true }).selectOption('before');
-    await page.getByLabel('Rows: 12', { exact: true }).waitFor();
+    await page.getByLabel('Rows: 15', { exact: true }).waitFor();
     assert.ok(await page.getByRole('radio', { name: 'None', exact: true }).isChecked(), 'review switching retains timer choice');
     assert.ok(await page.getByRole('switch', { name: 'Rotate pieces' }).isChecked(), 'review switching retains rotation');
     const savedPictures = await page.evaluate(() => new Promise((resolve, reject) => {

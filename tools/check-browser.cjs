@@ -37,14 +37,14 @@ fs.mkdirSync(output, { recursive: true });
     });
     await page.getByRole("button", { name: "Add Puzzle", exact: true }).click();
     await page.getByRole("radio", { name: "None", exact: true }).click();
-    await page.getByRole("button", { name: "216 pieces" }).click();
+    await page.getByRole("button", { name: "225 pieces" }).click();
     assert.equal(
-      await page.getByLabel("Rows: 12", { exact: true }).innerText(),
-      "12",
+      await page.getByLabel("Rows: 15", { exact: true }).innerText(),
+      "15",
     );
     assert.equal(
-      await page.getByLabel("Columns: 18", { exact: true }).innerText(),
-      "18",
+      await page.getByLabel("Columns: 15", { exact: true }).innerText(),
+      "15",
     );
     await page.getByRole("switch", { name: "Rotate pieces" }).check();
     await page.getByRole("button", { name: "Add Image", exact: true }).click();
@@ -79,7 +79,7 @@ fs.mkdirSync(output, { recursive: true });
     await page.getByRole("button", { name: "Cancel", exact: true }).click();
     assert.equal(await page.getByRole("dialog", { name: "Crop your picture" }).count(), 0);
     await page.getByRole("button", { name: "Back", exact: true }).click();
-    await page.getByLabel("Rows: 12", { exact: true }).waitFor();
+    await page.getByLabel("Rows: 15", { exact: true }).waitFor();
     assert.equal(
       await page.getByRole("switch", { name: "Rotate pieces" }).isChecked(),
       true,
@@ -114,9 +114,9 @@ fs.mkdirSync(output, { recursive: true });
       .click();
     await page.getByRole("img", { name: "Test landscape.png" }).waitFor();
     assert.equal(await page.getByRole("button", { name: "Choose from My Collection", exact: true }).count(), 0, "removed shortcut stays absent with a saved picture");
-    await page.getByLabel("Rows: 12", { exact: true }).waitFor();
+    await page.getByLabel("Rows: 15", { exact: true }).waitFor();
     assert.ok(await page.getByRole("radio", { name: "None", exact: true }).isChecked(), "import preserves timer-off choice");
-    await page.getByLabel("Columns: 18", { exact: true }).waitFor();
+    await page.getByLabel("Columns: 15", { exact: true }).waitFor();
     const createScroll = page.locator('[data-testid="page-scroll"]:visible');
     await createScroll.evaluate(node => { node.scrollTop = 0; });
     await page.getByTestId("device-frame").screenshot({ path: path.join(output, "create-selected-image.png") });

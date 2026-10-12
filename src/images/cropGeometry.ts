@@ -2,10 +2,10 @@ import { checkDimensions } from "./limits";
 
 export type Crop = { x: number; y: number; width: number; height: number };
 export type Corner = "nw" | "ne" | "sw" | "se";
-const ratio = 1.5;
+const ratio = 1;
 const clamp = (n: number, min: number, max: number) => Math.min(max, Math.max(min, n));
 
-/** Largest centred 3:2 rectangle: one pair of sides meets the image boundary. */
+/** Largest centred square: one pair of sides meets the image boundary. */
 export function initialCrop(width: number, height: number): Crop {
   checkDimensions(width, height);
   const w = Math.min(width, height * ratio), h = w / ratio;
@@ -17,7 +17,7 @@ export function validateCrop(crop: Crop, width: number, height: number) {
   if (![crop.x, crop.y, crop.width, crop.height].every(Number.isFinite) || crop.width <= 0 || crop.height <= 0 ||
     crop.x < -1e-6 || crop.y < -1e-6 || crop.x + crop.width > width + 1e-6 ||
     crop.y + crop.height > height + 1e-6 || Math.abs(crop.width / crop.height - ratio) > 1e-6)
-    throw new Error("The crop must stay inside the picture with a 3:2 shape.");
+    throw new Error("The crop must stay inside the picture with a square shape.");
 }
 
 export function moveCrop(crop: Crop, dx: number, dy: number, width: number, height: number): Crop {
@@ -26,7 +26,7 @@ export function moveCrop(crop: Crop, dx: number, dy: number, width: number, heig
   return { ...crop, x: clamp(crop.x + dx, 0, width - crop.width), y: clamp(crop.y + dy, 0, height - crop.height) };
 }
 
-/** Opposite corner stays anchored; pointer movement is projected onto the 3:2 diagonal. */
+/** Opposite corner stays anchored; pointer movement is projected onto the square diagonal. */
 export function resizeCrop(crop: Crop, corner: Corner, dx: number, dy: number, width: number, height: number): Crop {
   validateCrop(crop, width, height);
   if (![dx, dy].every(Number.isFinite)) return crop;

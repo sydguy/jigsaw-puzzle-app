@@ -50,7 +50,7 @@ export default function PhotoImport({
     const crop = selected ?? cropRectangle(bitmap.width, bitmap.height, zoom, x, y);
     validateCrop(crop, bitmap.width, bitmap.height);
     context.fillStyle = "#FFFFFF";
-    context.fillRect(0, 0, 1536, 1024);
+    context.fillRect(0, 0, 1024, 1024);
     context.drawImage(
       bitmap,
       crop.x,
@@ -59,7 +59,7 @@ export default function PhotoImport({
       crop.height,
       0,
       0,
-      1536,
+      1024,
       1024,
     );
   };
@@ -121,7 +121,7 @@ export default function PhotoImport({
         source: mode,
         addedAt: Date.now(),
         data,
-        width: 1536,
+        width: 1024,
         height: 1024,
       });
       if (active.current) onAdded(id);
@@ -138,7 +138,7 @@ export default function PhotoImport({
     }
   }
   if (mobile && bitmap) return <>
-    <canvas ref={canvas} width={1536} height={1024} style={{ display: "none" }} />
+    <canvas ref={canvas} width={1024} height={1024} style={{ display: "none" }} />
     <CropEditor bitmap={bitmap} working={working || local.busy} error={error}
       onCancel={() => { setBitmap(null); setError(""); }} onDone={crop => void save(crop)} />
   </>;
@@ -184,18 +184,18 @@ export default function PhotoImport({
         <>
           <canvas
             ref={canvas}
-            aria-label="3:2 crop preview"
-            width={1536}
+            aria-label="Square crop preview"
+            width={1024}
             height={1024}
             style={{
               width: "100%",
-              aspectRatio: "3 / 2",
+              aspectRatio: "1 / 1",
               borderRadius: 12,
               background: "#EFEEFD",
             }}
           />
           <Copy muted>
-            Fixed 3:2 crop · Reused for every puzzle made from this picture
+            Fixed square crop · Reused for every puzzle made from this picture
           </Copy>
           {[
             {

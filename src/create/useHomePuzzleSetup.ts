@@ -29,7 +29,7 @@ export function useHomePuzzleSetup() {
   useEffect(() => { notify?.(""); }, [original?.id, changed, notify]);
   return {
     original, changed, canContinue, canCreate: hasImage && !!home.addPuzzle,
-    heading: canContinue ? "Continue Playing or Play Again or create a new Puzzle?" : "Play Again or create a new Puzzle?",
+    heading: canContinue ? "Continue Playing or create a new Puzzle?" : "Play Again or create a new Puzzle?",
     description: canContinue
       ? "Pick up where you left off, or restart.\nChange settings to make a new puzzle."
       : "Completed! Play again with this setup.\nChange settings to make a new puzzle.",

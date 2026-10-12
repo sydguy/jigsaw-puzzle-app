@@ -3,6 +3,15 @@ import { designTokens } from "../design/system/tokens";
 
 export const theme = {
   ...designTokens,
+  puzzle: {
+    ...designTokens.puzzle,
+    grids: Array.from({ length: 16 }, (_, index): readonly [number, number] => [index + 5, index + 5]),
+    presets: [25, 64, 100, 225] as const,
+  },
+  gradient: {
+    ...designTokens.gradient,
+    preview: { ...designTokens.gradient.preview, colors: ["#F79B31", "#E8600B"] as const },
+  },
   color: {
     ...designTokens.color,
     // Shared owner-approved treatment for deletable cards.

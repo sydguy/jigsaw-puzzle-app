@@ -31,7 +31,7 @@ export default function CreatePuzzle() {
   const step = (change: number) =>
     setDraft((value) => ({
       ...value,
-      gridIndex: Math.max(0, Math.min(7, value.gridIndex + change)),
+      gridIndex: Math.max(0, Math.min(theme.puzzle.grids.length - 1, value.gridIndex + change)),
     }));
   if (!tablet) return <MobileCreatePuzzle />;
   return (
@@ -110,7 +110,7 @@ export default function CreatePuzzle() {
                     <PressStep
                       label={"Increase " + label}
                       text="+"
-                      disabled={draft.gridIndex === 7}
+                      disabled={draft.gridIndex === theme.puzzle.grids.length - 1}
                       onPress={() => step(1)}
                     />
                   </View>
@@ -118,7 +118,7 @@ export default function CreatePuzzle() {
               ))}
             </View>
             <Copy muted>
-              {rows * columns} pieces · Rows and columns stay in a 3:2 ratio
+              {rows * columns} pieces · Rows and columns stay equal
             </Copy>
             <Text style={ui.label}>Quick Picks</Text>
             <View style={ui.wrap}>
@@ -129,7 +129,7 @@ export default function CreatePuzzle() {
                 return (
                   <Choice
                     key={count}
-                    label={count + " pieces"}
+                    label={`${theme.puzzle.grids[i]![0]} × ${theme.puzzle.grids[i]![1]} · ${count} pieces`}
                     selected={i === draft.gridIndex}
                     onPress={() =>
                       setDraft((value) => ({ ...value, gridIndex: i }))

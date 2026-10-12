@@ -8,9 +8,11 @@ See [Home replay setup review](home-replay-review.md) for named puzzle setup, co
 
 See [puzzle screen review](puzzle-screen-review.md) for the configured board presentation, Home/setup entry routes and deferred gameplay boundary.
 
+See [square image revision](square-image-review.md) for the current 1:1 crop, collection thumbnails, populated Create and puzzle board, superseding earlier landscape picture rules on those screens.
+
 See [mobile gallery/camera review](mobile-image-sources-review.md) for the Add Image source screens and browser camera flow.
 
-See [mobile crop review](mobile-crop-review.md) for the full-picture selection, movable 3:2 corner frame and Cancel/Done handoff.
+See [mobile crop review](mobile-crop-review.md) for the full-picture selection, movable corner frame and Cancel/Done handoff; the square image revision updates its shape.
 
 See [mobile curated review](mobile-curated-review.md) for the collection cards, fixed scroll boundaries, shop panel and preview-only catalogue artwork.
 

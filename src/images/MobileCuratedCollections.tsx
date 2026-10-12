@@ -33,8 +33,8 @@ export default function MobileCuratedCollections({ header, options }: { header: 
       <View style={s.listBoundary} testID="curated-scroll-boundary">
         <AppScrollView scrollbarTopInset={0} scrollbarBottomInset={0} contentContainerStyle={s.list}>
           {samples.length ? samples.map(item => <Pressable key={item.id} accessibilityRole="button" accessibilityLabel={`Open ${item.title}`} onPress={() => openCollection(item.id)} style={s.row} testID={`curated-card-${item.id}`}>
-            <View style={{ width: imageWidth, height: imageWidth / 1.5, flexShrink: 0 }}>
-              <Image source={item.image} accessibilityLabel={`${item.title} artwork`} resizeMode="contain" style={s.image} />
+            <View style={{ width: imageWidth / 1.5, height: imageWidth / 1.5, flexShrink: 0 }} testID="curated-square-image">
+              <Image source={item.image} accessibilityLabel={`${item.title} artwork`} resizeMode="stretch" style={s.image} />
               {item.premium ? <Image source={art.collectionLockBadge} accessible={false} resizeMode="contain" style={s.lockBadge} />
                 : <View style={s.freeBadge}><Text style={s.freeBadgeText}>Free</Text></View>}
             </View>

@@ -23,6 +23,7 @@ const fs = require('node:fs');
   try {
     for (const layout of ['0', '1']) {
       await page.goto('http://localhost:8081/sources?returnTo=create', { waitUntil: 'networkidle', timeout: 120000 });
+      await page.locator('[data-preview-ready="true"]').waitFor();
       await page.getByLabel('Preview layout', { exact: true }).selectOption(layout);
       await page.getByRole('button', { name: 'Curated Collections', exact: true }).click();
       await page.getByTestId('curated-card-nature').click();
@@ -54,6 +55,7 @@ const fs = require('node:fs');
       const first = await page.getByTestId('collection-picture-sample-1').boundingBox();
       const second = await page.getByTestId('collection-picture-sample-2').boundingBox();
       const third = await page.getByTestId('collection-picture-sample-3').boundingBox();
+      assert(Math.abs(first.width - first.height) < 1, 'square collection pictures');
       assert(Math.abs(first.y - second.y) < 1 && Math.abs(first.y - third.y) < 1);
       assert(third.x + third.width < rail.x);
       await page.getByTestId('device-frame').screenshot({ path: `.cache/collection-picture-review/phone-${layout}-selected.png` });

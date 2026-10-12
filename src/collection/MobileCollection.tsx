@@ -80,8 +80,8 @@ export default function MobileCollection({ selecting = false }: { selecting?: bo
         <DetailRow item={item} selected={item.id === selectedId} onPress={() => setSelectedId(current => current === item.id ? null : item.id)} />
       </SwipeDeleteRow> : <Pressable key={item.id} testID="my-collection-item" accessibilityRole="button" accessibilityLabel={`Select ${item.title}`} aria-pressed={item.id === selectedId} onPress={() => setSelectedId(current => current === item.id ? null : item.id)}
         style={[s.gridItem, { width: tileWidth }]}>
-        <View style={[s.imageFrame, { width: "100%", aspectRatio: 1.5 }, item.id === selectedId && s.selected]}>
-          <Image source={item.image} accessibilityLabel={item.title} resizeMode="contain" style={s.image} />
+        <View testID="my-collection-square-image" style={[s.imageFrame, { width: "100%", aspectRatio: 1 }, item.id === selectedId && s.selected]}>
+          <Image source={item.image} accessibilityLabel={item.title} resizeMode="stretch" style={s.image} />
           {item.id === selectedId && <Tick />}
         </View>
         <View style={s.gridCopy}>
@@ -97,7 +97,7 @@ function DetailRow({ item, selected, onPress }: { item: CollectionItem; selected
   const { width } = useDevice();
   const imageHeight = Math.round((width - 40) / 3) / 1.5;
   return <Pressable accessibilityRole="button" accessibilityLabel={`Select ${item.title}`} aria-pressed={selected} testID="my-collection-item" onPress={onPress} style={[s.detail, selected && s.selected]}>
-    <View style={[s.imageFrame, s.detailImage, { width: imageHeight * 1.5, height: imageHeight }]}><Image source={item.image} accessibilityLabel={item.title} resizeMode="contain" style={s.image} /></View>
+    <View testID="my-collection-square-image" style={[s.imageFrame, s.detailImage, { width: imageHeight, height: imageHeight }]}><Image source={item.image} accessibilityLabel={item.title} resizeMode="stretch" style={s.image} /></View>
     <View style={s.detailCopy}>
       <View style={s.nameRow}><Text numberOfLines={1} ellipsizeMode="tail" style={[s.name, s.detailName]}>{item.title}</Text><View style={[s.radio, selected && s.radioOn]}>{selected && <View style={s.check} />}</View></View>
       <View style={[s.badge, { backgroundColor: badgeColors[item.theme]?.backgroundColor ?? theme.color.selected }]}><Text style={[s.badgeText, { color: badgeColors[item.theme]?.color ?? theme.color.primary }]}>{item.theme}</Text></View>

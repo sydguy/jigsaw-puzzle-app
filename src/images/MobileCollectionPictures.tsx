@@ -63,8 +63,8 @@ export default function MobileCollectionPictures({ collectionId, returnTo, onBac
       <AppScrollView scrollbarTopInset={0} scrollbarBottomInset={0} contentContainerStyle={s.grid}>
         {collection ? pictures.filter(item => !excludeOwned || !item.owned).map(item => <Pressable key={item.id} testID={`collection-picture-${item.id}`}
           accessibilityRole="button" accessibilityLabel={`${item.title}${item.owned ? ", already in collection" : ""}`} accessibilityState={{ selected: item.id === selected, disabled: item.owned }} aria-pressed={item.id === selected}
-          disabled={item.owned} onPress={() => setSelected(current => current === item.id ? null : item.id)} style={[s.tile, { width: tileWidth, height: tileWidth / 1.2 }, selected === item.id && s.selected]}>
-          <Image source={item.image} accessible={false} resizeMode="cover" style={s.picture} />
+          disabled={item.owned} onPress={() => setSelected(current => current === item.id ? null : item.id)} style={[s.tile, { width: tileWidth, height: tileWidth }, selected === item.id && s.selected]}>
+          <Image source={item.image} accessible={false} resizeMode="stretch" style={s.picture} />
           {item.owned && <View style={s.owned}><Text style={s.ownedText}>Already in{"\n"}collection</Text></View>}
           {item.id === selected && <View style={s.tickCircle} accessible={false}><View style={s.tick} /></View>}
         </Pressable>) : <Text style={s.subtitle}>This collection is not available in the preview.</Text>}

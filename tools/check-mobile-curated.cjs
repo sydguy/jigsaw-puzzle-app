@@ -12,6 +12,7 @@ fs.mkdirSync(out, { recursive: true });
     page.on('pageerror', e => errors.push(e.message));
     page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
     await page.goto('http://localhost:8081/create', { waitUntil: 'networkidle', timeout: 120000 });
+    await page.locator('[data-preview-ready="true"]').waitFor();
     await page.getByRole('button', { name: 'Add Image', exact: true }).click();
     const measurements = [];
     for (const [layout, name] of [['0', 'iphone'], ['1', 'android']]) {
@@ -37,6 +38,9 @@ fs.mkdirSync(out, { recursive: true });
       assert.ok(Math.abs(first.y - boundary.y) < 1, 'first card starts at clip boundary');
       assert.ok(Math.abs(first.x - heading.x) < 1 && Math.abs(first.width - heading.width) < 1, 'heading and cards align on both sides');
       const artwork = await page.getByRole('img', { name: 'Free Collection artwork', exact: true }).boundingBox();
+      assert.ok(Math.abs(artwork.width - artwork.height) < 1, 'square curated thumbnail');
+      const scale = await page.getByTestId('device-frame').evaluate(n => new DOMMatrix(getComputedStyle(n).transform).a);
+      assert.ok(Math.abs(artwork.height / scale - Math.round(((layout === '0' ? 390 : 412) - 36) * .375) / 1.5) < 1, 'curated thumbnail retains previous height');
       const inset = artwork.x - first.x;
       assert.ok(Math.abs(artwork.y - first.y - inset) < 1, 'image top padding matches left padding');
       assert.ok(Math.abs(first.y + first.height - artwork.y - artwork.height - inset) < 1, 'image bottom padding matches left padding');

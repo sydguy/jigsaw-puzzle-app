@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { useWindowDimensions } from "react-native";
 import { DeviceContext } from "./context";
 import { usePathname } from "expo-router";
@@ -23,6 +23,8 @@ const devices = [
 
 /** Browser-only review controls; no OS or entitlement emulation. */
 export default function PreviewHost({ children }: PropsWithChildren) {
+  const [ready, setReady] = useState(false);
+  useEffect(() => { setReady(true); }, []);
   const [index, setIndex] = useState(0);
   const [fit, setFit] = useState(true);
   const [homeState, setHomeState] = useState<HomeState>("empty");
@@ -57,6 +59,7 @@ export default function PreviewHost({ children }: PropsWithChildren) {
     : 1;
   return (
     <div
+      data-preview-ready={ready}
       style={{
         height: "100dvh",
         overflow: "auto",

@@ -106,7 +106,7 @@ fs.mkdirSync(output, { recursive: true });
     const stored = await pictures();
     assert.equal(stored.length, 1);
     assert.equal(stored[0].source, 'camera');
-    assert.equal(stored[0].width / stored[0].height, 1.5);
+    assert.equal(stored[0].width / stored[0].height, 1);
     await stopped();
     assert.ok(await page.evaluate(() => window.cameraRequests.every(r => r.audio === false)), 'never requests microphone');
     await page.reload({ waitUntil: 'domcontentloaded', timeout: 120000 });

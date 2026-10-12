@@ -1,0 +1,23 @@
+# Square image revision — 10 October 2026
+
+The owner's seven-screen request supersedes earlier 3:2 picture presentation rules for the crop, curated list, collection-picture selection, mobile My Collection, mobile populated Create and puzzle screen. References are `design/mobile/mobile-create puzzle populated_square.png` and `design/mobile/mobile-puzzle-type 2 _square.png`.
+
+## Behaviour
+
+- 13 October grid revision: linked rows/columns now run from 5×5 to 20×20 in single steps, with Quick Picks 5×5, 8×8, 10×10 and 15×15 (25, 64, 100 and 225 pieces). Fresh drafts start at 5×5. This supersedes the earlier unchanged rectangular-count decision. The shared app theme supplies these grids to phone/tablet setup and the puzzle board without changing source design tokens. Preview Home fixtures keep their prior row sizes with equal columns and consistent totals; fixture progress remains illustrative. No stored photo records are changed.
+- The largest centred square crop touches one opposite pair of image boundaries. Dragging and corner resizing retain 1:1 and remain inside the original image. Gallery and camera share this pipeline. Done saves the actual selected pixels as a 1024×1024 JPEG; Cancel writes nothing.
+- Storage accepts both new square and existing 1536×1024 photo records. No existing saved image is rewritten or deleted.
+- Curated list and My Collection detail thumbnails keep their earlier height and reduce their width to match. Legacy landscape artwork is compressed horizontally, as requested. Imported squares show their complete crop. Grid views retain exactly three square columns, selection and independent scrolling.
+- Mobile populated Create uses a centred square image with Change image overlaid. The 13 October refinement sizes it from available phone height, reserving room for readable controls and 48-point targets. Normal, completed and unfinished setup fit both reviewed phones without scrolling at default text size. Empty Create is unchanged; overflow recovery remains available for unusually short screens or enlarged text. The unfinished heading is now "Continue Playing or create a new Puzzle?", with Play Again retained as an action.
+- The puzzle board, full Preview and tray imagery use square presentation. Phone board size uses the available height so summary, tools and banner fit. Rotation is in the existing configuration/control row. The tray can be swiped left/right with no scrollbar; mouse drag, wheel and keyboard navigation remain available. Gameplay stays deferred.
+- Home card geometry and dedicated tablet collection/setup layouts are outside this mobile revision. Source artwork bytes remain untouched.
+
+## Verification
+
+13 October square-grid checks pass: `check-mobile-create.cjs` exercises every linked size from 5 through 20, all four presets, configuration retention and no-scroll phone fit; `check-home-replay.cjs` checks unchanged/changed/restored settings and distinct new-puzzle registration with square totals; `check-puzzle-screen.cjs` checks square board handoff, hidden tray scrollbars and simulated swipes in both directions, plus mouse/wheel/keyboard browsing. Updated phone/tablet screenshots were reviewed. These remain browser checks, not physical-device or gameplay validation.
+
+Passed `check-crop.cjs` (12,000 geometry steps, all four corners, exact saved pixels, cancellation and settings preservation), `check-image-bounds.cjs` (108 bounded square crops), `check-mobile-refinements.cjs` (legacy personal photos plus themed pictures, thumbnail geometry, filtering/deletion), `check-mobile-curated.cjs`, `check-collection-pictures.cjs`, `check-mobile-create.cjs`, `check-home-replay.cjs` and `check-puzzle-screen.cjs`.
+
+Phone and tablet browser screenshots were reviewed against the supplied square references. Both puzzle phones fit without page overflow. The 13 October Create refinement replaces the earlier 60–64 points of populated scrolling with smaller square previews; browser checks explicitly assert no page overflow in normal and replay phone setup. Curated and detailed thumbnail height checks match the previous height formulas exactly. Collection picture selection retains three columns and its fixed header/footer with outside scrollbar. Native picker/camera and physical-device verification remain deferred.
+
+Early runs against a stalled Expo instance and before browser hydration completed failed; those runs are not passing evidence. Expo was restarted, and a preview-ready marker now lets the browser checks wait for interactive controls before selecting settings. The final runs above passed with the selected settings retained.

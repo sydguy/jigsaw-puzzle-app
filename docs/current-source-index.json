@@ -73,8 +73,8 @@
     },
     {
       "path": "docs/decision-log-current.md",
-      "bytes": 11041,
-      "sha256": "697cff9601baf7f065119318019d7fc92b811382f188f52f33dbc1b139fa1150"
+      "bytes": 11586,
+      "sha256": "dd8e2d9f735fc16e802a6ff27d517177b19f410ec2d2f037148e2139f792f951"
     },
     {
       "path": "docs/dependency-audit.json",
@@ -108,8 +108,8 @@
     },
     {
       "path": "docs/mobile-crop-review.md",
-      "bytes": 5512,
-      "sha256": "5f61126ca01437da16598f4805703798cf5f6b401cecd9961a290a679a9910d4"
+      "bytes": 5754,
+      "sha256": "3f9c93aba9b162a78b1350c63f01bd715ddfe5d03765c80807bc6e889f55a203"
     },
     {
       "path": "docs/mobile-curated-review.md",
@@ -138,8 +138,8 @@
     },
     {
       "path": "docs/puzzle-screen-review.md",
-      "bytes": 4801,
-      "sha256": "fe25e6210db4626833b6a1c8c3ebf79c2af1df7fab53d45311bcfa02d5da2b5c"
+      "bytes": 6110,
+      "sha256": "e7e6dfc2b00b15421254ecfdc7ad8ff8d103444c0ba2d291d5b87dec77812b1f"
     },
     {
       "path": "docs/readiness.md",
@@ -148,8 +148,8 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 3768,
-      "sha256": "967519f2e733b05a86f94c7b7fd67ed1e8de8aa0a930a5298c0fa676f73d51f3"
+      "bytes": 4008,
+      "sha256": "ae0db2b6f333396deda6298e04e4e3cee99f19ce5e9d7df5c3da7340f6704750"
     },
     {
       "path": "docs/requirements-register.md",
@@ -180,6 +180,11 @@
       "path": "docs/source-inventory.md",
       "bytes": 18326,
       "sha256": "f9a8529e9e0b83c6917173545b46f2459e5c80cf7bfb7d9f2239e476146c3d5a"
+    },
+    {
+      "path": "docs/square-image-review.md",
+      "bytes": 4641,
+      "sha256": "b5ee405bdaa2245489c5ecde353e0e898ab8f35e250feced5bac61970cf003ea"
     },
     {
       "path": "docs/superseded/04-Jigsaw-Development-Handover-v3-2-.md",
@@ -285,6 +290,16 @@
       "path": "design/mobile/mobile-create puzzle populated.png",
       "bytes": 2001771,
       "sha256": "7e6df29f68765134c512519169ee14031aa61003ecc13b49ca283d7d62646168"
+    },
+    {
+      "path": "design/mobile/mobile-create puzzle populated_square.png",
+      "bytes": 1706097,
+      "sha256": "242634785d2fe83e131b27f2ac327c6e3fdd2830115a133f4c19efa4c2e3bff6"
+    },
+    {
+      "path": "design/mobile/mobile-create puzzle populated_square_v1.png",
+      "bytes": 1574088,
+      "sha256": "2792409ea89a05e71b7a47ce48a45f28e3a410308631623c38d2547a170a6489"
     },
     {
       "path": "design/mobile/mobile-create puzzle.png",

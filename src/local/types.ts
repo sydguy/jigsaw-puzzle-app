@@ -5,7 +5,8 @@ export type Picture = {
   source: "photo" | "camera";
   addedAt: number;
   data: string;
-  width: 1536;
+  // Keep existing landscape records readable; new imports are square.
+  width: 1024 | 1536;
   height: 1024;
 };
 export type Preferences = { sound: boolean; haptics: boolean };
@@ -17,7 +18,7 @@ export type Draft = {
   timer: "stopwatch" | "countdown" | "none";
 };
 export const defaultDraft: Draft = {
-  gridIndex: 2,
+  gridIndex: 0,
   rotation: false,
   timer: "countdown",
 };
@@ -37,7 +38,7 @@ export function validatePicture(value: unknown): Picture {
     p.theme !== "My Photo" ||
     typeof p.addedAt !== "number" ||
     !Number.isFinite(p.addedAt) ||
-    p.width !== 1536 ||
+    (p.width !== 1024 && p.width !== 1536) ||
     p.height !== 1024 ||
     typeof p.data !== "string" ||
     p.data.length > 6_000_000 ||

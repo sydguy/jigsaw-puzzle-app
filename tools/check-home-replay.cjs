@@ -25,6 +25,7 @@ fs.mkdirSync(out, { recursive: true });
   };
   try {
     await page.goto('http://localhost:8081/', { waitUntil: 'networkidle', timeout: 120000 });
+    await page.locator('[data-preview-ready="true"]').waitFor();
     await page.getByLabel('Fit to window').uncheck();
     await page.getByLabel('Home review state').selectOption('populated');
     for (const [layout, name] of [['0', 'iphone'], ['1', 'android'], ['2', 'tablet-portrait'], ['3', 'tablet-landscape']]) {
@@ -35,14 +36,16 @@ fs.mkdirSync(out, { recursive: true });
         await page.getByLabel('Rows: ' + rows, { exact: true }).waitFor();
         await assertActions(false, unfinished);
         await page.getByRole('heading', { name: unfinished
-          ? 'Continue Playing or Play Again or create a new Puzzle?' : 'Play Again or create a new Puzzle?', exact: true }).waitFor();
+          ? 'Continue Playing or create a new Puzzle?' : 'Play Again or create a new Puzzle?', exact: true }).waitFor();
         await settle();
         const scroll = page.locator('[data-testid="page-scroll"]:visible');
         await scroll.evaluate(n => { n.scrollTop = 0; });
         const dimensions = await scroll.evaluate(n => ({ viewport: n.clientHeight, content: n.scrollHeight }));
         sizes.push({ name, unfinished, ...dimensions });
         if (Number(layout) < 2) {
-          assert.ok(dimensions.content <= dimensions.viewport + 1, `${name} ${unfinished ? 'unfinished' : 'completed'} fits without scrolling: ${JSON.stringify(dimensions)}`);
+          assert.ok(dimensions.content <= dimensions.viewport + 1, `${name} replay setup fits without scrolling`);
+          const picture = await page.getByTestId('create-selected-picture').boundingBox();
+          assert.ok(Math.abs(picture.width - picture.height) < 1, 'square setup picture');
           const body = await page.getByTestId('create-ready-card').locator('div').last().evaluate(n => ({ h: n.getBoundingClientRect().height, text: n.textContent }));
           assert.ok(body.h <= 37, `two-line supporting copy: ${JSON.stringify(body)}`);
           if (unfinished) {
@@ -100,10 +103,10 @@ fs.mkdirSync(out, { recursive: true });
     await page.getByRole('heading', { name: 'My Puzzles (8)', exact: true }).waitFor();
     const castles = page.getByTestId('home-puzzle-row').filter({ hasText: 'Fairy Tale Castle' });
     assert.equal(await castles.count(), 2, 'new identity, original retained');
-    assert.ok((await castles.allTextContents()).some(t => t.includes('68%') && t.includes('216')), 'original progress/grid retained');
-    assert.ok((await castles.allTextContents()).some(t => t.includes('0%') && t.includes('294') && t.includes('Not yet')), 'new settings registered once');
-    await castles.filter({ hasText: '294' }).click();
-    await page.getByLabel('Rows: 14', { exact: true }).waitFor();
+    assert.ok((await castles.allTextContents()).some(t => t.includes('68%') && t.includes('144')), 'original progress/grid retained');
+    assert.ok((await castles.allTextContents()).some(t => t.includes('0%') && t.includes('169') && t.includes('Not yet')), 'new settings registered once');
+    await castles.filter({ hasText: '169' }).click();
+    await page.getByLabel('Rows: 13', { exact: true }).waitFor();
     assert.ok(await page.getByRole('radio', { name: 'None', exact: true }).isChecked(), 'new record retains settings');
     await assertActions(false, true);
     await back();
@@ -119,7 +122,7 @@ fs.mkdirSync(out, { recursive: true });
     assert.equal(count, 0, 'fixtures never persisted as pictures');
     assert.deepEqual(errors, []);
     fs.writeFileSync(path.join(out, 'results.json'), JSON.stringify({ passed: true, sizes, errors }, null, 2));
-    console.log('PASS: Home entry, completed/unfinished variants, every setting change/revert, source cancellation, isolated creation, original preserved, duplicate-submit protection, phone fit and tablet captures.');
+    console.log('PASS: Home entry, completed/unfinished variants, every setting change/revert, source cancellation, isolated creation, original preserved, duplicate-submit protection, square phone images and tablet captures.');
   } catch (e) { await page.screenshot({ path: path.join(out, 'failure.png'), fullPage: true }); throw e; }
   finally { await browser.close(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

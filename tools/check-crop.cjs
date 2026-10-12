@@ -22,7 +22,7 @@ for (const [w, h] of [[1800, 800], [800, 1200], [900, 600], [1000, 1000], [1, 1]
     const dx = (random() - .5) * w * 4, dy = (random() - .5) * h * 4;
     crop = i % 2 ? moveCrop(crop, dx, dy, w, h) : resizeCrop(crop, ['nw', 'ne', 'sw', 'se'][Math.floor(random() * 4)], dx, dy, w, h);
     validateCrop(crop, w, h);
-    assert.ok(Math.abs(crop.width / crop.height - 1.5) < 1e-6);
+    assert.ok(Math.abs(crop.width / crop.height - 1) < 1e-6);
   }
 }
 assert.throws(() => validateCrop({ x: 0, y: 0, width: Infinity, height: 2 }, 100, 100));
@@ -46,7 +46,8 @@ if (process.argv.includes('--geometry-only')) {
   }));
   try {
     await page.goto('http://localhost:8081/create', { waitUntil: 'networkidle', timeout: 120000 });
-    await page.getByRole('button', { name: '96 pieces', exact: true }).click();
+    await page.locator('[data-preview-ready="true"]').waitFor();
+    await page.getByRole('button', { name: '64 pieces', exact: true }).click();
     await page.getByRole('radio', { name: 'None', exact: true }).click();
     await page.getByRole('button', { name: 'Add Image', exact: true }).click();
     await page.getByRole('button', { name: 'Choose file', exact: true }).waitFor();
@@ -94,10 +95,11 @@ if (process.argv.includes('--geometry-only')) {
       assert.ok(await page.getByRole('radio', { name: 'None', exact: true }).isChecked());
       await page.getByLabel('Rows: 8', { exact: true }).waitFor();
       const pictures = await stored(), picture = pictures.find(p => p.title === `${name}-gradient.png`);
-      assert.equal(picture.width / picture.height, 1.5);
+      assert.equal(picture.width, 1024);
+      assert.equal(picture.height, 1024);
       const rgb = await page.evaluate(async data => {
         const img = new Image(); img.src = data; await img.decode(); const c = document.createElement('canvas'); c.width = img.width; c.height = img.height;
-        const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0); return [...ctx.getImageData(768, 512, 1, 1).data];
+        const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0); return [...ctx.getImageData(img.width / 2, img.height / 2, 1, 1).data];
       }, picture.data);
       assert.ok(Math.abs(rgb[0] - (selected.x + selected.width / 2) / w * 255) < 5, 'saved crop matches selected horizontal pixels');
       assert.ok(Math.abs(rgb[1] - (selected.y + selected.height / 2) / h * 255) < 5, 'saved crop matches selected vertical pixels');
